@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__version__ = '0.5.7'
+__version__ = '0.6.0'
 __author__ = 'Dane Springmeyer (dbsgeo [ -a- ] gmail.com)'
 __copyright__ = 'Copyright 2009, Dane Springmeyer'
 __license__ = 'BSD'
@@ -25,10 +25,10 @@ Read MML in verbose mode
  $ %prog mapfile.mml image.png -v
 
 Read MML, pipe to image
- $ %prog mapfile.mml --pipe > image.png
+ $ %prog mapfile.mml - > image.png
 
 Accept piped XML
-$ <xml stream> | %prog image.png
+$ <xml stream> | %prog - image.png
 
 """, version='%prog ' + __version__)
 
@@ -149,10 +149,6 @@ parser.add_option('--no-color', dest='no_color',
 parser.add_option('--no-open', dest='no_open',
                   action='store_true', default=False,
                   help='Skip opening of image in default viewer')
-
-parser.add_option('--pipe', dest='pipe',
-                  action='store_true', default=False,
-                  help='Pipe image to byte stream instead of writing to file')
                   
 parser.add_option('--fonts',
                   type='string', # actually results in a comma-delimited list
@@ -177,7 +173,12 @@ if __name__ == '__main__':
     from mapnik_utils.version_adapter import Mapnik
     mapnik = Mapnik(options.mapnik_version)
 
-    if not sys.stdin.isatty():
+    if len(args) == 0:
+        parser.error('\nPlease provide the path to a Mapnik xml or Cascadenik mml file\n')
+    elif len(args) == 1 and not options.dry_run:
+        parser.error('\nPlease provide an output image name\n')
+
+    if args[0] == '-' and not sys.stdin.isatty():
         xml = sys.stdin.read()
         if hasattr(mapnik,'load_map_from_string'):
             options.from_string = True
@@ -187,18 +188,21 @@ if __name__ == '__main__':
             (handle, mapfile) = tempfile.mkstemp('.xml', 'mapfile_string')
             os.close(handle)
             open(mapfile, 'w').write(xml)
-        if len(args) > 0:
-            options.image = args[0]
-    elif len(args) == 0:
-        parser.error('\n\nPlease provide the path to a Mapnik xml or Cascadenik mml file\n')
     else:
         mapfile = args[0]
-        if len(args) > 1:
-            options.image = args[1]
+
+    if len(args) > 1:
+        options.image = args[1]
+        if options.image == '-':
+            options.pipe = True
+        else:
+            options.pipe = False
            
     options.width, options.height = options.dimensions
     if not options.format and hasattr(options,'image'):
-        if not options.image.endswith('png'):
+        if options.image == '-':
+            options.format = 'png'
+        elif not options.image.endswith('png'):
             try:
                 options.format = options.image.split('.')[-1]
             except:
@@ -210,13 +214,7 @@ if __name__ == '__main__':
         if options.no_open:
             nik_map.render()
         else:
-            if hasattr(options,'image'):
-                nik_map.open()
-            else:
-                if not options.pipe and not options.dry_run:
-                    parser.error('\n\nPlease provide the path to an output image.\n')
-                else:
-                    nik_map.render()
+            nik_map.open()
     
     if options.profile:
         import cProfile

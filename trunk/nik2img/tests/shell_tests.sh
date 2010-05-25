@@ -1,14 +1,14 @@
 # mapfile from string
 cd tests/
-cat mapfile_wgs84.xml | nik2img.py /tmp/from_string.png
+cat mapfile_wgs84.xml | nik2img.py - /tmp/from_string.png
 cd ../
 
 # redirect image stream
-nik2img.py tests/mapfile_wgs84.xml --pipe > /tmp/image_stream.png
+nik2img.py tests/mapfile_wgs84.xml - > /tmp/image_stream.png
 open /tmp/image_stream.png
 
 # redirect image jpeg stream
-nik2img.py tests/mapfile_wgs84.xml -f jpeg --pipe > /tmp/image_stream.jpeg
+nik2img.py tests/mapfile_wgs84.xml -f jpeg - > /tmp/image_stream.jpeg
 open /tmp/image_stream.jpeg
 
 # worldfile registration
