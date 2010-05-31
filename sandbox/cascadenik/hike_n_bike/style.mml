@@ -91,7 +91,7 @@ zoom level  - scale denominator
 
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                 FROM planet_osm_polygon
+                 FROM planet_polygon
                  WHERE building IS NULL
                    AND (amenity IN ('hospital', 'police', 'fire_station')
                         OR tourism IN ('museum')
@@ -114,7 +114,7 @@ zoom level  - scale denominator
                          WHEN round(way_area * 1000000) >= 20 THEN 'large'
                          WHEN round(way_area * 1000000) >= 1 THEN 'medium'
                          ELSE 'small' END) AS size
-                     FROM planet_osm_polygon
+                     FROM planet_polygon
                      WHERE building IS NULL
                        AND (amenity IN ('park')
                         OR landuse IN ('recreation_ground', 'greenfield', 'meadow', 'grass', 'village_green', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
@@ -132,8 +132,9 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *
-                 FROM planet_osm_polygon
+                (SELECT *,
+                 tags->'fee' as fee
+                 FROM planet_polygon
                  WHERE building IS NULL
                    AND amenity = 'parking'
                  ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
@@ -148,7 +149,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_line
+                (SELECT * FROM planet_line
                  WHERE "natural" = 'cliff'
                     OR man_made IN ('embankment', 'cutting'))
                     AS foo]]></Parameter>
@@ -163,7 +164,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_polygon
+                (SELECT * FROM planet_polygon
                  WHERE "natural" = 'cliff'
                     OR man_made IN ('embankment', 'cutting'))
                     AS foo]]></Parameter>
@@ -179,7 +180,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_polygon
+                (SELECT * FROM planet_polygon
                      WHERE landuse IN ('reservoir', 'water')
                         OR "natural" IN ('lake', 'water', 'land')
                         OR waterway IN ('canal', 'riverbank', 'river')
@@ -195,7 +196,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
                      WHERE waterway IN ('river', 'stream', 'canal', 'drain')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -209,7 +210,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_line
+                (SELECT * FROM planet_line
                      WHERE route IN ('ferry') ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -268,7 +269,9 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_polygon
+                (SELECT *, 
+                 tags->'lanes' as lanes
+                 FROM planet_polygon
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC)
                  AS foo]]></Parameter>
@@ -284,7 +287,8 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *,
+                (SELECT *, 
+                 tags->'lanes' as lanes,
                     (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                           WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                           WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -292,7 +296,7 @@ zoom level  - scale denominator
                           ELSE 4 END) AS priority,
                         (CASE WHEN highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major'
                               ELSE 'minor' END) AS prominence
-                 FROM planet_osm_line
+                 FROM planet_line
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
 
@@ -309,9 +313,17 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_line
-                    WHERE highway IN ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway')
-	            ORDER BY z_order ASC) AS foo]]></Parameter>
+                (select way, highway, 
+                 tags->'bicycle' as bicycle, 
+                 tags->'horse' as horse, 
+                 tags->'foot' as foot, 
+                 tags->'tracktype' as tracktype, 
+                 tags->'path' as path,
+                 name, ref
+                 from planet_line
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 order by z_order asc
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road outline" srs="&osm_srs;">
@@ -323,7 +335,8 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *,
+                (SELECT *, 
+                 tags->'lanes' as lanes,
                     (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                           WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                           WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -331,7 +344,7 @@ zoom level  - scale denominator
                           ELSE 4 END) AS priority,
                         (CASE WHEN highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major'
                               ELSE 'minor' END) AS prominence
-                 FROM planet_osm_line
+                 FROM planet_line
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
                  AS foo]]></Parameter>
@@ -346,7 +359,18 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table">(SELECT * FROM planet_osm_line WHERE highway IN ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') ORDER BY z_order ASC) AS minor_roads</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way, highway, 
+                 tags->'bicycle' as bicycle, 
+                 tags->'horse' as horse, 
+                 tags->'foot' as foot, 
+                 tags->'tracktype' as tracktype, 
+                 tags->'path' as path,
+                 name, ref
+                 from planet_line
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 order by z_order asc
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road inline" srs="&osm_srs;">
@@ -358,7 +382,8 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *,
+                (SELECT *, 
+                 tags->'lanes' as lanes,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                               WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                               WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -366,10 +391,9 @@ zoom level  - scale denominator
                               ELSE 4 END) AS priority,
                         (CASE WHEN highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major'
                               ELSE 'minor' END) AS prominence
-                 FROM planet_osm_line
+                 FROM planet_line
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
-
                  AS foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -382,7 +406,8 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *,
+                (SELECT *, 
+                 tags->'lanes' as lanes,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                               WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                               WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -390,7 +415,7 @@ zoom level  - scale denominator
                               ELSE 4 END) AS priority,
                         (CASE WHEN highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major'
                               ELSE 'minor' END) AS prominence
-                 FROM planet_osm_line
+                 FROM planet_line
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
 
@@ -408,7 +433,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_line
+                (SELECT * FROM planet_line
 	             WHERE highway IN ('motorway', 'trunk', 'trunk_link'))
                      AS foo]]></Parameter>
         </Datasource>
@@ -422,7 +447,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE highway IN ('motorway', 'trunk', 'trunk_link'))
 	             AS foo]]></Parameter>
         </Datasource>
@@ -437,7 +462,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -451,7 +476,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -465,7 +490,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -479,7 +504,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -494,7 +519,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE power IN ('line')
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -509,7 +534,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_line
+	        (SELECT * FROM planet_line
 	             WHERE barrier IS NOT NULL
                      ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
@@ -524,8 +549,13 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_line
-                     WHERE access IN ('no', 'private')) AS foo]]></Parameter>
+                (select way, highway,
+                 tags->'path' as path,
+                 name, ref,
+                 access
+                 from planet_line
+                 where access in ('no', 'private')
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -539,7 +569,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
 	        (SELECT * 
-                     FROM planet_osm_line
+                     FROM planet_line
 	             WHERE boundary='administrative')
                         AS foo]]></Parameter>
         </Datasource>
@@ -554,7 +584,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
 	        (SELECT * 
-                     FROM planet_osm_polygon
+                     FROM planet_polygon
 	             WHERE boundary='administrative')
                         AS foo]]></Parameter>
         </Datasource>
@@ -569,7 +599,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
 	        (SELECT * 
-                     FROM planet_osm_line
+                     FROM planet_line
 	             WHERE boundary='forest')
                         AS foo]]></Parameter>
         </Datasource>
@@ -584,7 +614,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (SELECT * FROM planet_osm_polygon
+	        (SELECT * FROM planet_polygon
                      WHERE building IS NOT NULL
                      ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
@@ -605,7 +635,7 @@ zoom level  - scale denominator
 	            (CASE WHEN place = 'city' THEN 0
                           WHEN place = 'town' THEN 1
                           WHEN place = 'village' THEN 2
-                          ELSE 3 END) AS priority FROM planet_osm_point
+                          ELSE 3 END) AS priority FROM planet_point
                      WHERE place IN ('city', 'town', 'village', 'suburb', 'hamlet', 'locality')
                      ORDER BY priority ASC, correct_z_order DESC) AS foo]]></Parameter>
         </Datasource>
@@ -619,14 +649,16 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *, 
+                (SELECT *,
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route IN ('hiking', 'foot'))
                         AS foo]]></Parameter>
 <!--            <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route IN ('hiking', 'foot'))
                         AS foo]]></Parameter>
 -->
@@ -642,8 +674,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route IN ('hiking', 'foot'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -658,8 +692,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route='hiking')
                         AS foo]]></Parameter>
         </Datasource>
@@ -674,8 +710,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route='hiking')
 	                AS foo]]></Parameter>
         </Datasource>
@@ -690,8 +728,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route='hiking')
 	                AS foo]]></Parameter>
         </Datasource>
@@ -706,8 +746,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route='hiking')
 	                AS foo]]></Parameter>
         </Datasource>
@@ -722,8 +764,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *, 
+                 tags->'osmc:symbol' as "osmc:symbol", 
+                    tags->'route_name' as route_name,
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE route='hiking')
 	                AS foo]]></Parameter>
         </Datasource>
@@ -773,7 +817,7 @@ zoom level  - scale denominator
                         (CASE WHEN bridge IN ('yes', 'true') THEN 'yes'
                               ELSE 'no' END) AS is_bridge
 
-                 FROM (SELECT * FROM planet_osm_line WHERE ST_Intersects(way, !BBOX!)) AS bounded_lines
+                 FROM (SELECT * FROM planet_line WHERE ST_Intersects(way, !BBOX!)) AS bounded_lines
 
                  WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail')
                     OR highway IN ('secondary', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
@@ -787,11 +831,11 @@ zoom level  - scale denominator
 -->
 
 <!--
-(SELECT "natural", name, (CASE WHEN importance ~ E'^-?[[:digit:]]+(\.[[:digit:]]+)?$' THEN CAST (importance AS FLOAT) ELSE 0 END) AS importance_real FROM planet_osm_point WHERE "natural" IN ('peak') ORDER BY importance_real DESC);
+(SELECT "natural", name, (CASE WHEN importance ~ E'^-?[[:digit:]]+(\.[[:digit:]]+)?$' THEN CAST (importance AS FLOAT) ELSE 0 END) AS importance_real FROM planet_point WHERE "natural" IN ('peak') ORDER BY importance_real DESC);
 -->
 
 <!--
- (SELECT "natural", name, importance FROM planet_osm_point WHERE "natural" IN ('peak') AND importance SIMILAR TO '^-*[0-5].[0-9]$' ORDER BY importance DESC);
+ (SELECT "natural", name, importance FROM planet_point WHERE "natural" IN ('peak') AND importance SIMILAR TO '^-*[0-5].[0-9]$' ORDER BY importance DESC);
 -->
 
     <!-- POIs -->
@@ -805,7 +849,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE "natural" IN ('tree'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -819,8 +863,9 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *
-                     FROM planet_osm_point
+                (SELECT *,
+                     tags->'information' as information
+                     FROM planet_point
                      WHERE tourism IN ('viewpoint', 'information', 'picnic_site', 'summit_cross', 'camp_site', 'alpine_hut')
                      OR man_made IN ('tower'))
                         AS foo]]></Parameter>
@@ -836,7 +881,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE historic IN ('ruins', 'castle', 'wayside_cross'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -851,7 +896,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE "natural" IN ('cave_entrance'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -866,7 +911,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE boundary IN ('marker'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -881,7 +926,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE shop='bicycle')
                         AS foo]]></Parameter>
         </Datasource>
@@ -895,8 +940,9 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *
-                     FROM planet_osm_point
+                (SELECT *,
+                 tags->'fee' as fee
+                     FROM planet_point
                      WHERE amenity IN ('bench', 'toilets', 'shelter', 'telephone', 'parking', 'guidepost', 'signpost', 'rescue_box', 'hunting_stand')
                         OR man_made IN ('mineshaft', 'mast')
                         OR military IN ('bunker')
@@ -915,7 +961,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *
-                     FROM planet_osm_point
+                     FROM planet_point
                      WHERE power IN ('tower'))
                         AS foo]]></Parameter>
         </Datasource>
@@ -931,7 +977,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *, y(astext(way)) AS latitude FROM planet_osm_point
+                (SELECT *, y(astext(way)) AS latitude FROM planet_point
                      WHERE (railway IN ('station', 'subway_entrance')
                         OR aeroway IN ('aerodrome', 'airport'))
                        AND name IS NOT NULL
@@ -947,7 +993,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT * FROM planet_osm_point
+                (SELECT * FROM planet_point
                      WHERE (railway IN ('station', 'subway_entrance', 'halt', 'tram_stop')
                         OR aeroway IN ('aerodrome', 'airport')
                         OR highway IN ('gate', 'bus_stop')
@@ -964,7 +1010,9 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (SELECT *, length(way) AS length, CHAR_LENGTH(ref) AS ref_length,
+                (SELECT *, 
+                 tags->'lanes' as lanes,
+                    length(way) AS length, CHAR_LENGTH(ref) AS ref_length,
                     (CASE WHEN CHAR_LENGTH(ref) BETWEEN 2 AND 9 THEN ref
                      ELSE NULL END) AS ref_content,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
@@ -972,7 +1020,7 @@ zoom level  - scale denominator
                               WHEN highway IN ('secondary', 'secondary_link') THEN 2
                               WHEN highway = 'tertiary' THEN 3
                               ELSE 4 END) AS priority
-                     FROM planet_osm_line
+                     FROM planet_line
                      WHERE highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                      ORDER BY priority ASC, z_order ASC, length DESC) AS foo]]></Parameter>
         </Datasource>
@@ -991,7 +1039,7 @@ zoom level  - scale denominator
                               WHEN round(way_area * 1000000) >= 1 THEN 'medium'
                               ELSE 'small' END) AS size,
                         REGEXP_REPLACE(UPPER(name), '(.)', E'\\1\xC2\xA0\xC2\xA0', 'g') AS name_stretched
-                 FROM planet_osm_polygon
+                 FROM planet_polygon
                  WHERE building IS NULL
                    AND (amenity IN ('park')
                      OR landuse IN ('recreation_ground', 'greenfield', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
@@ -1010,11 +1058,12 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT *,
+                 tags->'fee' as fee,
                         (CASE WHEN round(way_area * 1000000) >= 20 THEN 'large'
                               WHEN round(way_area * 1000000) >= 1 THEN 'medium'
                               ELSE 'small' END) AS size,
                         REGEXP_REPLACE(UPPER(name), '(.)', E'\\1\xC2\xA0\xC2\xA0', 'g') AS name_stretched
-                 FROM planet_osm_polygon
+                 FROM planet_polygon
                  WHERE building IS NULL
                    AND (amenity IN ('parking', 'hospital', 'police', 'fire_station')
                      OR tourism IN ('museum')
@@ -1048,7 +1097,10 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table">(SELECT *, length(way) AS length, (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0 WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1 WHEN highway IN ('secondary', 'secondary_link') THEN 2 WHEN highway = 'tertiary' THEN 3 ELSE 4 END) AS priority FROM planet_osm_line WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary') ORDER BY priority ASC, z_order ASC, length DESC) AS minor_roads</Parameter>
+            <Parameter name="table">
+                (SELECT *, 
+                 tags->'lanes' as lanes,
+length(way) AS length, (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0 WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1 WHEN highway IN ('secondary', 'secondary_link') THEN 2 WHEN highway = 'tertiary' THEN 3 ELSE 4 END) AS priority FROM planet_line WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary') ORDER BY priority ASC, z_order ASC, length DESC) AS minor_roads</Parameter>
         </Datasource>
     </Layer>
     <Layer class="path label" srs="&osm_srs;">
@@ -1059,7 +1111,18 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table">(SELECT * FROM planet_osm_line WHERE highway IN ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') ORDER BY z_order ASC) AS minor_roads</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way, highway, 
+                 tags->'bicycle' as bicycle, 
+                 tags->'horse' as horse, 
+                 tags->'foot' as foot, 
+                 tags->'tracktype' as tracktype, 
+                 tags->'path' as path,
+                 name, ref
+                 from planet_line
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 order by z_order asc
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="water label" srs="&osm_srs;">
@@ -1076,7 +1139,7 @@ zoom level  - scale denominator
                               WHEN way_area >=  50000  THEN 'medium'
                               ELSE 'small' END) AS size,
                         REGEXP_REPLACE(UPPER(name), '(.)', E'\\1\xC2\xA0\xC2\xA0', 'g') AS name_stretched
-                 FROM planet_osm_polygon
+                 FROM planet_polygon
                  WHERE landuse IN ('reservoir', 'water')
                     OR "natural" IN ('lake', 'water', 'land')
                  ORDER BY z_order ASC) AS foo]]></Parameter>
@@ -1090,7 +1153,7 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table">(SELECT * FROM planet_osm_line 
+            <Parameter name="table">(SELECT * FROM planet_line 
 	      WHERE route IN ('ferry') 
 	      ORDER BY z_order ASC) AS ferry_label</Parameter>
         </Datasource>
@@ -1109,7 +1172,7 @@ zoom level  - scale denominator
                               WHEN round(way_area * 1000000) >= 1 THEN 'medium'
                               ELSE 'small' END) AS size,
                         REGEXP_REPLACE(UPPER(name), '(.)', E'\\1\xC2\xA0\xC2\xA0', 'g') AS name_stretched
-                 FROM planet_osm_polygon
+                 FROM planet_polygon
                  WHERE building IS NOT NULL
                  ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
