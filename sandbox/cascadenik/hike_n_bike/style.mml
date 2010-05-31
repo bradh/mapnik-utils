@@ -739,10 +739,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                (select way, "natural", name, ele, 
-                  (case when importance ~ e'^-?[[:digit:]]+(\.[[:digit:]]+)?$' then 
-                   cast (importance as float) else 0 end)
+                  (case when tags->'importance' ~ e'^-?[[:digit:]]+(\.[[:digit:]]+)?$' then 
+                   cast (tags->'importance' as float) else 0 end)
                   as importance_real
-                  from planet_osm_point
+                  from planet_point
                   where "natural" in ('peak') order by importance_real desc)
                   as foo]]></Parameter>
         </Datasource>
