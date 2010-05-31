@@ -97,7 +97,7 @@ zoom level  - scale denominator
                         OR tourism IN ('museum')
                         OR landuse IN ('residential', 'industrial', 'commercial')
                         OR aeroway IN ('apron'))
-                 ORDER BY z_order ASC, way_area DESC) AS citylike]]></Parameter>
+                 ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="parklike area" srs="&osm_srs;">
@@ -120,7 +120,7 @@ zoom level  - scale denominator
                         OR landuse IN ('recreation_ground', 'greenfield', 'meadow', 'grass', 'village_green', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
                         OR "natural" IN ('wood', 'grass', 'wetland', 'beach', 'scrub')
                         OR leisure IN ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza'))
-                     ORDER BY z_order ASC, way_area DESC) AS parklike]]></Parameter>
+                     ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="citylike parking area" srs="&osm_srs;">
@@ -136,7 +136,7 @@ zoom level  - scale denominator
                  FROM planet_osm_polygon
                  WHERE building IS NULL
                    AND amenity = 'parking'
-                 ORDER BY z_order ASC, way_area DESC) AS citylike]]></Parameter>
+                 ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="cliff line" srs="&osm_srs;">
@@ -151,7 +151,7 @@ zoom level  - scale denominator
                 (SELECT * FROM planet_osm_line
                  WHERE "natural" = 'cliff'
                     OR man_made IN ('embankment', 'cutting'))
-                    AS cliff]]></Parameter>
+                    AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="cliff area" srs="&osm_srs;">
@@ -166,7 +166,7 @@ zoom level  - scale denominator
                 (SELECT * FROM planet_osm_polygon
                  WHERE "natural" = 'cliff'
                     OR man_made IN ('embankment', 'cutting'))
-                    AS cliff]]></Parameter>
+                    AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -183,7 +183,7 @@ zoom level  - scale denominator
                      WHERE landuse IN ('reservoir', 'water')
                         OR "natural" IN ('lake', 'water', 'land')
                         OR waterway IN ('canal', 'riverbank', 'river')
-                     ORDER BY z_order ASC) AS water]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="water line" srs="&osm_srs;">
@@ -197,7 +197,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
                      WHERE waterway IN ('river', 'stream', 'canal', 'drain')
-                     ORDER BY z_order ASC) AS rivers]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="water ferry" srs="&osm_srs;">
@@ -210,7 +210,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT * FROM planet_osm_line
-                     WHERE route IN ('ferry') ORDER BY z_order ASC) AS ferry]]></Parameter>
+                     WHERE route IN ('ferry') ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -227,7 +227,7 @@ zoom level  - scale denominator
                 (SELECT way,height FROM contours WHERE
                  height::integer % 10 = 0 AND
                  height::integer % 50 != 0 AND
-                 height::integer % 100 != 0) AS srtm]]></Parameter>
+                 height::integer % 100 != 0) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="srtm fifty" srs="&contours_srs;">
@@ -241,7 +241,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (SELECT way,height FROM contours WHERE
                  height::integer % 50 = 0 AND
-                 height::integer % 100 != 0) AS srtm]]></Parameter>
+                 height::integer % 100 != 0) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="srtm hundred" srs="&contours_srs;">
@@ -254,7 +254,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT way,height FROM contours WHERE
-                 height::integer % 100 = 0) AS srtm]]></Parameter>
+                 height::integer % 100 = 0) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 -->
@@ -271,7 +271,7 @@ zoom level  - scale denominator
                 (SELECT * FROM planet_osm_polygon
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC)
-                 AS road_area]]></Parameter>
+                 AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -296,7 +296,7 @@ zoom level  - scale denominator
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
 
-                 AS minor_roads]]></Parameter>
+                 AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -311,7 +311,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (SELECT * FROM planet_osm_line
                     WHERE highway IN ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway')
-	            ORDER BY z_order ASC) AS minor_roads]]></Parameter>
+	            ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road outline" srs="&osm_srs;">
@@ -334,7 +334,7 @@ zoom level  - scale denominator
                  FROM planet_osm_line
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
-                 AS minor_roads]]></Parameter>
+                 AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -370,7 +370,7 @@ zoom level  - scale denominator
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
 
-                 AS minor_roads]]></Parameter>
+                 AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road centerline" srs="&osm_srs;">
@@ -394,7 +394,7 @@ zoom level  - scale denominator
                  WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  ORDER BY z_order ASC, priority DESC)
 
-                 AS minor_roads]]></Parameter>
+                 AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -410,7 +410,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (SELECT * FROM planet_osm_line
 	             WHERE highway IN ('motorway', 'trunk', 'trunk_link'))
-                     AS motorways]]></Parameter>
+                     AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="motorway inline" srs="&osm_srs;">
@@ -424,7 +424,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE highway IN ('motorway', 'trunk', 'trunk_link'))
-	             AS motorways]]></Parameter>
+	             AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -439,7 +439,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
-                     ORDER BY z_order ASC) AS railways]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="rail outline" srs="&osm_srs;">
@@ -453,7 +453,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
-                     ORDER BY z_order ASC) AS railways]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="rail centerline" srs="&osm_srs;">
@@ -467,7 +467,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
-                     ORDER BY z_order ASC) AS railways]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="rail line" srs="&osm_srs;">
@@ -481,7 +481,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE railway IN ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
-                     ORDER BY z_order ASC) AS railways]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -496,7 +496,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE power IN ('line')
-                     ORDER BY z_order ASC) AS power]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -511,7 +511,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_line
 	             WHERE barrier IS NOT NULL
-                     ORDER BY z_order ASC) AS barrier]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -525,7 +525,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (SELECT * FROM planet_osm_line
-                     WHERE access IN ('no', 'private')) AS acc]]></Parameter>
+                     WHERE access IN ('no', 'private')) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -541,7 +541,7 @@ zoom level  - scale denominator
 	        (SELECT * 
                      FROM planet_osm_line
 	             WHERE boundary='administrative')
-                        AS boundaryline]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="boundary area" srs="&osm_srs;">
@@ -556,7 +556,7 @@ zoom level  - scale denominator
 	        (SELECT * 
                      FROM planet_osm_polygon
 	             WHERE boundary='administrative')
-                        AS boundaryarea]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="boundary forest" srs="&osm_srs;">
@@ -571,7 +571,7 @@ zoom level  - scale denominator
 	        (SELECT * 
                      FROM planet_osm_line
 	             WHERE boundary='forest')
-                        AS boundaryforest]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -586,7 +586,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
 	        (SELECT * FROM planet_osm_polygon
                      WHERE building IS NOT NULL
-                     ORDER BY z_order ASC, way_area DESC) AS citylike]]></Parameter>
+                     ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -607,7 +607,7 @@ zoom level  - scale denominator
                           WHEN place = 'village' THEN 2
                           ELSE 3 END) AS priority FROM planet_osm_point
                      WHERE place IN ('city', 'town', 'village', 'suburb', 'hamlet', 'locality')
-                     ORDER BY priority ASC, correct_z_order DESC) AS places]]></Parameter>
+                     ORDER BY priority ASC, correct_z_order DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking" srs="&osm_srs;">
@@ -623,12 +623,12 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route IN ('hiking', 'foot'))
-                        AS route]]></Parameter>
+                        AS foo]]></Parameter>
 <!--            <Parameter name="table"><![CDATA[
                 (SELECT *
                      FROM planet_osm_line
                      WHERE route IN ('hiking', 'foot'))
-                        AS route]]></Parameter>
+                        AS foo]]></Parameter>
 -->
         </Datasource>
     </Layer>
@@ -645,7 +645,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route IN ('hiking', 'foot'))
-                        AS route]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking_heide" srs="&osm_srs;">
@@ -661,7 +661,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route='hiking')
-                        AS route]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking_heide_a_h" srs="&osm_srs;">
@@ -677,7 +677,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route='hiking')
-	                AS route]]></Parameter>
+	                AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking_heide_k_n" srs="&osm_srs;">
@@ -693,7 +693,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route='hiking')
-	                AS route]]></Parameter>
+	                AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking_heide_o_s" srs="&osm_srs;">
@@ -709,7 +709,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route='hiking')
-	                AS route]]></Parameter>
+	                AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="route hiking_heide_t_z" srs="&osm_srs;">
@@ -725,7 +725,7 @@ zoom level  - scale denominator
                      CASE WHEN route IS NOT null THEN ' ' END AS empty 
                      FROM planet_osm_line
                      WHERE route='hiking')
-	                AS route]]></Parameter>
+	                AS foo]]></Parameter>
         </Datasource>
     </Layer>
  
@@ -738,13 +738,13 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-               (SELECT way, "natural", name, ele, 
-                      (CASE WHEN importance ~ E'^-?[[:digit:]]+(\.[[:digit:]]+)?$' THEN 
-                       CAST (importance AS FLOAT) ELSE 0 END)
-                     AS importance_real
-                     FROM planet_osm_point
-                     WHERE "natural" IN ('peak') ORDER BY importance_real DESC)
-                        AS peak]]></Parameter>
+               (select way, "natural", name, ele, 
+                  (case when importance ~ e'^-?[[:digit:]]+(\.[[:digit:]]+)?$' then 
+                   cast (importance as float) else 0 end)
+                  as importance_real
+                  from planet_osm_point
+                  where "natural" in ('peak') order by importance_real desc)
+                  as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -783,7 +783,7 @@ zoom level  - scale denominator
                  GROUP BY highway, railway, coalesced_layer, priority, kind, is_tunnel, is_bridge
                  ORDER BY coalesced_layer ASC, priority DESC)
                  
-                 AS collected_lines]]></Parameter>
+                 AS foo]]></Parameter>
 -->
 
 <!--
@@ -807,7 +807,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE "natural" IN ('tree'))
-                        AS poi_natural]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi_tourism point" srs="&osm_srs;">
@@ -823,7 +823,7 @@ zoom level  - scale denominator
                      FROM planet_osm_point
                      WHERE tourism IN ('viewpoint', 'information', 'picnic_site', 'summit_cross', 'camp_site', 'alpine_hut')
                      OR man_made IN ('tower'))
-                        AS poi_tourism]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi_historic point" srs="&osm_srs;">
@@ -838,7 +838,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE historic IN ('ruins', 'castle', 'wayside_cross'))
-                        AS poi_historic]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi_natural point" srs="&osm_srs;">
@@ -853,7 +853,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE "natural" IN ('cave_entrance'))
-                        AS poi_natural]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi_boundary point" srs="&osm_srs;">
@@ -868,7 +868,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE boundary IN ('marker'))
-                        AS poi_boundary]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi_shop point" srs="&osm_srs;">
@@ -883,7 +883,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE shop='bicycle')
-                        AS poi_shop]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="poi point" srs="&osm_srs;">
@@ -901,7 +901,7 @@ zoom level  - scale denominator
                         OR man_made IN ('mineshaft', 'mast')
                         OR military IN ('bunker')
                         OR amenity IN ('restaurant', 'fast_food', 'pub', 'drinking_water'))
-                        AS poi]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -917,7 +917,7 @@ zoom level  - scale denominator
                 (SELECT *
                      FROM planet_osm_point
                      WHERE power IN ('tower'))
-                        AS power]]></Parameter>
+                        AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -935,7 +935,7 @@ zoom level  - scale denominator
                      WHERE (railway IN ('station', 'subway_entrance')
                         OR aeroway IN ('aerodrome', 'airport'))
                        AND name IS NOT NULL
-                     ORDER BY z_order ASC, latitude DESC) AS transit_points]]></Parameter>
+                     ORDER BY z_order ASC, latitude DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road point" srs="&osm_srs;">
@@ -952,7 +952,7 @@ zoom level  - scale denominator
                         OR aeroway IN ('aerodrome', 'airport')
                         OR highway IN ('gate', 'bus_stop')
                         OR barrier IN ('gate', 'bollard'))
-                     ORDER BY z_order ASC) AS road_points]]></Parameter>
+                     ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="road label major" srs="&osm_srs;">
@@ -974,7 +974,7 @@ zoom level  - scale denominator
                               ELSE 4 END) AS priority
                      FROM planet_osm_line
                      WHERE highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
-                     ORDER BY priority ASC, z_order ASC, length DESC) AS major_roads]]></Parameter>
+                     ORDER BY priority ASC, z_order ASC, length DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="parklike label" srs="&osm_srs;">
@@ -997,7 +997,7 @@ zoom level  - scale denominator
                      OR landuse IN ('recreation_ground', 'greenfield', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
                      OR "natural" IN ('wood', 'grass', 'wetland', 'beach', 'scrub')
                      OR leisure IN ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza'))
-                 ORDER BY z_order ASC, way_area DESC) AS parklike]]></Parameter>
+                 ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="citylike label" srs="&osm_srs;">
@@ -1020,7 +1020,7 @@ zoom level  - scale denominator
                      OR tourism IN ('museum')
                      OR landuse IN ('residential', 'industrial', 'commercial')
                      OR aeroway IN ('apron'))
-                 ORDER BY z_order ASC, way_area DESC) AS citylike]]></Parameter>
+                 ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 <!--
@@ -1036,7 +1036,7 @@ zoom level  - scale denominator
                 (SELECT way,height FROM contours WHERE
                  height::integer % 10 = 0 OR
                  height::integer % 50 = 0 OR
-                 height::integer % 100 = 0) AS srtm]]></Parameter>
+                 height::integer % 100 = 0) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 -->
@@ -1079,7 +1079,7 @@ zoom level  - scale denominator
                  FROM planet_osm_polygon
                  WHERE landuse IN ('reservoir', 'water')
                     OR "natural" IN ('lake', 'water', 'land')
-                 ORDER BY z_order ASC) AS water]]></Parameter>
+                 ORDER BY z_order ASC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
     <Layer class="ferry label" srs="&osm_srs;">
@@ -1111,7 +1111,7 @@ zoom level  - scale denominator
                         REGEXP_REPLACE(UPPER(name), '(.)', E'\\1\xC2\xA0\xC2\xA0', 'g') AS name_stretched
                  FROM planet_osm_polygon
                  WHERE building IS NOT NULL
-                 ORDER BY z_order ASC, way_area DESC) AS citylike]]></Parameter>
+                 ORDER BY z_order ASC, way_area DESC) AS foo]]></Parameter>
         </Datasource>
     </Layer>
 
