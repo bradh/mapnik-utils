@@ -243,7 +243,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge,
+                 highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes
                  from planet_polygon
                  where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
@@ -262,7 +262,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge,
+                 highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
                     (case when highway in ('motorway', 'motorway_link') then 0
                           when highway in ('trunk', 'trunk_link', 'primary', 'primary_link') then 1
@@ -310,7 +310,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge,
+                 highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
                     (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                           WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
@@ -358,7 +358,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge,
+                 highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                               WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
@@ -383,7 +383,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge,
+                 highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                               WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
@@ -1031,7 +1031,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, name, ref, 
+                 highway, name, ref, oneway,
                  tags->'lanes' as lanes,
                  length(way) as length, char_length(ref) as ref_length,
                  (case when char_length(ref) between 2 and 9 then ref
@@ -1125,7 +1125,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, name, ref,
+                 highway, name, ref, oneway,
                  tags->'lanes' as lanes,
                  length(way) as length, 
                  (case when highway in ('motorway', 'motorway_link') then 0 
