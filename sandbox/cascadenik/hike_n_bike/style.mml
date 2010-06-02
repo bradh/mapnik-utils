@@ -979,7 +979,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  amenity, man_made, military, name,
-                 tags->'fee' as fee
+                 case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end as fee
                  from planet_point
                  where amenity in ('bench', 'toilets', 'shelter', 'telephone', 'parking', 'guidepost', 'signpost', 'rescue_box', 'hunting_stand')
                  or man_made in ('mineshaft', 'mast')
