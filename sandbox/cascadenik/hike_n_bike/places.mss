@@ -2,7 +2,7 @@
 
 .place name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-wrap-width: 65;
@@ -11,7 +11,7 @@
 .place[place=town][zoom>=9] name,
 .place[place=city] name
 {
-    text-face-name: "Droid Sans Bold";
+    text-fontset-name: "bold-fonts";
     text-halo-radius: 2 !important;
     text-fill: #222;
 }

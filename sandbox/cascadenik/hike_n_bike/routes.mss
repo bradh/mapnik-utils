@@ -5,7 +5,7 @@
 .route.hiking empty,
 .route.hiking_small empty
 {
-    shield-face-name: "Droid Sans Regular";
+    shield-fontset-name: "book-fonts";
     shield-size: 0;
     shield-fill: #777;
 }
@@ -596,7 +596,7 @@
 
 .path[name="Kletterzustieg"] name
 {
-    shield-face-name: "Droid Sans Regular";
+    shield-fontset-name: "book-fonts";
     shield-size: 0;
     shield-fill: #777;
 }
@@ -627,7 +627,7 @@
 
 .path[path=mountain_path] name
 {
-    shield-face-name: "Droid Sans Regular";
+    shield-fontset-name: "book-fonts";
     shield-size: 0;
     shield-fill: #777;
 }

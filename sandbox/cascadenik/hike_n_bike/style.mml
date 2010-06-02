@@ -60,7 +60,32 @@ zoom level  - scale denominator
     <Stylesheet src="routes_dresdner_heide2.mss"/>
     <Stylesheet src="routes.mss"/>
 
-            <!-- coastline shapefiles can be found at http://hypercube.telascience.org/~kleptog/ -->
+    <!--Settings for Mapnik Fonts
+    Uncomment the unifont entries if you have that font installed
+    in your mapnik fonts dir, and want to use it as a fallback font.
+    Mapnik includes this font by default since r1328.
+    To see the fonts you have installed with Mapnik do:
+    ls `python -c "import mapnik;print mapnik.fontscollectionpath"`-->
+    <FontSet name="book-fonts">
+      <Font face_name="Droid Sans Regular" />
+      <Font face_name="Droid Sans Japanese" />
+      <Font face_name="Droid Sans Fallback" />
+      <!--<Font face_name="DejaVu Sans Book" />-->
+      <Font face_name="unifont Medium" />
+    </FontSet>
+    <FontSet name="bold-fonts">
+      <Font face_name="Droid Sans Bold" />
+      <!--<Font face_name="DejaVu Sans Bold" />-->
+      <Font face_name="unifont Medium" />
+    </FontSet>
+    <FontSet name="oblique-fonts">
+      <Font face_name="Droid Sans Italic" />
+      <!--<Font face_name="DejaVu Sans Oblique" />-->
+      <Font face_name="unifont Medium" />
+    </FontSet>
+
+
+    <!-- coastline shapefiles can be found at http://hypercube.telascience.org/~kleptog/ -->
     <Layer class="coast edge outer" srs="&coastlines_srs;">
         <Datasource>
             <Parameter name="type">shape</Parameter>

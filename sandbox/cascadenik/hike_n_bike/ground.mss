@@ -39,7 +39,7 @@
 
 .water.line name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-placement: line;
 /*     text-size: 9; */
     text-fill: #7396bb;
@@ -378,7 +378,7 @@
     line-color: #659a4e;
     line-join: round;
     line-width: 1;
-    text-face-name: "Droid Serif Italic";
+    text-fontset-name: "oblique-fonts";
     text-size: 9;
     text-fill: #659a4e;
     text-halo-radius: 1;
@@ -390,7 +390,7 @@
 .parklike.label name,
 .citylike.label[amenity!=parking] name
 {
-    text-face-name: "Droid Serif Italic";
+    text-fontset-name: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -402,7 +402,7 @@
 .parklike.label[zoom=16][size=small] name,
 .citylike.label[zoom=16][size=small][amenity!=parking] name
 {
-    text-face-name: "Droid Serif Italic";
+    text-fontset-name: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -414,7 +414,7 @@
 .parklike.label[zoom>=17] name,
 .citylike.label[zoom>=17][amenity!=parking] name
 {
-    text-face-name: "Droid Serif Italic";
+    text-fontset-name: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -426,7 +426,7 @@
 
 .building.label name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -435,7 +435,7 @@
 .building.label[zoom>=15][zoom<=16][size=medium] name,
 .building.label[zoom=16][size=small] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -450,7 +450,7 @@
     point-file: url('img/svg-twotone-png/tourist_museum.p.16.png');
     text-dy: 18;
     text-fill: #734a08;
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -464,7 +464,7 @@
     point-file: url('img/svg-twotone-png/tourist_museum.p.14.png');
     text-dy: 16;
     text-fill: #734a08;
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -547,7 +547,7 @@
 .building.label[zoom>=16][size=large] name,
 .building.label[zoom>=17] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -557,7 +557,7 @@
 
 .water.label name
 {
-    text-face-name: "Droid Serif Italic";
+    text-fontset-name: "oblique-fonts";
     text-fill: #7396bb;
     text-halo-fill: #e7f6fd;
     text-halo-radius: 1;
@@ -581,7 +581,7 @@
 
 .ferry.label[zoom>=13] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-size: 9;
     text-placement: line;
     text-dy: 5;

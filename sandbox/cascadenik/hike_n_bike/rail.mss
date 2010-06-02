@@ -204,7 +204,7 @@
 /* transit */
 .transit.point[zoom>=13] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #082685;
     text-placement: point;
     text-size: 8;
@@ -212,7 +212,7 @@
 
 .transit.point[zoom>=14] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #082685;
     text-placement: point;
     text-size: 9;
@@ -220,7 +220,7 @@
 
 .transit.point[zoom>=15] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #082685;
     text-placement: point;
     text-size: 10;
@@ -229,7 +229,7 @@
 
 .transit.point[zoom>=16] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-fill: #082685;
     text-placement: point;
     text-size: 11;

@@ -323,7 +323,7 @@ fettere Striche: Autos nicht; Fahrrad nicht: ein fetter und ein duenner
 
 .path.label[zoom>=12] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-size: 8;
     text-fill: #000;
     text-placement: line;
@@ -337,7 +337,7 @@ fettere Striche: Autos nicht; Fahrrad nicht: ein fetter und ein duenner
 
 .path.label[zoom>=15] name
 {
-    text-face-name: "Droid Sans Regular";
+    text-fontset-name: "book-fonts";
     text-size: 10;
     text-fill: #000;
     text-placement: line;
