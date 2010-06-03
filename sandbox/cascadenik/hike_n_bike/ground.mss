@@ -538,10 +538,29 @@
     point-file: url('img/misc/hospital.12.png');
 }
 
+.building.label[zoom>=13][amenity=parking],
+.citylike.label[zoom>=13][amenity=parking]
+{
+    point-file: url('img/svg-twotone-png/transport_parking.n.8.png');
+}
+
 .building.label[zoom>=15][amenity=parking],
 .citylike.label[zoom>=15][amenity=parking]
 {
     point-file: url('img/svg-twotone-png/transport_parking.n.12.png');
+}
+
+
+.building.label[zoom>=13][amenity=parking][fee=yes],
+.citylike.label[zoom>=13][amenity=parking][fee=yes]
+{
+    point-file: url('img/svg-twotone-png/transport_parking_car_paid.p.8.png');
+}
+
+.building.label[zoom>=15][amenity=parking][fee=yes],
+.citylike.label[zoom>=15][amenity=parking][fee=yes]
+{
+    point-file: url('img/svg-twotone-png/transport_parking_car_paid.p.12.png');
 }
 
 .building.label[zoom>=16][size=large] name,

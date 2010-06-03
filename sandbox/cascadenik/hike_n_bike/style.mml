@@ -162,7 +162,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, landuse, amenity,
-                 tags->'fee' as fee
+                 case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end as fee
                  from planet_polygon
                  where building is null
                    and amenity = 'parking'
@@ -289,13 +289,13 @@ zoom level  - scale denominator
                 (select way,
                  highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
-                    (case when highway in ('motorway', 'motorway_link') then 0
-                          when highway in ('trunk', 'trunk_link', 'primary', 'primary_link') then 1
-                          when highway in ('secondary', 'secondary_link') then 2
-                          when highway = 'tertiary' then 3
-                          else 4 end) as priority,
-                        (case when highway in ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') then 'major'
-                              else 'minor' end) as prominence
+                 (case when highway in ('motorway', 'motorway_link') then 0
+                       when highway in ('trunk', 'trunk_link', 'primary', 'primary_link') then 1
+                       when highway in ('secondary', 'secondary_link') then 2
+                       when highway = 'tertiary' then 3
+                       else 4 end) as priority,
+                 (case when highway in ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') then 'major'
+                       else 'minor' end) as prominence
                  from planet_line
                  where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
                  order by z_order asc, priority desc
@@ -1108,7 +1108,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, landuse, aeroway, name, ref,
-                 tags->'fee' as fee,
+                 (case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
                  (case when round(way_area * 1000000) >= 20 then 'large'
                        when round(way_area * 1000000) >= 1 then 'medium'
                        else 'small' end) as size,
@@ -1236,6 +1236,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, name, ref,
+                 (case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
                  (case when round(way_area * 1000000) >= 20 then 'large'
                        when round(way_area * 1000000) >= 1 then 'medium'
                        else 'small' end
