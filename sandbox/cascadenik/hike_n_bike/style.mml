@@ -205,6 +205,26 @@ zoom level  - scale denominator
         </Datasource>
     </Layer>
 
+    <Layer class="water edge" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 landuse, "natural", waterway
+                 from planet_polygon
+                 where landuse in ('reservoir', 'water')
+                    or "natural" in ('lake', 'water', 'land')
+                    or waterway in ('canal', 'riverbank', 'river')
+                 order by z_order asc
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+
     <Layer class="water area" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>

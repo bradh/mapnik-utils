@@ -27,14 +27,16 @@
     */
 }
 
-/* water areas with an outline look bad because they show the seams 
-   when riverbanks touch along the length of a river, so don't outline any waters */
+.water.edge[zoom>12]
+{
+    line-color: #a1cbea;
+}
+.water.edge[zoom>14] { line-width: 6; }
+.water.edge[zoom<=14] { line-width: 4; }
 
 .water.area
 {
     polygon-fill: #cae5fb;
-    polygon-opacity: 0.95;
-    line-join: round;
 }
 
 .water.line name
