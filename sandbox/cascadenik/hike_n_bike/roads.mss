@@ -370,13 +370,15 @@
 }
 
 .motorway.inline[highway=trunk],
-.road.inline[highway=trunk]
+.road.inline[highway=trunk],
+.road.inline[highway=trunk_link]
 {
     line-color: #ffec9f;
 }
 
 .motorway.outline[highway=trunk],
-.road.outline[highway=trunk]
+.road.outline[highway=trunk],
+.road.outline[highway=trunk_link]
 {
     line-color: #b1a67b;
 }

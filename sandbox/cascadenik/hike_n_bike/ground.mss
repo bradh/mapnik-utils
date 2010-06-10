@@ -447,7 +447,7 @@
 .building.label[zoom>=17][tourism=museum] name,
 .citylike.label[zoom>=17][tourism=museum] name
 {
-    point-file: url('img/svg-twotone-png/tourist_museum.p.16.png');
+    point-file: url('sjjb-mapicons/png/tourist_museum.glow.16.png');
     text-dy: 18;
     text-fill: #734a08;
     text-fontset-name: "book-fonts";
@@ -461,7 +461,7 @@
 .building.label[zoom>=15][zoom<=16][tourism=museum] name,
 .citylike.label[zoom>=15][zoom<=16][tourism=museum] name
 {
-    point-file: url('img/svg-twotone-png/tourist_museum.p.14.png');
+    point-file: url('sjjb-mapicons/png/tourist_museum.glow.14.png');
     text-dy: 16;
     text-fill: #734a08;
     text-fontset-name: "book-fonts";
@@ -475,7 +475,7 @@
 .building.label[zoom=14][tourism=museum] name,
 .citylike.label[zoom=14][tourism=museum] name
 {
-    point-file: url('img/svg-twotone-png/tourist_museum.p.12.png');
+    point-file: url('sjjb-mapicons/png/tourist_museum.glow.12.png');
 }
 
 .building.label[zoom>=17][amenity=police],
@@ -541,26 +541,26 @@
 .building.label[zoom>=13][amenity=parking],
 .citylike.label[zoom>=13][amenity=parking]
 {
-    point-file: url('img/svg-twotone-png/transport_parking.n.8.png');
+    point-file: url('sjjb-mapicons/png/transport_parking.glow.8.png');
 }
 
 .building.label[zoom>=15][amenity=parking],
 .citylike.label[zoom>=15][amenity=parking]
 {
-    point-file: url('img/svg-twotone-png/transport_parking.n.12.png');
+    point-file: url('sjjb-mapicons/png/transport_parking.glow.12.png');
 }
 
 
 .building.label[zoom>=13][amenity=parking][fee=yes],
 .citylike.label[zoom>=13][amenity=parking][fee=yes]
 {
-    point-file: url('img/svg-twotone-png/transport_parking_car_paid.p.8.png');
+    point-file: url('sjjb-mapicons/png/transport_parking_car_paid.glow.8.png');
 }
 
 .building.label[zoom>=15][amenity=parking][fee=yes],
 .citylike.label[zoom>=15][amenity=parking][fee=yes]
 {
-    point-file: url('img/svg-twotone-png/transport_parking_car_paid.p.12.png');
+    point-file: url('sjjb-mapicons/png/transport_parking_car_paid.glow.12.png');
 }
 
 .building.label[zoom>=16][size=large] name,

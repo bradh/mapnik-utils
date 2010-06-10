@@ -162,7 +162,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, landuse, amenity,
-                 case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end as fee
+                 case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end as fee
                  from planet_polygon
                  where building is null
                    and amenity = 'parking'
@@ -979,7 +979,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  amenity, man_made, military, name,
-                 case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end as fee
+                 case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end as fee
                  from planet_point
                  where amenity in ('bench', 'toilets', 'shelter', 'telephone', 'parking', 'guidepost', 'signpost', 'rescue_box', 'hunting_stand')
                  or man_made in ('mineshaft', 'mast')
@@ -1108,7 +1108,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, landuse, aeroway, name, ref,
-                 (case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
+                 (case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
                  (case when round(way_area * 1000000) >= 20 then 'large'
                        when round(way_area * 1000000) >= 1 then 'medium'
                        else 'small' end) as size,
@@ -1236,7 +1236,7 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, name, ref,
-                 (case when (tags->'fee' in ('no','false','0') and tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
+                 (case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
                  (case when round(way_area * 1000000) >= 20 then 'large'
                        when round(way_area * 1000000) >= 1 then 'medium'
                        else 'small' end
