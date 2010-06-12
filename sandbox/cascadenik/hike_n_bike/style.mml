@@ -220,7 +220,6 @@ zoom level  - scale denominator
                  where landuse in ('reservoir', 'water')
                     or "natural" in ('lake', 'water', 'land')
                     or waterway in ('canal', 'riverbank', 'river')
-                 order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -240,7 +239,6 @@ zoom level  - scale denominator
                  where landuse in ('reservoir', 'water')
                     or "natural" in ('lake', 'water', 'land')
                     or waterway in ('canal', 'riverbank', 'river')
-                 order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -257,7 +255,6 @@ zoom level  - scale denominator
                  waterway, name 
                  from planet_line
                  where waterway in ('river', 'stream', 'canal', 'drain')
-                 order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -273,7 +270,7 @@ zoom level  - scale denominator
                 (select way,
                  route 
                  from planet_line
-                 where route in ('ferry') order by z_order asc
+                 where route in ('ferry')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -341,7 +338,6 @@ zoom level  - scale denominator
                  name, ref
                  from planet_line
                  where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
-                 order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -389,7 +385,6 @@ zoom level  - scale denominator
                  name, ref
                  from planet_line
                  where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
-                 order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -838,8 +833,9 @@ zoom level  - scale denominator
                    cast (tags->'importance' as float) else 0 end)
                   as importance_real
                   from planet_point
-                  where "natural" in ('peak') order by importance_real desc)
-                  as foo]]></Parameter>
+                  where "natural" in ('peak') 
+                  order by importance_real desc
+                  ) as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -1241,7 +1237,6 @@ zoom level  - scale denominator
                  route, name, ref 
                  from planet_line 
 	         where route in ('ferry') 
-	         order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
