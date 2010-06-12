@@ -31,6 +31,7 @@
 {
     line-color: #a1cbea;
     line-join: round;
+    line-cap: round;
 }
 .water.edge[zoom>14] { line-width: 6; }
 .water.edge[zoom<=14] { line-width: 4; }
