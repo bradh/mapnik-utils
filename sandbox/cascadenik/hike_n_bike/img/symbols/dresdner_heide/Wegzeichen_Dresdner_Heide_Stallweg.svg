@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Stallweg.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="1.3005181"
+     inkscape:cx="229.30761"
+     inkscape:cy="549.21145"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Stallweg.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Stallweg.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="M 509.03125 53.0625 L 91.875 324.5 L 92.28125 373.6875 L 601.21875 375.21875 L 601.875 432.1875 L 601.34375 439.25 L 600 445.09375 L 596.875 449.59375 L 592.78125 453.9375 L 588.28125 458.28125 L 582.03125 462.625 L 576.1875 465.875 L 574.96875 467.375 L 575.25 469.28125 L 576.34375 470.78125 L 669.59375 471.59375 L 670.9375 469.96875 L 670.9375 467.65625 L 669.59375 465.75 L 665.78125 463.3125 L 660.46875 459.09375 L 655.4375 454.59375 L 652.03125 450.25 L 650.15625 445.625 L 649.46875 439.125 L 650.28125 375.21875 L 712.25 375.625 L 718.375 377.53125 L 723.53125 380.25 L 727.625 384.0625 L 731.6875 388 L 736.1875 393.71875 L 739.4375 401.46875 L 740.9375 403.09375 L 742.96875 403.375 L 743.8125 402.28125 L 743.25 301.8125 L 742.15625 299.65625 L 740.53125 298.96875 L 738.5 299.65625 L 737 302.21875 L 734.96875 306.03125 L 731.15625 312.15625 L 726.9375 317.3125 L 722.1875 321.53125 L 717.6875 323.71875 L 650.8125 323.84375 L 650.6875 265.40625 L 651.21875 258.75 L 653.40625 251 L 656.53125 245.15625 L 659.53125 241.875 L 664.28125 238.625 L 668.75 235.5 L 670 233.875 L 670 231.28125 L 668.90625 230.0625 L 578.65625 229.65625 L 576.59375 230.59375 L 575.9375 232.90625 L 577 235.5 L 579.1875 236.4375 L 581.90625 237.65625 L 586.25 240.25 L 592.25 244.59375 L 597.125 249.34375 L 600.53125 255.625 L 602.4375 263.34375 L 601.3125 323.71875 L 508.25 322.5625 L 509.03125 53.0625 z M 426 184.25 L 428.1875 322.90625 L 216.65625 322.09375 L 426 184.25 z "
+       id="path2816" />
+  </g>
+</svg>

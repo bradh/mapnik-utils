@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Pillnitz-Moritzburger_Weg.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47 r22583"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="977"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="5.2020724"
+     inkscape:cx="561.29096"
+     inkscape:cy="656.66295"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Pillnitz-Moritzburger_Weg.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Pillnitz-Moritzburger_Weg.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="M 371.34375 49.6875 L 134.5625 50.5 L 134.4375 87.46875 L 171.28125 87.59375 L 171.28125 611.59375 L 133.875 611.46875 L 133.34375 649.40625 L 303.65625 649 L 303.40625 611.46875 L 267.09375 611.59375 L 267.375 414.09375 L 360.75 414.78125 L 377.1875 413.28125 L 391.59375 410.28125 L 410.21875 404.59375 L 426.8125 397.25 L 445.3125 386.5 L 462.03125 374.6875 L 472.90625 364.625 L 484.03125 351.96875 L 494.90625 337.5625 L 503.625 325.0625 L 511.90625 308.75 L 518.4375 292.59375 L 523.3125 275.59375 L 525.78125 262.40625 L 528.21875 248.125 L 528.75 230.59375 L 527.53125 213.59375 L 524.28125 194.15625 L 521.28125 180.15625 L 516.53125 166.84375 L 510.28125 152.15625 L 502.9375 138.03125 L 495.0625 126.34375 L 485.65625 113.84375 L 477.25 104.1875 L 468.6875 96.03125 L 459.4375 88.28125 L 447.0625 79.3125 L 433.1875 70.46875 L 415.9375 62.46875 L 402.0625 57.15625 L 385.09375 52 L 371.34375 49.6875 z M 268.53125 87.46875 L 286.21875 87.65625 L 304.6875 89.1875 L 325.0625 92.84375 L 349.09375 101.3125 L 364.28125 110.15625 L 383.875 124.75 L 396 136.875 L 407.71875 150.90625 L 415.03125 163 L 422.125 176.84375 L 428.28125 193.375 L 431.75 208.375 L 432.71875 221.25 L 432.71875 235.46875 L 430.78125 249.71875 L 428.09375 263.5625 L 424.0625 277.375 L 419.0625 288.53125 L 410.8125 304.125 L 404.46875 314.875 L 395.625 326.59375 L 382.71875 340.25 L 371.59375 349.65625 L 358.3125 357.15625 L 343.125 364.65625 L 326.59375 370.4375 L 309.3125 375.25 L 296.21875 377.34375 L 279.125 377.15625 L 267.78125 376.59375 L 268.53125 87.46875 z "
+       id="path2816" />
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="M 648.10423,49.407281 778.72811,435.78784 905.02393,50.556755 l 130.52487,-0.192231 0,38.830678 -36.07095,-0.232903 4.07785,521.691281 32.079,0 0.1359,38.05981 -167.05539,-0.13592 0.13593,-37.65203 37.65203,0.13593 L 901.47384,183.9759 749.7783,648.57747 593.18936,200.01539 l 2.91922,410.12604 53.44024,-0.19223 -0.19223,37.48506 -135.33068,0.57669 0.19223,-37.67729 41.71415,-0.19223 -0.76893,-520.561766 -41.90637,0.192231 0.38446,-40.368527 134.46278,0.0039 z"
+       id="path2821" />
+  </g>
+</svg>

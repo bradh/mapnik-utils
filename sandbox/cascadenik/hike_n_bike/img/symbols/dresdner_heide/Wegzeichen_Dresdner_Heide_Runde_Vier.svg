@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Runde_Vier.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47 r22583"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="977"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="3.6784207"
+     inkscape:cx="399.89006"
+     inkscape:cy="524.98425"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Runde_Vier.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Runde_Vier.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="M 363.125 50.15625 L 363.65625 260.03125 L 264.4375 260.3125 L 255.1875 256.21875 L 244.84375 245.0625 L 245.40625 338.875 L 257.09375 325 L 265.53125 319.84375 L 364.46875 319.5625 L 365.03125 585.71875 L 351.6875 583.53125 L 336.1875 578.65625 L 316.09375 570.5 L 297.875 561.53125 L 281.5625 552.28125 L 261.4375 537.0625 L 239.96875 515.5625 L 226.09375 497.625 L 216.03125 480.5 L 210.34375 470.1875 L 200.8125 444.90625 L 194.03125 418.78125 L 192.125 405.1875 L 194.03125 397.03125 L 197.5625 390.53125 L 203.8125 384.8125 L 211.40625 376.9375 L 102.9375 376.9375 L 107.03125 381.28125 L 113.5625 387.53125 L 120.875 395.96875 L 126.3125 403.03125 L 130.6875 411.1875 L 132.59375 420.6875 L 136.375 441.09375 L 142.09375 462.03125 L 148.625 481.59375 L 159.21875 504.4375 L 169 521.5625 L 181.25 539.21875 L 195.65625 557.15625 L 205.96875 568.03125 L 218.5 580.8125 L 237.53125 596.875 L 257.09375 609.90625 L 276.40625 621.3125 L 297.59375 630.3125 L 321.25 637.625 L 338.90625 642 L 351.6875 644.15625 L 366.90625 647.15625 L 384.875 648.5 L 402.25 648.78125 L 418.84375 648.25 L 432.15625 647.15625 L 447.375 645.53125 L 460.96875 642.8125 L 477.03125 637.90625 L 493.875 632.1875 L 510.1875 625.125 L 529.21875 615.0625 L 546.0625 604.1875 L 562.125 592.5 L 573.53125 583.28125 L 582.78125 574.28125 L 594.75 562.0625 L 601.53125 554.4375 L 609.96875 543.84375 L 620.03125 528.90625 L 629.8125 512.3125 L 637.96875 496.8125 L 645.03125 479.96875 L 650.46875 466.09375 L 655.34375 451.15625 L 664.0625 410.90625 L 666.78125 401.125 L 670.59375 395.40625 L 675.46875 389.4375 L 682.28125 382.90625 L 686.34375 378.28125 L 580.3125 377.1875 L 585.5 382.375 L 591.75 388.875 L 596.90625 395.96875 L 600.15625 401.9375 L 602.34375 407.90625 L 601.53125 416.90625 L 597.4375 432.375 L 591.46875 449.5 L 583.59375 467.1875 L 574.34375 484.59375 L 565.90625 498.1875 L 557.21875 511.21875 L 548.53125 522.09375 L 533.84375 536.5 L 525.6875 542.5 L 512.90625 551.46875 L 499.84375 560.15625 L 483 568.84375 L 465.34375 575.9375 L 446.84375 581.625 L 438.15625 583.53125 L 425.90625 585.4375 L 424 319.03125 L 603.15625 317.9375 L 363.125 50.15625 z M 422.90625 167.0625 L 505.1875 259.90625 L 424.0625 259.71875 L 422.90625 167.0625 z "
+       id="path2818" />
+  </g>
+</svg>

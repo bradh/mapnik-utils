@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Ochsensteig.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47 r22583"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="977"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="0.91960517"
+     inkscape:cx="743.85451"
+     inkscape:cy="455.58801"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Ochsensteig.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Ochsensteig.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <g
+       id="g2827">
+      <path
+         id="path2818"
+         d="M 288.96875 52.9375 L 276.75 54.03125 L 260.96875 58.375 L 240.3125 66.25 L 219.65625 77.6875 L 200.34375 93.1875 L 184.59375 111.375 L 173.4375 129.0625 L 161.75 151.90625 L 148.4375 182.0625 L 139.1875 209 L 131.84375 237.8125 L 126.40625 270.15625 L 123.4375 302.21875 L 122.875 335.65625 L 126.40625 364.5 L 131.3125 392.75 L 138.375 422.9375 L 147.625 450.125 L 158.5 476.5 L 170.71875 501.78125 L 180.5 520 L 194.65625 537.375 L 210.15625 552.0625 L 230 565.375 L 247.65625 574.625 L 266.6875 581.15625 L 287.625 585.25 L 299.84375 586.3125 L 317.53125 585.78125 L 334.375 582.25 L 351.5 577.09375 L 371.09375 568.09375 L 388.75 556.6875 L 405.59375 542.5625 L 419.75 525.6875 L 431.4375 508.03125 L 440.6875 490.09375 L 449.65625 471.0625 L 459.4375 445.78125 L 464.875 427.84375 L 470.84375 404.1875 L 475.21875 382.96875 L 478.46875 358.78125 L 479.8125 334.59375 L 480.375 312.84375 L 478.75 286.75 L 475.21875 260.375 L 469.78125 234.53125 L 463.25 209 L 455.09375 184.25 L 446.9375 165.5 L 439.875 149.71875 L 429.53125 130.6875 L 419.46875 113.84375 L 407.78125 99.6875 L 393.90625 87.1875 L 380.0625 76.3125 L 364.84375 67.625 L 346.34375 60.28125 L 324.59375 54.03125 L 308 52.9375 L 288.96875 52.9375 z M 296.0625 88.28125 L 305.5625 88.28125 L 318.34375 89.65625 L 329.5 94.25 L 339.28125 99.96875 L 348.53125 107.03125 L 358.03125 117.65625 L 365.65625 131.25 L 370.8125 144.28125 L 375.96875 158.6875 L 381.96875 176.90625 L 389.03125 205.71875 L 395 232.09375 L 399.625 258.75 L 402.0625 283.21875 L 403.71875 303.59375 L 403.71875 333.5 L 402.875 364.5 L 399.625 393.3125 L 394.1875 420.75 L 387.9375 447.6875 L 380.59375 473.78125 L 373.25 493.0625 L 365.90625 511.5625 L 357.21875 524.875 L 345.53125 536.5625 L 331.65625 545 L 319.4375 549.09375 L 303.65625 550.71875 L 287.90625 549.625 L 276.75 546.09375 L 264.53125 539.84375 L 250.375 530.59375 L 240.3125 516.46875 L 233.25 502.875 L 225.625 481.65625 L 216.65625 454.1875 L 209.875 427.5625 L 205.25 403.09375 L 200.90625 372.375 L 198.46875 350.90625 L 197.90625 333.21875 L 198.1875 302.5 L 199.28125 273.40625 L 201.4375 251.125 L 204.96875 227.46875 L 210.15625 205.4375 L 218.84375 173.65625 L 225.09375 154.875 L 232.15625 136.9375 L 238.40625 126.34375 L 246.5625 114.375 L 256.09375 103.78125 L 268.0625 96.15625 L 278.65625 92.09375 L 286 89.65625 L 296.0625 88.28125 z "
+         style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002" />
+      <path
+         id="path2823"
+         d="m 733.73881,146.18795 -9.51496,-0.27186 -5.43711,-12.77722 -10.33052,-13.86465 -12.77722,-10.87423 -13.32094,-7.34011 -11.6898,-4.077834 -15.49578,-1.087424 -20.11733,2.990414 -13.32093,4.893404 -10.87423,5.70897 -11.6898,7.61196 -9.78681,10.05867 -9.78681,12.23351 -8.42753,17.67063 -5.43712,15.49578 -1.90299,19.0299 1.08742,13.04908 3.80599,18.21434 7.06825,15.22393 8.97124,13.04907 11.96165,11.14609 14.95207,10.87423 14.68022,6.7964 14.95206,4.62155 22.02032,7.61196 19.84548,7.34011 17.39877,7.88382 15.49578,9.51495 12.23351,9.78681 14.1365,14.95207 10.60238,14.1365 8.15567,14.40836 7.34011,17.67062 4.8934,14.95207 3.80599,17.12692 1.08742,14.68021 -0.54371,15.76764 -2.17485,16.85506 -4.34969,16.85506 -8.69939,21.20475 -10.87423,19.30176 -10.33052,12.77722 -11.41794,11.41795 -8.15568,7.3401 -12.50536,9.2431 -13.04908,7.61196 -17.94249,7.61197 -22.02032,4.8934 -18.48619,2.4467 -19.84547,-0.54371 -30.44785,-2.71856 -25.55445,-4.62155 -26.64187,-5.43711 -14.68021,-4.89341 0,17.67063 -38.60352,-0.27185 0.54371,-116.35429 5.70897,-1.63113 4.07784,0.54371 3.80598,7.06825 4.07783,12.77722 7.88382,14.1365 11.41795,13.04908 12.77722,11.96166 16.03949,8.42753 18.75805,6.25268 14.68021,1.63114 20.11733,-0.27186 17.67063,-4.34969 16.03949,-8.15568 12.50537,-8.97124 8.97124,-8.15567 14.1365,-18.21434 11.14609,-19.30176 6.25268,-17.67063 2.44671,-13.59279 0.81556,-15.22392 0,-12.77723 -2.17484,-16.85506 -4.89341,-14.40835 -7.3401,-17.12692 -11.96166,-16.03949 -8.15567,-8.97124 -16.31135,-13.86465 -16.5832,-9.78681 -21.74847,-8.15567 -16.85506,-4.89341 -10.33052,-3.53412 -16.31135,-6.52454 -15.22392,-8.42753 -17.67063,-14.40836 -13.32093,-16.03949 -11.41795,-18.21434 -7.88382,-18.75805 -4.34969,-16.85506 -1.90299,-17.94248 0.27186,-16.85506 2.4467,-16.03949 5.98083,-19.84548 7.88382,-16.85506 8.69938,-13.32093 9.2431,-12.505369 10.05866,-9.243097 13.04908,-9.514953 20.38919,-11.146088 15.49578,-6.252683 18.21434,-4.077837 15.49578,-1.631135 20.38918,-0.271856 16.03949,1.631135 18.21434,3.262269 17.12692,4.621549 12.23351,4.349693 0.27185,-14.136502 33.43827,0.815568 1.35928,95.693246 z"
+         style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002" />
+      <path
+         sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccc"
+         id="path2825"
+         d="m 734.41845,186.83039 65.51725,-0.54371 -0.13593,-58.58493 76.66333,-23.24367 0.54372,81.69267 36.15682,-0.27186 0.40778,38.60353 -35.88497,0.27185 4.62155,294.96355 2.44671,6.66046 4.07783,6.11676 7.34011,5.57304 8.83531,5.02934 6.7964,0.95149 8.42753,-0.27186 6.38861,-0.67963 4.34969,-2.03892 1.90299,-1.49521 0,40.64244 -7.06825,2.4467 -7.88382,1.90299 -9.24309,1.903 -12.6413,0.67964 -10.60238,-0.40779 -10.46644,-2.4467 -11.6898,-3.67005 -11.41795,-6.25269 -9.24309,-5.8449 -8.42753,-7.47603 -7.88382,-7.74789 -6.25269,-8.69939 -5.57304,-8.97124 -4.8934,-10.19459 -3.80598,-10.33052 -2.17485,-14.95207 -0.54371,-21.34068 -1.8429,-253.89318 -66.41584,-0.0481 -0.38485,-38.03189 z"
+         style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002" />
+    </g>
+  </g>
+</svg>

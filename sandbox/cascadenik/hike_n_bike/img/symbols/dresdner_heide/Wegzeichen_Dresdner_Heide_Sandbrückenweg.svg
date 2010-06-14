@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Schwarzer_Bildweg.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="0.45980259"
+     inkscape:cx="181.11545"
+     inkscape:cy="592.65229"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Schwarzer_Bildweg.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Schwarzer_Bildweg.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="M 498.59375 49.9375 L 498.84375 87.46875 L 526.03125 88.28125 L 529.03125 609.96875 L 501.84375 610.53125 L 501.5625 648.3125 L 728.84375 647.75 L 744.625 646.40625 L 759.03125 643.96875 L 772.0625 640.40625 L 786.21875 635.25 L 798.71875 629.28125 L 811.21875 622.21875 L 822.375 614.875 L 833.5 605.625 L 845.46875 593.9375 L 854.71875 582.78125 L 863.6875 567.84375 L 872.375 552.0625 L 877.5625 540.09375 L 882.4375 524.34375 L 885.96875 508.5625 L 887.875 489.8125 L 888.15625 471.3125 L 885.4375 453.9375 L 881.625 435.15625 L 874.5625 415.59375 L 867.5 402.28125 L 859.0625 388.40625 L 852 379.15625 L 842.75 368.03125 L 831.875 357.15625 L 818 345.71875 L 804.40625 337.03125 L 791.65625 329.96875 L 781.3125 325.625 L 772.34375 323.71875 L 780.21875 318.8125 L 789.75 311.46875 L 801.15625 300.0625 L 810.9375 288.625 L 819.09375 276.125 L 827 261.1875 L 832.15625 248.40625 L 836.78125 233.71875 L 839.5 217.96875 L 840.59375 200.84375 L 839.21875 182.34375 L 835.96875 165.75 L 831.59375 149.4375 L 827.8125 139.125 C 827.8125 139.125 825.09337 132.8587 819.65625 123.34375 C 814.21913 113.8288 809.3125 109.75 809.3125 109.75 L 797.625 96.71875 L 786.21875 86.09375 L 774.53125 76.875 L 762.28125 68.71875 L 747.34375 61.90625 L 734.28125 57.5625 L 717.6875 53.75 L 701.9375 51.84375 L 684.53125 50.78125 L 498.59375 49.9375 z M 457.5 50.5625 L 419.0625 50.75 L 419.0625 67.09375 L 409.84375 64 L 397.15625 61.5 L 379.65625 58.0625 L 356 55.15625 L 338.90625 54.03125 L 321.21875 54.03125 L 305.84375 54.96875 L 290.84375 57.65625 L 275.65625 62.46875 L 259.3125 69 L 246.8125 75.75 L 232.96875 85.34375 L 218.5625 98.4375 L 207.8125 112.46875 L 196.46875 127.4375 L 188.96875 142.625 L 183.96875 154.75 L 180.125 168.59375 L 177.4375 182.625 L 176.46875 197.40625 L 176.84375 214.90625 L 179.34375 231.625 L 185.125 251.8125 L 192.21875 268.34375 L 199.90625 282.1875 L 211.0625 297 L 223 309.6875 L 235.46875 320.25 L 248.5625 328.71875 L 265.28125 336.78125 L 282 342.5625 L 302.375 347.9375 L 319.5 353.125 L 336.59375 359.65625 L 350.0625 366.78125 L 364.84375 376.375 L 376.59375 386.78125 L 389.84375 401.96875 L 401 418.5 L 408.5 435.21875 L 413.875 451.9375 L 417.34375 467.125 L 418.09375 478.65625 L 418.09375 491.34375 L 416.1875 506.53125 L 411.1875 524.59375 L 404.65625 540.375 L 395.21875 556.125 L 385.21875 567.84375 L 375.8125 577.0625 L 363.5 586.3125 L 348.3125 594.5625 L 332.75 600.15625 L 320.65625 602.65625 L 309.09375 604 L 295.46875 603.8125 L 282.59375 602.25 L 268.75 599 L 256.0625 594.1875 L 243.5625 587.46875 L 231.84375 580.71875 L 223.1875 573.03125 L 214.71875 563.625 L 208 555.5625 L 199.34375 542.28125 L 192.21875 528.625 L 188.78125 519.59375 L 185.3125 517.5 L 180.6875 517.5 L 176.65625 519.59375 L 173.96875 522.6875 L 172.25 525.9375 L 174.9375 646.28125 L 213.375 646.09375 L 212.59375 628.21875 L 223 630.53125 L 237.96875 634.15625 L 252 637.25 L 271.03125 639.9375 L 314.3125 644.34375 L 328.53125 645.3125 L 348.125 645.3125 L 356.78125 644.15625 L 373.3125 641.09375 L 390.8125 635.71875 L 416.375 624.1875 L 434.8125 612.25 L 452.125 596.875 L 465.96875 581.6875 L 476.34375 564.375 L 485 547.84375 L 492.3125 528.0625 L 496.71875 508.0625 L 499.03125 487.5 L 498.46875 469.625 L 496.53125 450.96875 L 491.90625 431.5625 L 485.78125 413.28125 L 477.125 396.5625 L 468.65625 384.0625 L 462.125 374.65625 L 451.5625 362.34375 L 440.21875 351.78125 L 427.34375 341.59375 L 411 332.1875 L 393.875 324.28125 L 374.28125 318.53125 L 354.46875 314.5 L 336.40625 310.46875 L 322.1875 305.84375 L 308.53125 299.6875 L 295.28125 291.8125 L 285.46875 283.34375 L 275.84375 272.59375 L 269.3125 263.15625 L 263.15625 252.78125 L 258.34375 241.4375 L 253.9375 227.40625 L 252.40625 214.90625 L 251.8125 200.875 L 254.125 182.8125 L 258.34375 169.75 L 263.75 158 L 269.125 149.15625 L 278.9375 137.25 L 286.21875 130.125 L 295.28125 122.25 L 304.875 115.71875 L 312.9375 110.71875 L 323.71875 106.3125 L 337.5625 104.1875 L 354.28125 103.625 L 370.03125 104.5625 L 382.15625 108.21875 L 394.28125 114 L 407.34375 122.4375 L 420.59375 133.59375 L 430.03125 143.96875 L 436.9375 155.90625 L 440.78125 165.125 L 442.53125 173.1875 L 445.59375 177.8125 L 449.8125 179.15625 L 453.28125 177.4375 L 456.5625 173.59375 L 458.28125 169.34375 L 457.5 50.5625 z M 653.8125 89.09375 L 671.46875 90.71875 L 688.625 94.8125 L 703.5625 101.34375 L 720.6875 111.9375 L 732.9375 123.09375 L 742.4375 136.125 L 748.96875 147.8125 L 753.84375 160.3125 L 757.375 173.65625 L 759.84375 184.78125 L 760.375 197.84375 L 760.09375 212.78125 L 757.9375 227.46875 L 753.59375 242.96875 L 744.875 258.1875 L 734 273.6875 L 719.875 287.28125 L 703.5625 297.875 L 685.625 305.5 L 671.46875 308.75 L 656.53125 310.9375 L 613.3125 310.65625 L 610.59375 89.375 L 653.8125 89.09375 z M 662.25 350.625 L 681.28125 351.15625 L 693.21875 352.8125 L 709 357.6875 L 725.59375 364.5 L 741.625 374 L 755.75 385.6875 L 766.90625 397.65625 L 776.15625 410.4375 L 784.5625 426.1875 L 788.125 434.90625 L 790.84375 444.40625 L 793.28125 459.625 L 794.09375 471.875 L 794.375 487.90625 L 792.46875 505.3125 L 787.5625 522.4375 L 781.3125 537.375 L 775.59375 546.625 L 768.25 557.78125 L 758.21875 569.75 L 747.0625 580.0625 L 732.375 590.9375 L 717.4375 598.8125 L 700.03125 605.34375 L 683.1875 608.875 L 667.6875 609.4375 L 615.46875 609.4375 L 612.75 350.90625 L 662.25 350.625 z "
+       id="path2816" />
+  </g>
+</svg>

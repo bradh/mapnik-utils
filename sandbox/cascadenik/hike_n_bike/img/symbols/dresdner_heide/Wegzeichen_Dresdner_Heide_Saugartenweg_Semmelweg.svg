@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Saugartenweg,_Semmelweg.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="3.6784207"
+     inkscape:cx="357.70452"
+     inkscape:cy="615.56869"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Saugartenweg,_Semmelweg.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Saugartenweg,_Semmelweg.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="m 168.77889,586.68924 -36.90837,-0.19223 -0.57669,-112.83965 1.53785,-2.499 2.11454,-1.34562 3.0757,-0.57669 2.69123,1.53785 1.92231,3.26793 1.34562,6.53585 4.42131,9.80379 5.76694,9.80378 5.95916,8.45817 9.41932,9.41932 8.07371,7.49701 7.68924,5.19024 6.34363,4.99801 9.41932,4.22909 9.03486,2.88346 10.57271,2.69124 11.7261,0.76892 9.41932,-0.19223 8.45817,-0.96116 11.1494,-2.499 9.61155,-3.46016 10.38048,-5.19024 9.80379,-5.95916 8.6504,-6.1514 6.92031,-6.34362 6.53586,-7.30478 5.95916,-7.30478 5.57471,-8.26594 6.53585,-11.53386 4.42132,-10.18825 3.65239,-12.11056 2.11454,-9.80379 0.76892,-12.11055 0,-10.76494 -0.19223,-9.80379 -1.73008,-13.26394 -3.65239,-11.53387 -5.38247,-12.87948 -4.42131,-9.41932 -8.26594,-11.7261 -9.99601,-12.68725 -9.80379,-8.6504 -12.68725,-8.45817 -8.6504,-4.80577 -13.45618,-5.57471 -15.57071,-4.998 -18.06972,-6.53586 -15.37849,-6.15139 -12.68725,-6.34363 -13.84064,-9.03486 -11.91833,-9.03486 -8.0737,-8.07371 -9.61156,-11.91832 -7.11255,-10.57271 -4.998,-10.38048 -4.80578,-13.07172 -3.46016,-13.84063 -1.34562,-12.30279 -0.57669,-14.03287 0.38446,-16.91634 3.26793,-16.14741 4.03685,-12.68725 6.34363,-14.03287 8.0737,-14.03287 9.03486,-11.34163 13.84064,-13.648407 7.68924,-5.959164 11.14941,-6.920318 13.84063,-7.304782 13.07172,-4.229083 14.80179,-4.421315 16.53187,-2.114542 20.56873,-0.192231 17.49303,0.768924 15.76295,2.691235 14.2251,3.267929 10.38048,3.075697 11.53386,4.229084 0.19223,-15.378487 32.48705,0 0,89.57968 -1.34561,4.22909 -2.11455,2.30677 -4.03685,0.76892 -2.69123,-1.15338 -2.69124,-4.61355 -4.42131,-9.99601 -6.72809,-9.61156 -7.49701,-8.45817 -10.57271,-7.30478 -11.34164,-5.574698 -10.18824,-2.883466 -8.84263,-1.153386 -10.38048,-0.384463 -9.22709,0.961156 -9.61156,2.691235 -8.45817,2.691232 -7.68924,3.46016 -5.95916,2.69124 -6.72809,4.22908 -6.53586,5.19024 -6.15139,5.95916 -4.03685,4.22909 -6.1514,8.6504 -5.76693,9.80378 -4.03685,10.18825 -3.84463,9.80378 -1.53784,12.68726 -0.38447,10.18824 0,8.26594 1.92231,13.45617 2.49901,11.91833 3.46016,9.41932 5.76693,8.07371 6.53586,8.6504 7.30478,8.45817 9.41932,7.88147 12.30279,8.26594 14.80179,6.72808 12.68726,5.95917 14.2251,5.38247 13.07171,4.03685 10.95717,4.03685 14.80179,5.57471 9.03486,4.61354 12.30279,7.49701 9.80379,7.88148 8.6504,8.6504 10.57271,11.72609 c 0,0 2.88346,0.19223 9.99601,13.84064 7.11255,13.64841 7.49701,13.64841 7.49701,13.64841 l 6.34363,16.53187 4.80578,14.80179 3.26793,13.84064 1.15338,14.03287 0.19223,12.49502 -0.57669,9.61155 -2.499,15.57072 -4.03686,15.95518 -5.5747,14.03287 -8.45817,15.57072 -9.61155,13.84064 -9.03486,11.34163 -13.07171,11.72609 -12.68726,9.41933 -14.80179,8.84263 -27.48904,10.18824 -19.41534,4.61355 -16.14741,0.76893 -23.64443,-0.76893 -23.64442,-2.30677 -17.3008,-2.69124 -22.49103,-4.80577 -14.2251,-3.65239 -12.11056,-4.99801 -0.19223,19.7998 z"
+       id="path2816" />
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="m 437.41598,86.107814 -25.8263,0 0.54371,-36.156822 151.9674,0.271856 -0.27186,35.341254 -37.24424,0 74.21663,259.894148 71.76993,-291.157565 78.02262,285.176735 60.8957,-254.185174 -36.70054,0.271856 0,-34.525687 109.28604,0.271856 0.27185,33.981975 -32.89455,0.271856 L 729.38911,581.15723 650.27908,289.99966 576.3343,584.14764 437.41598,86.107814 z"
+       id="path2818" />
+  </g>
+</svg>

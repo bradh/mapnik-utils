@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Zirkel.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2880">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective9" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="0.91960517"
+     inkscape:cx="454.19802"
+     inkscape:cy="403.74411"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g4047"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       xlink:href="file:///home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Zirkel.jpg"
+       width="997"
+       height="772"
+       id="image2886"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <g
+       id="g4047">
+      <path
+         id="path3266"
+         style="fill:#ff0000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+         d="m 448.01836,184.79147 c -30.44785,53.64621 -60.8957,107.29242 -91.34355,160.93863 30.24273,15.67352 57.70126,24.17391 91.82439,23.80038 31.30861,-0.0577 64.79976,-10.97325 92.49385,-24.34409 C 510.00149,291.72142 479.00992,238.25644 448.01836,184.79147 z M 288.16715,53.756972 l -3.80598,4.893404 -10.33052,8.699386 -9.78681,13.049079 -0.54371,1.631134 -3.80598,20.661045 -1.08743,106.02376 c 2.74807,13.12494 5.31465,26.34063 10.87424,38.05981 5.77947,16.46349 14.62982,31.22093 25.01073,45.12806 14.68021,17.94249 29.90414,33.71012 29.90414,33.71012 l 153.87038,-276.205491 131.0345,229.446301 14.1365,-23.3796 10.33052,-28.81672 5.43712,-29.36042 L 638.86113,90.729361 633.42402,78.223994 624.72463,66.80605 612.21927,56.47553 608.48125,53.8929 c -0.40621,-1.367586 -0.90746,-3.525922 0.27186,-5.437116 l 164.88537,-0.424275 c 1.34112,2.333012 1.34112,5.216479 1.34112,5.216479 l -2.78735,3.171812 -7.30478,6.151395 -10.28436,10.861056 -6.53586,12.687252 -3.55627,15.090137 -0.19223,28.73855 -3.68538,32.73393 -10.92419,38.77603 -16.91633,43.44423 -14.99403,25.3745 -17.30079,25.75896 -20.76096,21.91435 -17.68526,16.91633 151.09363,264.50997 17.68526,14.60956 14.2251,10.38048 16.14741,6.92032 14.60956,4.61354 4.22909,2.69124 0.38446,3.0757 -1.53785,3.07569 -6.15139,0 -182.23507,0.76893 -3.46016,-2.30677 -0.38446,-3.0757 5.38247,-6.1514 7.30478,-10.76494 4.61355,-16.91633 -3.84463,-17.68526 -10.38047,-19.22311 -106.49602,-186.84861 -21.14542,8.45817 -25.3745,6.53585 -23.4522,4.99801 0.76893,205.3028 4.22908,9.99601 6.53586,8.45817 8.0737,6.92032 8.45817,4.99801 1.92231,2.69123 1.15339,3.0757 -1.92231,2.30677 -125.71913,0.76893 -4.22908,-1.92231 -0.38446,-3.84463 3.46015,-2.69123 10.76495,-9.61155 4.998,-8.45817 4.22909,-7.68925 1.53785,-11.1494 0.38446,-197.22909 -23.45219,-4.61354 -28.06574,-6.92032 -16.53187,-6.53586 -12.30279,-4.99801 -126.10359,224.52591 0,6.15139 1.53785,6.92032 4.61354,7.68924 6.92032,8.45817 4.99801,4.61355 1.92231,2.69123 -0.38446,2.69124 -3.0757,1.92231 -102.6514,0.38446 -2.30677,-3.0757 0.76892,-3.0757 5.38247,-3.07569 22.29881,-14.60956 13.45618,-11.91833 5.38247,-8.45817 133.40837,-239.90439 c -13.84064,-8.45817 -19.60757,-13.45617 -19.60757,-13.45617 l -26.91236,-20.76096 -27.68127,-29.21912 -19.22311,-26.14343 -16.53187,-26.14343 -13.84064,-29.60359 -11.1494,-33.4482 -7.30478,-36.52391 -2.69124,-35.37052 0,-19.223106 -4.61355,-14.609562 -7.68924,-9.996016 -10.38048,-8.073705 -5.38247,-3.46016 c -1.07012,-1.409695 -0.88287,-3.203851 -0.6728,-4.613546 1.13176,-1.734559 1.75331,-3.108372 4.13296,-3.844621 l 151.09363,0.384462 3.0757,1.922311 0.20499,2.623525 z" />
+    </g>
+  </g>
+</svg>

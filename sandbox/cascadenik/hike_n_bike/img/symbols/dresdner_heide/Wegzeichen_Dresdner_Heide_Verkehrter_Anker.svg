@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Verkehrter_Anker.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="0.91960517"
+     inkscape:cx="509.1094"
+     inkscape:cy="564.09883"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="true"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       xlink:href="file:///home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Verkehrter_Anker.jpg"
+       id="image"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       id="path2822"
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2.02178454;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="m 416.3125,512.59375 c -22.84381,11.62262 -38.5,35.33141 -38.5,62.71875 0,38.85495 31.48879,70.34375 70.34375,70.34375 38.85495,0 70.34375,-31.4888 70.34375,-70.34375 0,-29.24993 -17.84911,-54.32525 -43.25,-64.9375 m 0,0 5.53125,-319.6875 0,-11.15625 1.15625,-4.40625 2.875,-4.8125 3.46875,-2.6875 4.59375,-1.34375 3.46875,0.5625 6.90625,0.78125 32.6875,6.53125 11.90625,3.46875 19.8125,6.71875 16.53125,8.09375 21.15625,11.90625 21.71875,14.59375 16.53125,13.46875 20.1875,18.84375 17.875,19.03125 17.09375,20 17.875,23.0625 13.84375,19.40625 3.84375,5.1875 3.84375,1.75 4.0625,-1.9375 1.90625,-2.3125 0.1875,-6.90625 -1.34375,-7.125 -4.59375,-13.0625 -7.71875,-17.875 L 720.09375,269.125 711.4375,251.8125 701.25,233.9375 693.1875,220.09375 683,205.3125 674.15625,193.78125 662.4375,180.125 646.65625,163.40625 632.8125,151.46875 614.1875,136.875 602.65625,128.21875 584.375,117.25 l -13.0625,-6.53125 -14.8125,-5.75 c 0,0 -16.69983,-6.339019 -17.46875,-6.53125 C 538.26233,98.245269 520.1875,93.625 520.1875,93.625 L 503.84375,88.4375 488.46875,82.28125 476.9375,76.5 465.40625,67.65625 455.78125,59 450,52.28125 l -5,-6.71875 -3.0625,5 -5.375,6.15625 -6.53125,6.71875 -8.84375,6.90625 -9.25,5.96875 L 401,81.5 l -12.6875,4.8125 -18.46875,4.8125 -38.8125,12.5 -24.625,10.75 -16.125,9.03125 -24.625,17.125 -21.90625,19.40625 -18.65625,19.21875 -17.46875,22.5 -13.65625,21.53125 -11.15625,20.5625 -15,31.53125 L 156.875,302 l -9.0625,24.59375 0.21875,4.625 2.5,2.5 3.25,1.15625 3.09375,-0.40625 2.5,-2.875 3.0625,-4.8125 6.34375,-9.40625 11.53125,-16.71875 8.28125,-10.96875 13.0625,-17.28125 18.625,-20.96875 14.8125,-14.59375 20.375,-16.5625 17.125,-11.90625 19.03125,-11.15625 24.03125,-12.5 26.125,-10.1875 23.46875,-6.125 25.5625,-5.40625 8.84375,-0.5625 3.4375,2.875 2.5,3.09375 1.65625,5.5 9.0625,338.6875 m 31.84375,31.9375 c 16.99904,0 30.78125,13.7822 30.78125,30.78125 0,16.99904 -13.78221,30.8125 -30.78125,30.8125 -16.99905,0 -30.78125,-13.81346 -30.78125,-30.8125 0,-16.99905 13.7822,-30.78125 30.78125,-30.78125 z" />
+  </g>
+</svg>

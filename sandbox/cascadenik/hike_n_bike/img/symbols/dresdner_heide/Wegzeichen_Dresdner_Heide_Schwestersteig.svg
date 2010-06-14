@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="Wegzeichen_Dresdner_Heide_Schwestersteig.svg"
+   height="772"
+   width="997"
+   inkscape:version="0.47pre4 r22446"
+   version="1.1"
+   id="svg2876">
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 386 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="997 : 386 : 1"
+       inkscape:persp3d-origin="498.5 : 257.33333 : 1"
+       id="perspective10" />
+  </defs>
+  <metadata
+     id="metadata2882">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Manfred Ruttkowski, Dresden</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>Author (Manfred Ruttkowski)</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Wegzeichen</rdf:li>
+            <rdf:li>Symbol</rdf:li>
+            <rdf:li>Dresdner Heide</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Wegzeichen der Dresdner Heide, Sachsen, Deutschland. Vektorisiert von der gescannten Original-Schablone.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Colin Marquardt</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1294"
+     inkscape:window-height="881"
+     id="namedview2878"
+     showgrid="false"
+     inkscape:zoom="10.404145"
+     inkscape:cx="627.08943"
+     inkscape:cy="-99.140077"
+     inkscape:window-x="109"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Bitmap"
+     sodipodi:insensitive="true"
+     style="opacity:0.6;display:inline">
+    <image
+       sodipodi:absref="/home/colin/gpx/Wegezeichenschablonen_zur_Dresdner_Heide/Wegzeichen_Dresdner_Heide/Wegzeichen_Dresdner_Heide_Schwestersteig.jpg"
+       xlink:href="Wegzeichen_Dresdner_Heide_Schwestersteig.jpg"
+       y="0"
+       x="0"
+       id="image" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Symbol">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2.70000002"
+       d="m 613.8504,895.96625 -418.11422,-1.08743 370.53945,-493.55421 0.81557,-4.62154 -0.27185,-4.89341 -1.49521,-2.99041 -3.12634,-2.4467 -2.85449,-1.90299 -3.12634,-0.67964 -257.99116,1.76706 -12.64129,1.76706 -16.99099,2.99041 -17.94248,4.62155 -15.49578,5.16526 -15.90357,6.66047 -11.96165,5.98083 -7.47604,4.07784 -2.85448,1.76706 -2.58263,0.40778 -1.90299,-0.40778 -1.35928,-1.35928 -0.27186,-1.76706 1.22335,-2.31078 95.01361,-126.14109 151.83146,-1.35928 -0.95149,-97.05252 -68.77952,0.13593 -5.16526,1.76706 -4.07784,2.58263 -3.80598,3.53413 -4.34969,4.8934 -4.89341,5.43712 -1.63113,2.17484 -1.63114,0.67964 -1.63113,0 -0.9515,-1.35928 -0.27185,-79.65375 0.81556,-0.54371 1.22336,0.13593 1.35927,2.85449 4.62155,5.57304 3.67006,3.94191 3.67005,1.90299 2.99041,1.76706 3.67006,1.49521 74.21663,-0.54371 -0.54371,-67.963952 -1.08742,-3.805982 -2.03892,-4.893404 -2.71856,-2.854486 -4.21377,-3.805981 -12.09758,-11.282016 85.49865,-0.951495 -6.25268,6.116755 -4.48562,4.621549 -2.85449,5.301188 -3.94191,8.563458 0.27186,69.187306 75.16813,-0.13593 10.05866,-3.94191 12.09758,-12.50537 -0.54371,77.88669 -10.87423,-12.36944 -5.98083,-3.80598 -4.48562,-1.35928 -74.0807,0.81557 2.03891,96.78066 224.82475,-2.31077 -368.11509,486.74532 -2.78735,3.26793 -2.21066,3.55627 -1.53785,4.22909 -0.38446,3.94073 0.86504,4.22909 1.05727,2.69123 1.92231,1.8262 3.65239,2.01843 5.67082,0.57669 253.07222,0.67281 11.24552,-0.5767 10.95717,-2.11454 18.5503,-4.3252 15.57072,-5.5747 13.45617,-4.99801 13.55229,-6.43974 11.62998,-5.86305 6.24751,-4.13296 2.59512,-1.63397 2.21066,-0.57669 2.499,0.19223 1.34562,1.73008 0.28835,3.0757 -1.34562,4.22908 -96.92402,126.56137 z"
+       id="path2816" />
+  </g>
+</svg>
