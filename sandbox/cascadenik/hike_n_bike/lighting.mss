@@ -7,8 +7,6 @@
     line-cap: round;
     line-join: miter;
     line-opacity: 1.0;
-    outline-cap: butt;
-    outline-join: miter;
 }
 
 /* lit and unlit */
@@ -47,7 +45,7 @@
 
 /* Ways */
 
-.way.lighting[zoom>=14]
+.way.lighting[zoom>=12]
 {
     line-cap: round;
     line-join: miter;
@@ -61,6 +59,7 @@
 .way.lighting[lit=no] { line-color: #000000; }
 
 /* line widths depending on zoom */
+.way.lighting[zoom=12] { line-width: 1; }
 .way.lighting[zoom=13] { line-width: 2; }
 .way.lighting[zoom=14] { line-width: 2; }
 .way.lighting[zoom=15] { line-width: 3; }

@@ -21,19 +21,15 @@
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, tags->'lit' as lit,
-                    (case when highway in ('motorway', 'motorway_link') then 0
-                          when highway in ('trunk', 'primary') then 1
-                          when highway = 'secondary' then 2
-                          when highway = 'tertiary' then 3
-                          else 4 end) as priority,
-                        (case when highway in ('secondary', 'trunk', 'primary', 'motorway', 'motorway_link') then 'major'
-                              else 'minor' end) as prominence
+                (select way,
+                 (case when tags->'lit' in ('no','false','0') then 'no'::text else 'yes'::text end) as lit,
+                 (case when highway in ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') then 'major'
+                          else 'minor' end) as prominence
                  from planet_line
-                 where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'trunk', 'primary', 'motorway', 'motorway_link') and (tags ? 'lit')
-                 order by z_order asc, priority desc)
-
-                 as foo]]></Parameter>
+                 where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'road', 
+                                   'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') 
+                 and (tags ? 'lit')
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -45,9 +41,11 @@
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, tags->'lit' as lit
+                (select way,
+                 (case when tags->'lit' in ('no','false','0') then 'no'::text else 'yes'::text end) as lit
                  from planet_line
-                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') and (tags ? 'lit')
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 and (tags ? 'lit')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -60,7 +58,8 @@
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, tags->'lit' as lit, building
+                (select way, building,
+                 (case when tags->'lit' in ('no','false','0') then 'no'::text else 'yes'::text end) as lit
                  from planet_line
                  where building is not null and (tags ? 'lit')
                 ) as foo]]></Parameter>
@@ -76,7 +75,7 @@
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way, building,
-                 case when tags->'lit' in ('no','false','0') then 'no'::text else 'yes'::text end as lit
+                 (case when tags->'lit' in ('no','false','0') then 'no'::text else 'yes'::text end) as lit
                  from planet_polygon
                  where (tags ? 'lit')
                 ) as foo]]></Parameter>
