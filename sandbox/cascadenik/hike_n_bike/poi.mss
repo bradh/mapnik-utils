@@ -688,7 +688,6 @@
     text-halo-fill: #fbfbfb;
     text-halo-radius: 1;
 }
-
 .poi_shop.point[shop=bicycle][zoom>=15] name
 {
     point-file: url('sjjb-mapicons/png/shopping_bicycle.glow.16.png');
@@ -736,11 +735,6 @@
 }
 
 
-.poi.point[amenity=hunting_stand][zoom>=13]
-{
-    point-file: url('img/svg-twotone-png/poi_hunting_stand.p.14.png');
-/*    point-file: url('sjjb-mapicons/png/poi_hunting_stand.glow.14.png');*/
-}
 .poi.point[amenity=hunting_stand][zoom>=15]
 {
     point-file: url('img/svg-twotone-png/poi_hunting_stand.p.16.png');
