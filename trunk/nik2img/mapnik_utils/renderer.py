@@ -41,13 +41,14 @@ def binaryPrint(binary_data):
 
 
 class Render(object):
-    def __init__(self,m,image,format,world_file_ext=None,zip_compress=False):
+    def __init__(self,m,image,format,world_file_ext=None,zip_compress=False,scale_factor=None):
         
         self.m = m
         self.image = image
         self.format = format
         self.world_file_ext = world_file_ext
         self.zip_compress = zip_compress
+        self.scale_factor = scale_factor
         
         self.start_time = 0
         self.render_time = 0
@@ -98,7 +99,10 @@ class Render(object):
         """
         self.timer()
         im = mapnik.Image(self.m.width,self.m.height)
-        mapnik.render(self.m,im)
+        if self.scale_factor:
+            mapnik.render(self.m,im,self.scale_factor)
+        else:
+            mapnik.render(self.m,im)
         return im.tostring(self.format)
         self.stop()
 
@@ -169,7 +173,12 @@ class Render(object):
             os.close(handle)
             self.world_file_ext = 'wld'
             self.write_wld(png_tmp)
-            mapnik.render_to_file(args[0],png_tmp,'png')
+            im = mapnik.Image(args[0].width,self.m.height)
+            if self.scale_factor:
+                mapnik.render(args[0],im,self.scale_factor)
+            else:
+                mapnik.render(args[0],im)
+            im.save(png_tmp,'png')
             # todo - figure out more reasonable defaults
             opts = ' -ot Byte -co COMPRESS=JPEG -co JPEG_QUALITY=100'
             base_cmd = 'gdal_translate %s %s -a_srs "%s" %s'
@@ -179,6 +188,8 @@ class Render(object):
             self.stop()
         else:
             self.timer()
+            if self.scale_factor:
+                args = args + (self.scale_factor,)
             mapnik.render_to_file(*args)
             if self.world_file_ext:
                 self.write_wld(args[1])

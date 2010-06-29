@@ -52,6 +52,7 @@ class Compose(object):
         self.map = None
         self.rendered = False
         self.verbose = False
+        self.scale_factor = None
         
         self.start_time = 0
         self.load_map_time = 0
@@ -194,9 +195,9 @@ class Compose(object):
             self.build()
         
         if self.dry_run:
-            self.output_error("Dry run completed successfully...")            
+            self.output_error("Dry run completed successfully...")
 
-        renderer = Render(self.map,self.image,self.format,self.world_file,self.zip_compress)
+        renderer = Render(self.map,self.image,self.format,self.world_file,self.zip_compress,self.scale_factor)
         if not self.image == '-':
             renderer.render_file()
         else:

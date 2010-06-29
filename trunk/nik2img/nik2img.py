@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__version__ = '0.6.0'
+__version__ = '0.6.1'
 __author__ = 'Dane Springmeyer (dbsgeo [ -a- ] gmail.com)'
 __copyright__ = 'Copyright 2009, Dane Springmeyer'
 __license__ = 'BSD'
@@ -163,7 +163,12 @@ parser.add_option('--mapnik-version', dest='mapnik_version',
 parser.add_option('--zip', dest='zip_compress',
                   action='store_true', default=False,
                   help='Apply zip compression to output image (and other files by same name)')
-    
+
+parser.add_option('--scale-factor', dest='scale_factor',
+                  type='float',
+                  help='Pass a scale factor to the Mapnik renderer (experimental)',
+                  action='store')
+                      
 if __name__ == '__main__':
     (options, args) = parser.parse_args()
     
@@ -172,9 +177,14 @@ if __name__ == '__main__':
     # control usage of either mapnik or mapnik2
     from mapnik_utils.version_adapter import Mapnik
     mapnik = Mapnik(options.mapnik_version)
-
+    
+    if options.scale_factor:
+        if not mapnik.mapnik_version() >= 800:
+            parser.error('\nPassing a scale factor requires at least mapnik >= 0.8.0 (aka Mapnik2)\n')
+    
     if len(args) == 0:
         parser.error('\nPlease provide the path to a Mapnik xml or Cascadenik mml file\n')
+    
     elif len(args) == 1 and not options.dry_run:
         parser.error('\nPlease provide an output image name\n')
 
