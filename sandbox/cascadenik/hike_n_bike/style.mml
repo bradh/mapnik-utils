@@ -644,6 +644,22 @@ zoom level  - scale denominator
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
+    <Layer class="boundary national_park" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+	        (select way,
+                 boundary, name
+                 from planet_polygon
+	         where boundary='national_park'
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
 
     <Layer class="building area" srs="&osm_srs;">
         <Datasource>

@@ -390,6 +390,54 @@
     text-placement: line;
 }
 
+.boundary.national_park[zoom>=7][zoom<=9] name
+{
+    polygon-fill: #00ff00;
+    polygon-opacity: 0.05;
+    line-color: #00ff00;
+    line-join: round;
+    line-width: 1.5;
+    line-dasharray: 4, 2;
+    line-opacity: 0.15;
+}
+.boundary.national_park[zoom>=10][zoom<=12] name
+{
+    polygon-fill: #00ff00;
+    polygon-opacity: 0.05;
+    line-color: #00ff00;
+    line-join: round;
+    line-width: 3.0;
+    line-dasharray: 6, 2;
+    line-opacity: 0.15;
+}
+.boundary.national_park[zoom>=13][zoom<=18] name
+{
+    line-color: #00ff00;
+    line-join: round;
+    line-width: 3.0;
+    line-dasharray: 6, 2;
+    line-opacity: 0.15;
+}
+.boundary.national_park[zoom>=8][zoom<=9] name
+{
+    text-fontset-name: "oblique-fonts";
+    text-size: 8;
+    text-dy: -8;
+    text-fill: #9c9;
+    text-halo-radius: 1;
+    text-placement: point;
+    text-wrap-width: 14;
+}
+.boundary.national_park[zoom>=10][zoom<=11] name
+{
+    text-fontset-name: "oblique-fonts";
+    text-size: 11;
+    text-fill: #9c9;
+    text-halo-radius: 1;
+    text-placement: point;
+    text-wrap-width: 14;
+}
+
 
 .parklike.label name,
 .citylike.label[amenity!=parking] name
