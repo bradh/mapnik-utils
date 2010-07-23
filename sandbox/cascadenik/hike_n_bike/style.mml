@@ -126,31 +126,6 @@ zoom level  - scale denominator
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
-    <Layer class="parklike area" srs="&osm_srs;">
-        <Datasource>
-            <Parameter name="type">postgis</Parameter>
-            <Parameter name="host">&host;</Parameter>
-            <Parameter name="dbname">&dbname;</Parameter>
-            <Parameter name="user">&user;</Parameter>
-            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
-            <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table"><![CDATA[
-                (select way,
-                 building, amenity, landuse, "natural", leisure,
-                 (case
-                         when round(way_area * 1000000) >= 20 then 'large'
-                         when round(way_area * 1000000) >= 1 then 'medium'
-                         else 'small' end) as size
-                 from planet_polygon
-                 where building is null
-                       and (amenity in ('park')
-                        or landuse in ('recreation_ground', 'greenfield', 'meadow', 'grass', 'village_green', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
-                        or "natural" in ('wood', 'grass', 'wetland', 'beach', 'scrub')
-                        or leisure in ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza'))
-                 order by z_order asc, way_area desc
-                ) as foo]]></Parameter>
-        </Datasource>
-    </Layer>
     <Layer class="citylike parking area" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -205,6 +180,31 @@ zoom level  - scale denominator
         </Datasource>
     </Layer>
 
+    <Layer class="parklike area" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 building, amenity, landuse, "natural", leisure,
+                 (case
+                         when round(way_area * 1000000) >= 20 then 'large'
+                         when round(way_area * 1000000) >= 1 then 'medium'
+                         else 'small' end) as size
+                 from planet_polygon
+                 where building is null
+                       and (amenity in ('park')
+                        or landuse in ('recreation_ground', 'greenfield', 'meadow', 'grass', 'village_green', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
+                        or "natural" in ('wood', 'grass', 'wetland', 'beach', 'scrub')
+                        or leisure in ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza'))
+                 order by z_order asc, way_area desc
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
     <Layer class="water edge" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -217,7 +217,7 @@ zoom level  - scale denominator
                 (select way,
                  landuse, "natural", waterway
                  from planet_polygon
-                 where landuse in ('reservoir', 'water')
+                 where landuse in ('reservoir', 'water', 'basin')
                     or "natural" in ('lake', 'water', 'land')
                     or waterway in ('canal', 'riverbank', 'river')
                 ) as foo]]></Parameter>
@@ -236,7 +236,7 @@ zoom level  - scale denominator
                 (select way,
                  landuse, "natural", waterway
                  from planet_polygon
-                 where landuse in ('reservoir', 'water')
+                 where landuse in ('reservoir', 'water', 'basin')
                     or "natural" in ('lake', 'water', 'land')
                     or waterway in ('canal', 'riverbank', 'river')
                 ) as foo]]></Parameter>
@@ -423,20 +423,12 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge, oneway,
-                 tags->'lanes' as lanes,
-                        (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
-                              WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
-                              WHEN highway IN ('secondary', 'secondary_link') THEN 2
-                              WHEN highway = 'tertiary' THEN 3
-                              ELSE 4 END) AS priority,
-                        (CASE WHEN highway IN ('secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link') THEN 'major'
-                              ELSE 'minor' END) AS prominence
-                 FROM planet_line
-                 WHERE highway IN ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
-                 ORDER BY z_order ASC, priority DESC)
-
-                 AS foo]]></Parameter>
+                 highway,
+                 tags->'lanes' as lanes
+                 from planet_line
+	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary')
+                 )
+                 as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -453,7 +445,7 @@ zoom level  - scale denominator
                 (select way,
                  highway 
                  from planet_line
-	         where highway in ('motorway', 'trunk', 'trunk_link')
+	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -469,7 +461,7 @@ zoom level  - scale denominator
                 (select way,
                  highway 
                  from planet_line
-	         where highway in ('motorway', 'trunk', 'trunk_link')
+	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
 	        ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -1104,31 +1096,6 @@ zoom level  - scale denominator
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
-    <Layer class="parklike label" srs="&osm_srs;">
-        <Datasource>
-            <Parameter name="type">postgis</Parameter>
-            <Parameter name="host">&host;</Parameter>
-            <Parameter name="dbname">&dbname;</Parameter>
-            <Parameter name="user">&user;</Parameter>
-            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
-            <Parameter name="extent">&extent;</Parameter>
-            <Parameter name="table"><![CDATA[
-                (select way,
-                 building, amenity, landuse, "natural", leisure, name, ref,
-                 (case when round(way_area * 1000000) >= 20 then 'large'
-                       when round(way_area * 1000000) >= 1 then 'medium'
-                       else 'small' end) as size,
-                       regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
-                  from planet_polygon
-                  where building is null
-                  and (amenity in ('park')
-                       or landuse in ('recreation_ground', 'greenfield', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
-                       or "natural" in ('wood', 'grass', 'wetland', 'beach', 'scrub')
-                       or leisure in ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza')
-                      ) order by z_order asc, way_area desc
-                 ) as foo]]></Parameter>
-        </Datasource>
-    </Layer>
     <Layer class="citylike label" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -1218,6 +1185,31 @@ zoom level  - scale denominator
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
+    <Layer class="parklike label" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 building, amenity, landuse, "natural", leisure, name, ref,
+                 (case when round(way_area * 1000000) >= 20 then 'large'
+                       when round(way_area * 1000000) >= 1 then 'medium'
+                       else 'small' end) as size,
+                       regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
+                  from planet_polygon
+                  where building is null
+                  and (amenity in ('park')
+                       or landuse in ('recreation_ground', 'greenfield', 'cemetery', 'forest', 'allotments', 'farm', 'farmland', 'quarry', 'vineyard')
+                       or "natural" in ('wood', 'grass', 'wetland', 'beach', 'scrub')
+                       or leisure in ('park', 'pitch', 'track', 'golf_course', 'common', 'playground', 'garden', 'plaza')
+                      ) order by z_order asc, way_area desc
+                 ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
     <Layer class="water label" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -1234,7 +1226,7 @@ zoom level  - scale denominator
                        else 'small' end) as size,
                        regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
                  from planet_polygon
-                 where landuse in ('reservoir', 'water')
+                 where landuse in ('reservoir', 'water', 'basin')
                  or "natural" in ('lake', 'water', 'land')
                  order by z_order asc
                 ) as foo]]></Parameter>
