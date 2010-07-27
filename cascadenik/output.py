@@ -131,19 +131,22 @@ class Filter:
         return str(self.text)
 
 class PolygonSymbolizer:
-    def __init__(self, color, opacity=None):
+    def __init__(self, color, opacity=None, gamma=None):
         assert color.__class__ is style.color
         assert opacity is None or type(opacity) in (int, float)
+        assert gamma is None or type(gamma) in (int, float)
 
         self.color = color
         self.opacity = opacity or 1.0
+        self.gamma = gamma
 
     def __repr__(self):
-        return 'Polygon(%s, %s)' % (self.color, self.opacity)
+        return 'Polygon(%s, %s, %s)' % (self.color, self.opacity, self.gamma)
 
     def to_mapnik(self):
         sym = mapnik.PolygonSymbolizer(mapnik.Color(str(self.color)))
         sym.fill_opacity = self.opacity
+        sym.gamma = self.gamma or sym.gamma
         
         return sym
 
@@ -178,8 +181,9 @@ class LineSymbolizer:
 class TextSymbolizer:
     def __init__(self, name, face_name, size, color, wrap_width=None, \
         spacing=None, label_position_tolerance=None, max_char_angle_delta=None, \
-        halo_color=None, halo_radius=None, dx=None, dy=None, avoid_edges=None, \
-        min_distance=None, allow_overlap=None, placement=None):
+        halo_color=None, halo_radius=None, dx=None, dy=None, character_spacing=None, \
+        line_spacing=None, avoid_edges=None, min_distance=None, allow_overlap=None, \
+        placement=None):
 
         assert type(name) is str
         assert type(face_name) is str
@@ -193,6 +197,8 @@ class TextSymbolizer:
         assert halo_radius is None or type(halo_radius) is int
         assert dx is None or type(dx) is int
         assert dy is None or type(dy) is int
+        assert character_spacing is None or type(character_spacing) is int
+        assert line_spacing is None or type(line_spacing) is int
         assert avoid_edges is None or avoid_edges.__class__ is style.boolean
         assert min_distance is None or type(min_distance) is int
         assert allow_overlap is None or allow_overlap.__class__ is style.boolean
@@ -211,6 +217,8 @@ class TextSymbolizer:
         self.halo_radius = halo_radius
         self.dx = dx
         self.dy = dy
+        self.character_spacing = character_spacing
+        self.line_spacing = line_spacing
         self.avoid_edges = avoid_edges
         self.min_distance = min_distance
         self.allow_overlap = allow_overlap
@@ -229,6 +237,8 @@ class TextSymbolizer:
         sym.max_char_angle_delta = self.max_char_angle_delta or sym.max_char_angle_delta
         sym.halo_fill = self.halo_color or sym.halo_fill
         sym.halo_radius = self.halo_radius or sym.halo_radius
+        sym.character_spacing = self.character_spacing or sym.character_spacing
+        sym.line_spacing = self.line_spacing or sym.line_spacing
         sym.avoid_edges = self.avoid_edges or sym.avoid_edges
         sym.minimum_distance = self.min_distance or sym.minimum_distance
         sym.allow_overlap = self.allow_overlap or sym.allow_overlap
@@ -238,7 +248,7 @@ class TextSymbolizer:
         return sym
 
 class ShieldSymbolizer:
-    def __init__(self, face_name=None, size=None, file=None, filetype=None, width=None, height=None, color=None, min_distance=None):
+    def __init__(self, face_name=None, size=None, file=None, filetype=None, width=None, height=None, color=None, character_spacing=None, line_spacing=None, spacing=None, min_distance=None):
         assert face_name and size or file
         
         assert face_name is None or type(face_name) is str
@@ -247,6 +257,9 @@ class ShieldSymbolizer:
         assert height is None or type(height) is int
 
         assert color is None or color.__class__ is style.color
+        assert character_spacing is None or type(character_spacing) is int
+        assert line_spacing is None or type(line_spacing) is int
+        assert spacing is None or type(spacing) is int
         assert min_distance is None or type(min_distance) is int
 
         self.face_name = face_name
@@ -257,6 +270,9 @@ class ShieldSymbolizer:
         self.height = height
 
         self.color = color
+        self.character_spacing = character_spacing
+        self.line_spacing = line_spacing
+        self.spacing = spacing
         self.min_distance = min_distance
 
     def __repr__(self):

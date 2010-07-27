@@ -10,15 +10,53 @@ from operator import lt, le, eq, ge, gt
 import PIL.Image
 import os.path
 import zipfile
-
 import style, output
 
 try:
-    import xml.etree.ElementTree as ElementTree
-    from xml.etree.ElementTree import Element
+    import PIL.Image
+    HAS_PIL = True
 except ImportError:
-    import elementtree.ElementTree as ElementTree
-    from elementtree.ElementTree import Element
+    HAS_PIL = False
+
+try:
+    import mapik2 as mapnik
+    HAS_MAPNIK = True
+except ImportError:
+    try:
+        import mapnik
+        HAS_MAPNIK = True
+    except ImportError:
+        HAS_MAPNIK = False
+        
+MAPNIK_AUTO_IMAGE_SUPPORT = None
+MAPNIK_VERSION = None
+
+# if mapnik is actually installed we attempt
+# to  benefit from knowing its version
+if HAS_MAPNIK:
+    if hasattr(mapnik,'mapnik_version'):
+        MAPNIK_VERSION = mapnik.mapnik_version()
+        # note, bugs in 0.7.0 require *_pattern_symbolizer image type,width,height to be specified
+        # fixed in 0.7.1 - http://trac.mapnik.org/ticket/508
+        if MAPNIK_VERSION >= 701:
+            MAPNIK_AUTO_IMAGE_SUPPORT = True
+
+if not HAS_PIL:
+    warn = 'Warning: PIL (Python Imaging Library) is required for proper handling of image symbolizers when using JPEG format images or not running Mapnik >=0.7.0\n'
+    sys.stderr.write(warn)
+
+DEFAULT_ENCODING = 'utf-8'
+
+try:
+    import lxml.etree as ElementTree
+    from lxml.etree import Element
+except ImportError:
+    try:
+        import xml.etree.ElementTree as ElementTree
+        from xml.etree.ElementTree import Element
+    except ImportError:
+        import elementtree.ElementTree as ElementTree
+        from elementtree.ElementTree import Element
 
 opsort = {lt: 1, le: 2, eq: 3, ge: 4, gt: 5}
 opstr = {lt: '<', le: '<=', eq: '==', ge: '>=', gt: '>'}
@@ -385,7 +423,7 @@ def selectors_tests(selectors, property=None):
     for selector in selectors:
         for test in selector.allTests():
             if property is None or test.property == property:
-                tests[str(test)] = test
+                tests[unicode(test)] = test
 
     return tests.values()
 
@@ -440,19 +478,23 @@ def tests_filter_combinations(tests):
     # if no filters have been defined, return a blank one that matches anything
     return [Filter()]
 
-def is_gym_projection(map_el):
+def is_gym_projection(srs):
     """ Return true if the map projection matches that used by VEarth, Google, OSM, etc.
     
-        Will be useful for a zoom-level shorthand for scale-denominator.
-    """ 
-    # expected
-    gym = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null'
-    gym = dict([p.split('=') for p in gym.split() if '=' in p])
-    
+        Is currently necessary for zoom-level shorthand for scale-denominator.
+    """
+    if srs.lower() == '+init=epsg:900913':
+        return True
+
     # observed
-    srs = map_el.get('srs', '')
     srs = dict([p.split('=') for p in srs.split() if '=' in p])
     
+    # expected
+    # note, common optional modifiers like +no_defs, +over, and +wkt
+    # are not pairs and should not prevent matching
+    gym = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null'
+    gym = dict([p.split('=') for p in gym.split() if '=' in p])
+        
     for p in gym:
         if srs.get(p, None) != gym.get(p, None):
             return False
@@ -470,7 +512,7 @@ def extract_declarations(map_el, base):
     
         if 'src' in stylesheet.attrib:
             url = urlparse.urljoin(base, stylesheet.attrib['src'])
-            styles, local_base = urllib.urlopen(url).read(), url
+            styles, local_base = urllib.urlopen(url).read().decode(DEFAULT_ENCODING), url
 
         elif stylesheet.text:
             styles, local_base = stylesheet.text, base
@@ -478,7 +520,7 @@ def extract_declarations(map_el, base):
         else:
             continue
             
-        rulesets = style.stylesheet_rulesets(styles, base=local_base, is_gym=is_gym_projection(map_el))
+        rulesets = style.stylesheet_rulesets(styles, base=local_base, is_gym=is_gym_projection(map_el.get('srs','')))
         declarations += style.rulesets_declarations(rulesets)
 
     return declarations
@@ -488,7 +530,7 @@ def test2str(test):
     """
     if type(test.value) in (int, float):
         value = str(test.value)
-    elif type(test.value) is str:
+    elif type(test.value) in (str, unicode):
         value = "'%s'" % test.value
     else:
         raise Exception("test2str doesn't know what to do with a %s" % type(test.value))
@@ -584,7 +626,8 @@ def get_polygon_rules(declarations):
         create a new Style element with a PolygonSymbolizer, add it to Map
         and refer to it in Layer.
     """
-    property_map = {'polygon-fill': 'fill', 'polygon-opacity': 'fill-opacity'}
+    property_map = {'polygon-fill': 'fill', 'polygon-opacity': 'fill-opacity',
+                    'polygon-gamma': 'gamma'}
     
     property_names = property_map.keys()
     
@@ -669,7 +712,8 @@ def get_text_rule_groups(declarations):
                     'text-label-position-tolerance': 'label_position_tolerance',
                     'text-max-char-angle-delta': 'max_char_angle_delta', 'text-fill': 'fill',
                     'text-halo-fill': 'halo_fill', 'text-halo-radius': 'halo_radius',
-                    'text-dx': 'dx', 'text-dy': 'dy',
+                    'text-dx': 'dx', 'text-dy': 'dy', 'text-character-spacing': 'character_spacing',
+                    'text-line-spacing': 'line_spacing',
                     'text-avoid-edges': 'avoid_edges', 'text-min-distance': 'min_distance',
                     'text-allow-overlap': 'allow_overlap', 'text-placement': 'placement'}
 
@@ -731,33 +775,58 @@ def get_text_rule_groups(declarations):
     
     return dict(groups)
 
-def postprocess_symbolizer_image_file(file_name, out, temp_name):
+def postprocess_symbolizer_image_file(file_name, dir, temp_name, move_local_files=False):
     """ Given a file name, an output directory name, and a temporary
         file name, save the file to a temporary location as a PING
         while noting its dimensions.
     """
     # read the image to get some more details
     img_path = file_name
+
+    if os.path.exists(img_path): # local file
+        if os.path.isabs(img_path) and sys.platform == "win32":
+            img_path = 'file:%s' % img_path
+
     img_data = urllib.urlopen(img_path).read()
-    img_file = StringIO.StringIO(img_data)
-    img = PIL.Image.open(img_file)
     
-    # save the image to a tempfile, making it a PNG no matter what
-    (handle, path) = tempfile.mkstemp(suffix='.png', prefix='cascadenik-%s-' % temp_name, dir=out)
-    os.close(handle)
+    ext = os.path.splitext(img_path)[1]
     
-    img.save(path)
+    if os.path.exists(img_path) and not move_local_files:
+        path = img_path
+    elif dir:
+        path = os.path.join(dir,os.path.basename(img_path))
+    else:
+        # save the image to a tempfile
+        (handle, path) = tempfile.mkstemp(suffix=ext, prefix='cascadenik-%s-' % temp_name)
+        os.close(handle)
+
+    if MAPNIK_AUTO_IMAGE_SUPPORT and 'png' in ext.lower():
+        if not path == img_path:
+            file = open(path,'wb')
+            file.write(img_data)
+            file.close()
+    else:
+        if not HAS_PIL:
+            raise SystemExit('PIL (Python Imaging Library) is required for handling image data unless you are using PNG inputs and running Mapnik >=0.7.0')
+        img_file = StringIO.StringIO(img_data)
+        img = PIL.Image.open(img_file)
+        # Force PNG
+        path = path.replace(ext,'.png')
+        img.save(path,format='PNG')
+
     os.chmod(path, 0644)
-    
     return path, 'png', img.size[0], img.size[1]
 
-def get_shield_rule_groups(declarations, out=None):
+
+def get_shield_rule_groups(declarations, dir=None, move_local_files=False):
     """ Given a list of declarations, return a list of output.Rule objects.
         
         Optionally provide an output directory for local copies of image files.
     """
     property_map = {'shield-face-name': 'face_name', 'shield-size': 'size', 
-                    'shield-fill': 'fill', 'shield-min-distance': 'min_distance',
+                    'shield-fill': 'fill', 'shield-character-spacing': 'character_spacing',
+                    'shield-line-spacing': 'line_spacing',
+                    'shield-spacing': 'spacing', 'shield-min-distance': 'min_distance',
                     'shield-file': 'file', 'shield-width': 'width', 'shield-height': 'height' }
 
     property_names = property_map.keys()
@@ -792,7 +861,7 @@ def get_shield_rule_groups(declarations, out=None):
             
             file, filetype, width, height \
                 = values.has_key('shield-file') \
-                and postprocess_symbolizer_image_file(str(values['shield-file'].value), out, 'shield') \
+                and postprocess_symbolizer_image_file(str(values['shield-file'].value), dir, 'shield', move_local_files) \
                 or (None, None, None, None)
             
             width = values.has_key('shield-width') and values['shield-width'].value or width
@@ -811,7 +880,7 @@ def get_shield_rule_groups(declarations, out=None):
     
     return dict(groups)
 
-def get_point_rules(declarations, out=None):
+def get_point_rules(declarations, dir=None, move_local_files=False):
     """ Given a list of declarations, return a list of output.Rule objects.
         
         Optionally provide an output directory for local copies of image files.
@@ -829,7 +898,7 @@ def get_point_rules(declarations, out=None):
     
         point_file, point_type, point_width, point_height \
             = values.has_key('point-file') \
-            and postprocess_symbolizer_image_file(str(values['point-file'].value), out, 'point') \
+            and postprocess_symbolizer_image_file(str(values['point-file'].value), dir, 'point', move_local_files) \
             or (None, None, None, None)
         
         point_width = values.has_key('point-width') and values['point-width'].value or point_width
@@ -843,7 +912,7 @@ def get_point_rules(declarations, out=None):
     
     return rules
 
-def get_polygon_pattern_rules(declarations, out=None):
+def get_polygon_pattern_rules(declarations, dir=None, move_local_files=False):
     """ Given a list of declarations, return a list of output.Rule objects.
         
         Optionally provide an output directory for local copies of image files.
@@ -860,7 +929,7 @@ def get_polygon_pattern_rules(declarations, out=None):
     
         poly_pattern_file, poly_pattern_type, poly_pattern_width, poly_pattern_height \
             = values.has_key('polygon-pattern-file') \
-            and postprocess_symbolizer_image_file(str(values['polygon-pattern-file'].value), out, 'polygon-pattern') \
+            and postprocess_symbolizer_image_file(str(values['polygon-pattern-file'].value), dir, 'polygon-pattern', move_local_files) \
             or (None, None, None, None)
         
         poly_pattern_width = values.has_key('polygon-pattern-width') and values['polygon-pattern-width'].value or poly_pattern_width
@@ -912,7 +981,7 @@ def get_applicable_declarations(element, declarations):
     return [dec for dec in declarations
             if dec.selector.matches(element_tag, element_id, element_classes)]
 
-def localize_shapefile(base, shapefile, dir=None):
+def localize_shapefile(src, shapefile, dir=None, move_local_files=False):
     """ Given a stylesheet path, a shapefile name, and a temp directory,
         modify the shapefile name so it's an absolute path.
     
@@ -922,9 +991,18 @@ def localize_shapefile(base, shapefile, dir=None):
     """
     (scheme, netloc, path, params, query, fragment) = urlparse.urlparse(shapefile)
     
+    if move_local_files:
+        sys.stderr.write('WARNING: moving local shapefiles not yet supported\n')
+
     if scheme == '':
         # assumed to be local
-        return os.path.realpath(urlparse.urljoin(base, shapefile))
+        if MAPNIK_VERSION >= 601:
+            # Mapnik 0.6.1 accepts relative paths, so we leave it unchanged
+            # but compiled file must maintain same relativity to the files
+            # as the stylesheet, which needs to be addressed separately
+            return shapefile
+        else:
+            return os.path.realpath(urlparse.urljoin(src, shapefile))
 
     # assumed to be a remote zip archive with .shp, .shx, and .dbf files
     zip_data = urllib.urlopen(shapefile).read()
@@ -934,7 +1012,10 @@ def localize_shapefile(base, shapefile, dir=None):
     extensions = [os.path.splitext(info.filename)[1] for info in infos]
     basenames = [os.path.basename(info.filename) for info in infos]
     
-    tmp_dir = tempfile.mkdtemp(prefix='cascadenik-shapefile-', dir=dir)
+    if dir:
+        base_dir = dir
+    else:
+        base_dir = tempfile.mkdtemp(prefix='cascadenik-shapefile-')
     
     for (expected, required) in (('.shp', True), ('.shx', True), ('.dbf', True), ('.prj', False)):
         if required and expected not in extensions:
@@ -943,7 +1024,7 @@ def localize_shapefile(base, shapefile, dir=None):
         for (info, extension, basename) in zip(infos, extensions, basenames):
             if extension == expected:
                 file_data = zip_file.read(info.filename)
-                file_name = '%(tmp_dir)s/%(basename)s' % locals()
+                file_name = os.path.normpath('%(base_dir)s/%(basename)s' % locals())
                 
                 file = open(file_name, 'wb')
                 file.write(file_data)
@@ -956,9 +1037,25 @@ def localize_shapefile(base, shapefile, dir=None):
 
     return local
 
-def compile(src, dir=None):
+def compile(src, **kwargs):
     """
     """
+    dir = kwargs.get('dir',None)
+    move_local_files = kwargs.get('move_local_files',False)
+    
+    if os.path.exists(src): # local file
+        # using 'file:' enables support on win32
+        # for opening local files with urllib.urlopen
+        # Note: this must only be used with abs paths to local files
+        # otherwise urllib will think they are absolute, 
+        # therefore in the future it will likely be
+        # wiser to just open local files with open()
+        if os.path.isabs(src) and sys.platform == "win32":
+            src = 'file:%s' % src
+    
+    if dir and not os.path.exists(dir):
+        os.mkdir(dir)
+
     try:
         # guessing src is a literal XML string?
         map_el = ElementTree.fromstring(src)
@@ -982,12 +1079,14 @@ def compile(src, dir=None):
         
         for parameter_el in layer_el.find('Datasource').findall('Parameter'):
             if parameter_el.get('name', None) == 'file':
-                # make shapefiles local, absolute paths
-                parameter_el.text = localize_shapefile(base, parameter_el.text, dir)
+                # fetch a remote zipped shapefile or read a local one
+                parameter_el.text = localize_shapefile(src, parameter_el.text, dir, move_local_files)
 
             elif parameter_el.get('name', None) == 'table':
                 # remove line breaks from possible SQL
-                parameter_el.text = parameter_el.text.replace('\r', ' ').replace('\n', ' ')
+                # http://trac.mapnik.org/ticket/173
+                if not MAPNIK_VERSION >= 601:
+                    parameter_el.text = parameter_el.text.replace('\r', ' ').replace('\n', ' ')
 
         layer_declarations = get_applicable_declarations(layer_el, declarations)
         
@@ -998,22 +1097,22 @@ def compile(src, dir=None):
                                    get_polygon_rules(layer_declarations)))
 
         styles.append(output.Style('polygon pattern style %d' % ids.next(),
-                                   get_polygon_pattern_rules(layer_declarations, dir)))
+                                   get_polygon_pattern_rules(layer_declarations, dir, move_local_files)))
 
         styles.append(output.Style('line style %d' % ids.next(),
                                    get_line_rules(layer_declarations)))
 
         styles.append(output.Style('line pattern style %d' % ids.next(),
-                                   get_line_pattern_rules(layer_declarations, dir)))
+                                   get_line_pattern_rules(layer_declarations, dir, move_local_files)))
 
-        for (shield_name, shield_rules) in get_shield_rule_groups(layer_declarations, dir).items():
+        for (shield_name, shield_rules) in get_shield_rule_groups(layer_declarations, dir, move_local_files).items():
             styles.append(output.Style('shield style %d (%s)' % (ids.next(), shield_name), shield_rules))
 
         for (text_name, text_rules) in get_text_rule_groups(layer_declarations).items():
             styles.append(output.Style('text style %d (%s)' % (ids.next(), text_name), text_rules))
 
         styles.append(output.Style('point style %d' % ids.next(),
-                                   get_point_rules(layer_declarations, dir)))
+                                   get_point_rules(layer_declarations, dir, move_local_files)))
                                    
         styles = [s for s in styles if s.rules]
         

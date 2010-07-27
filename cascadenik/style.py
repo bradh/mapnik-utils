@@ -78,6 +78,9 @@ properties = {
     'polygon-fill': color,
 
     # 
+    'polygon-gamma': float,
+    
+    # 
     'polygon-opacity': float,
 
     #--------------- line symbolizer
@@ -156,6 +159,12 @@ properties = {
 
     # space between repeated labels
     'text-spacing': int,
+
+    # Horizontal spacing between characters (in pixels).
+    'text-character-spacing': int,
+
+    # Vertical spacing between lines of multiline labels (in pixels)
+    'text-line-spacing': int,
 
     # allow labels to be moved from their point by some distance
     'text-label-position-tolerance': int,
@@ -244,6 +253,15 @@ properties = {
     # Minimum distance between repeated labels such as street names or shield symbols
     'shield-min-distance': int,
 
+    # Spacing between repeated labels such as street names or shield symbols
+    'shield-spacing': int,
+
+    # Horizontal spacing between characters (in pixels).
+    'shield-character-spacing': int,
+    
+    # Vertical spacing between lines of multiline shields (in pixels)
+    'shield-line-spacing': int,
+
     # path to image file (default none)
     'shield-file': uri,
 
@@ -284,7 +302,7 @@ class Selector:
     
         self.elements = elements[:]
 
-    def convertZoomTests(self):
+    def convertZoomTests(self,is_gym=True):
         """ Modify the tests on this selector to use mapnik-friendly
             scale-denominator instead of shorthand zoom.
         """
@@ -313,6 +331,10 @@ class Selector:
         
         for test in self.elements[0].tests:
             if test.property == 'zoom':
+                if not is_gym:
+                    # TODO - should we warn instead that values may not be appropriate?
+                    raise NotImplementedError('Map srs is not web mercator, so zoom level shorthand cannot be propertly converted to Min/Max scaledenominators')
+
                 test.property = 'scale-denominator'
 
                 if test.op == '=':
@@ -328,7 +350,7 @@ class Selector:
                     test.op, test.value = '<', max(zooms[test.value])
                 elif test.op == '>':
                     test.op, test.value = '<', min(zooms[test.value])
-                    
+
 
     def specificity(self):
         """ Loosely based on http://www.w3.org/TR/REC-CSS2/cascade.html#specificity
@@ -455,7 +477,7 @@ class SelectorAttributeTest:
     def __cmp__(self, other):
         """
         """
-        return cmp(repr(self), repr(other))
+        return cmp(unicode(self), unicode(other))
 
     def isSimple(self):
         """
@@ -674,7 +696,7 @@ class Value:
         return repr(self.value)
 
     def __str__(self):
-        return str(self.value)
+        return unicode(self.value)
 
 def stylesheet_declarations(string, base=None, is_gym=False):
     """
@@ -845,7 +867,7 @@ def postprocess_selector(tokens, is_gym, line=0, col=0):
                 parts.append(value)
                 
             elif nname == 'CHAR' and value in ('<', '=', '>', '!'):
-                if value is '=' and parts[-1] in ('<', '>', '!'):
+                if value == '=' and parts[-1] in ('<', '>', '!'):
                     parts[-1] += value
                 else:
                     if len(parts) != 1:
@@ -878,8 +900,8 @@ def postprocess_selector(tokens, is_gym, line=0, col=0):
                 elements[-1].addTest(SelectorAttributeTest(*args))
                 in_attribute = False
 
-            elif nname == 'S':
-                in_element = False
+            elif nname == 'CHAR' and value == ']':
+                in_attribute = False
     
     if len(elements) > 2:
         raise ParseException('Only two-element selectors are supported for Mapnik styles', line, col)
@@ -901,8 +923,7 @@ def postprocess_selector(tokens, is_gym, line=0, col=0):
 
     selector = Selector(*elements)
     
-    if is_gym:
-        selector.convertZoomTests()
+    selector.convertZoomTests(is_gym=is_gym)
     
     return selector
 
