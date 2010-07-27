@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 import shutil
@@ -13,6 +15,7 @@ from cascadenik.compile import filtered_property_declarations, is_applicable_sel
 from cascadenik.compile import get_polygon_rules, get_line_rules, get_text_rule_groups, get_shield_rule_groups
 from cascadenik.compile import get_point_rules, get_polygon_pattern_rules, get_line_pattern_rules
 from cascadenik.compile import test2str, compile
+from cascadenik.compile import MAPNIK_AUTO_IMAGE_SUPPORT
 import cascadenik.output as output
 
 class ParseTests(unittest.TestCase):
@@ -230,6 +233,9 @@ class ValueTests(unittest.TestCase):
     def testBadValue3(self):
         self.assertRaises(ParseException, postprocess_value, [('IDENT', 'non-number')], Property('polygon-opacity'))
 
+    def testBadValue3b(self):
+        self.assertRaises(ParseException, postprocess_value, [('IDENT', 'non-number')], Property('polygon-gamma'))
+
     def testBadValue4(self):
         self.assertRaises(ParseException, postprocess_value, [('IDENT', 'non-string')], Property('text-face-name'))
 
@@ -256,6 +262,9 @@ class ValueTests(unittest.TestCase):
 
     def testValue1(self):
         self.assertEqual(1.0, postprocess_value([('NUMBER', '1.0')], Property('polygon-opacity')).value)
+
+    def testValue1b(self):
+        self.assertEqual(1.0, postprocess_value([('NUMBER', '1.0')], Property('polygon-gamma')).value)
 
     def testValue2(self):
         self.assertEqual(10, postprocess_value([('NUMBER', '10')], Property('line-width')).value)
@@ -289,6 +298,18 @@ class ValueTests(unittest.TestCase):
 
     def testValue11(self):
         self.assertEqual('1,2.0,3', str(postprocess_value([('NUMBER', '1'), ('CHAR', ','), ('S', ' '), ('NUMBER', '2.0'), ('CHAR', ','), ('NUMBER', '3')], Property('line-dasharray'))))
+
+    def testValue12(self):
+        self.assertEqual(12, postprocess_value([('NUMBER', '12')], Property('text-character-spacing')).value)
+
+    def testValue13(self):
+        self.assertEqual(14, postprocess_value([('NUMBER', '14')], Property('shield-character-spacing')).value)
+
+    def testValue14(self):
+        self.assertEqual(12, postprocess_value([('NUMBER', '12')], Property('text-line-spacing')).value)
+
+    def testValue15(self):
+        self.assertEqual(14, postprocess_value([('NUMBER', '14')], Property('shield-line-spacing')).value)
 
 class CascadeTests(unittest.TestCase):
 
@@ -330,6 +351,8 @@ class CascadeTests(unittest.TestCase):
                 line-cap: square;
                 text-allow-overlap: false;
                 text-dx: -10;
+                polygon-gamma: /* value between 0 and 1 */ .65;
+                text-character-spacing: 4;
             }
         """
         rulesets = stylesheet_rulesets(s)
@@ -343,7 +366,7 @@ class CascadeTests(unittest.TestCase):
         
         declarations = rulesets_declarations(rulesets)
 
-        self.assertEqual(15, len(declarations))
+        self.assertEqual(19, len(declarations))
 
         self.assertEqual('*', str(declarations[0].selector))
         self.assertEqual('polygon-fill', declarations[0].property.name)
@@ -373,37 +396,49 @@ class CascadeTests(unittest.TestCase):
         self.assertEqual('text-dx', declarations[6].property.name)
         self.assertEqual('-10', str(declarations[6].value))
 
-        self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[7].selector))
-        self.assertEqual('polygon-fill', declarations[7].property.name)
-        self.assertEqual('#ff9900', str(declarations[7].value))
-
-        self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[8].selector))
-        self.assertEqual('text-face-name', declarations[8].property.name)
-        self.assertEqual('Helvetica Bold', str(declarations[8].value))
-
+        self.assertEqual('*', str(declarations[7].selector))
+        self.assertEqual('polygon-gamma', declarations[7].property.name)
+        self.assertEqual('0.65', str(declarations[7].value))
+        
+        self.assertEqual('*', str(declarations[8].selector))
+        self.assertEqual('text-character-spacing', declarations[8].property.name)
+        self.assertEqual('4', str(declarations[8].value))
+        
         self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[9].selector))
-        self.assertEqual('text-size', declarations[9].property.name)
-        self.assertEqual('10', str(declarations[9].value))
+        self.assertEqual('polygon-fill', declarations[9].property.name)
+        self.assertEqual('#ff9900', str(declarations[9].value))
 
         self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[10].selector))
-        self.assertEqual('polygon-pattern-file', declarations[10].property.name)
-        self.assertEqual('http://example.com', str(declarations[10].value))
+        self.assertEqual('text-face-name', declarations[10].property.name)
+        self.assertEqual('Helvetica Bold', str(declarations[10].value))
 
         self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[11].selector))
-        self.assertEqual('line-cap', declarations[11].property.name)
-        self.assertEqual('square', str(declarations[11].value))
+        self.assertEqual('text-size', declarations[11].property.name)
+        self.assertEqual('10', str(declarations[11].value))
 
         self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[12].selector))
-        self.assertEqual('text-allow-overlap', declarations[12].property.name)
-        self.assertEqual('false', str(declarations[12].value))
+        self.assertEqual('polygon-pattern-file', declarations[12].property.name)
+        self.assertEqual('http://example.com', str(declarations[12].value))
 
         self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[13].selector))
-        self.assertEqual('text-dx', declarations[13].property.name)
-        self.assertEqual('-10', str(declarations[13].value))
+        self.assertEqual('line-cap', declarations[13].property.name)
+        self.assertEqual('square', str(declarations[13].value))
 
-        self.assertEqual('*', str(declarations[14].selector))
-        self.assertEqual('text-fill', declarations[14].property.name)
-        self.assertEqual('#ff9900', str(declarations[14].value))
+        self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[14].selector))
+        self.assertEqual('text-allow-overlap', declarations[14].property.name)
+        self.assertEqual('false', str(declarations[14].value))
+
+        self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[15].selector))
+        self.assertEqual('text-dx', declarations[15].property.name)
+        self.assertEqual('-10', str(declarations[15].value))
+
+        self.assertEqual('Layer#foo.foo[baz>10] bar', str(declarations[16].selector))
+        self.assertEqual('polygon-gamma', declarations[16].property.name)
+        self.assertEqual('0.65', str(declarations[16].value))
+
+        self.assertEqual('*', str(declarations[18].selector))
+        self.assertEqual('text-fill', declarations[18].property.name)
+        self.assertEqual('#ff9900', str(declarations[18].value))
 
 class SelectorParseTests(unittest.TestCase):
 
@@ -466,6 +501,46 @@ class SelectorParseTests(unittest.TestCase):
         filters = tests_filter_combinations(selectors_tests(selectors))
         
         self.assertEqual("[foo] = '1.1'", test2str(filters[1].tests[0]))
+
+    def testFilters7(self):
+        s = """
+            Layer[landuse= "military"] { polygon-fill: #000; }
+        """
+        rulesets = stylesheet_rulesets(s)
+        selectors = [dec.selector for dec in rulesets_declarations(rulesets)]
+        filters = tests_filter_combinations(selectors_tests(selectors))
+        
+        self.assertEqual("[landuse] = 'military'", test2str(filters[1].tests[0]))
+
+    def testFilters8(self):
+        s = """
+            Layer[foo =1] { polygon-fill: #000; }
+        """
+        rulesets = stylesheet_rulesets(s)
+        selectors = [dec.selector for dec in rulesets_declarations(rulesets)]
+        filters = tests_filter_combinations(selectors_tests(selectors))
+        
+        self.assertEqual("[foo] = 1", test2str(filters[1].tests[0]))
+
+    def testFilters9(self):
+        s = """
+            Layer[foo = "1.1"] { polygon-fill: #000; }
+        """
+        rulesets = stylesheet_rulesets(s)
+        selectors = [dec.selector for dec in rulesets_declarations(rulesets)]
+        filters = tests_filter_combinations(selectors_tests(selectors))
+        
+        self.assertEqual("[foo] = '1.1'", test2str(filters[1].tests[0]))
+
+    def testFilters10(self):
+        s = u'''
+        Layer[name="Grüner Strich"] { polygon-fill: #000; }
+        '''
+        rulesets = stylesheet_rulesets(s)
+        selectors = [dec.selector for dec in rulesets_declarations(rulesets)]
+        filters = tests_filter_combinations(selectors_tests(selectors))
+        
+        self.assertEqual(u"[name] = 'Grüner Strich'", test2str(filters[1].tests[0]))
 
 class FilterCombinationTests(unittest.TestCase):
 
@@ -940,48 +1015,54 @@ class StyleRuleTests(unittest.TestCase):
         assert shield_rule_groups['label'][0].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][0].symbolizers[0].face_name)
         self.assertEqual(12, shield_rule_groups['label'][0].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].height)
         self.assertEqual("not [bar] = 'baz' and not [bar] = 'quux' and [foo] <= 1", shield_rule_groups['label'][0].filter.text)
         
         assert shield_rule_groups['label'][1].minscale is None
         assert shield_rule_groups['label'][1].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][1].symbolizers[0].face_name)
         self.assertEqual(10, shield_rule_groups['label'][1].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].height)
         self.assertEqual("not [bar] = 'baz' and not [bar] = 'quux' and [foo] > 1", shield_rule_groups['label'][1].filter.text)
         
         assert shield_rule_groups['label'][2].minscale is None
         assert shield_rule_groups['label'][2].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][2].symbolizers[0].face_name)
         self.assertEqual(14, shield_rule_groups['label'][2].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].height)
         self.assertEqual("[bar] = 'baz' and [foo] <= 1", shield_rule_groups['label'][2].filter.text)
         
         assert shield_rule_groups['label'][3].minscale is None
         assert shield_rule_groups['label'][3].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][3].symbolizers[0].face_name)
         self.assertEqual(14, shield_rule_groups['label'][3].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].height)
         self.assertEqual("[bar] = 'baz' and [foo] > 1", shield_rule_groups['label'][3].filter.text)
         
         assert shield_rule_groups['label'][4].minscale is None
         assert shield_rule_groups['label'][4].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][4].symbolizers[0].face_name)
         self.assertEqual(16, shield_rule_groups['label'][4].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].height)
         self.assertEqual("[bar] = 'quux' and [foo] <= 1", shield_rule_groups['label'][4].filter.text)
         
         assert shield_rule_groups['label'][5].minscale is None
         assert shield_rule_groups['label'][5].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][5].symbolizers[0].face_name)
         self.assertEqual(16, shield_rule_groups['label'][5].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].height)
         self.assertEqual("[bar] = 'quux' and [foo] > 1", shield_rule_groups['label'][5].filter.text)
 
     def testStyleRules06(self):
@@ -1002,48 +1083,54 @@ class StyleRuleTests(unittest.TestCase):
         assert shield_rule_groups['label'][0].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][0].symbolizers[0].face_name)
         self.assertEqual(12, shield_rule_groups['label'][0].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][0].symbolizers[0].height)
         self.assertEqual("not [bar] = 'baz' and not [bar] = 'quux' and [foo] <= 1", shield_rule_groups['label'][0].filter.text)
         
         assert shield_rule_groups['label'][1].minscale is None
         assert shield_rule_groups['label'][1].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][1].symbolizers[0].face_name)
         self.assertEqual(10, shield_rule_groups['label'][1].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][1].symbolizers[0].height)
         self.assertEqual("not [bar] = 'baz' and not [bar] = 'quux' and [foo] > 1", shield_rule_groups['label'][1].filter.text)
         
         assert shield_rule_groups['label'][2].minscale is None
         assert shield_rule_groups['label'][2].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][2].symbolizers[0].face_name)
         self.assertEqual(14, shield_rule_groups['label'][2].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][2].symbolizers[0].height)
         self.assertEqual("[bar] = 'baz' and [foo] <= 1", shield_rule_groups['label'][2].filter.text)
         
         assert shield_rule_groups['label'][3].minscale is None
         assert shield_rule_groups['label'][3].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][3].symbolizers[0].face_name)
         self.assertEqual(14, shield_rule_groups['label'][3].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][3].symbolizers[0].height)
         self.assertEqual("[bar] = 'baz' and [foo] > 1", shield_rule_groups['label'][3].filter.text)
         
         assert shield_rule_groups['label'][4].minscale is None
         assert shield_rule_groups['label'][4].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][4].symbolizers[0].face_name)
         self.assertEqual(16, shield_rule_groups['label'][4].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][4].symbolizers[0].height)
         self.assertEqual("[bar] = 'quux' and [foo] <= 1", shield_rule_groups['label'][4].filter.text)
         
         assert shield_rule_groups['label'][5].minscale is None
         assert shield_rule_groups['label'][5].maxscale is None
         self.assertEqual('Helvetica', shield_rule_groups['label'][5].symbolizers[0].face_name)
         self.assertEqual(16, shield_rule_groups['label'][5].symbolizers[0].size)
-        self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].width)
-        self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].width)
+            self.assertEqual(8, shield_rule_groups['label'][5].symbolizers[0].height)
         self.assertEqual("[bar] = 'quux' and [foo] > 1", shield_rule_groups['label'][5].filter.text)
 
         point_rules = get_point_rules(declarations)
@@ -1051,9 +1138,10 @@ class StyleRuleTests(unittest.TestCase):
         assert point_rules[0].filter is None
         assert point_rules[0].minscale is None
         assert point_rules[0].maxscale is None
-        self.assertEqual('png', point_rules[0].symbolizers[0].type)
-        self.assertEqual(8, point_rules[0].symbolizers[0].width)
-        self.assertEqual(8, point_rules[0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual('png', point_rules[0].symbolizers[0].type)
+            self.assertEqual(8, point_rules[0].symbolizers[0].width)
+            self.assertEqual(8, point_rules[0].symbolizers[0].height)
 
     def testStyleRules07(self):
         s = """
@@ -1069,27 +1157,30 @@ class StyleRuleTests(unittest.TestCase):
         assert point_rules[0].filter is None
         assert point_rules[0].minscale is None
         assert point_rules[0].maxscale is None
-        self.assertEqual('png', point_rules[0].symbolizers[0].type)
-        self.assertEqual(8, point_rules[0].symbolizers[0].width)
-        self.assertEqual(8, point_rules[0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual('png', point_rules[0].symbolizers[0].type)
+            self.assertEqual(8, point_rules[0].symbolizers[0].width)
+            self.assertEqual(8, point_rules[0].symbolizers[0].height)
 
         polygon_pattern_rules = get_polygon_pattern_rules(declarations)
         
         assert polygon_pattern_rules[0].filter is None
         assert polygon_pattern_rules[0].minscale is None
         assert polygon_pattern_rules[0].maxscale is None
-        self.assertEqual('png', polygon_pattern_rules[0].symbolizers[0].type)
-        self.assertEqual(8, polygon_pattern_rules[0].symbolizers[0].width)
-        self.assertEqual(8, polygon_pattern_rules[0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual('png', polygon_pattern_rules[0].symbolizers[0].type)
+            self.assertEqual(8, polygon_pattern_rules[0].symbolizers[0].width)
+            self.assertEqual(8, polygon_pattern_rules[0].symbolizers[0].height)
 
         line_pattern_rules = get_line_pattern_rules(declarations)
         
         assert line_pattern_rules[0].filter is None
         assert line_pattern_rules[0].minscale is None
         assert line_pattern_rules[0].maxscale is None
-        self.assertEqual('png', line_pattern_rules[0].symbolizers[0].type)
-        self.assertEqual(8, line_pattern_rules[0].symbolizers[0].width)
-        self.assertEqual(8, line_pattern_rules[0].symbolizers[0].height)
+        if not MAPNIK_AUTO_IMAGE_SUPPORT:
+            self.assertEqual('png', line_pattern_rules[0].symbolizers[0].type)
+            self.assertEqual(8, line_pattern_rules[0].symbolizers[0].width)
+            self.assertEqual(8, line_pattern_rules[0].symbolizers[0].height)
 
     def testStyleRules08(self):
         s = """
@@ -1218,6 +1309,27 @@ class StyleRuleTests(unittest.TestCase):
         self.assertEqual(color(0x00, 0x00, 0x44), polygon_rules[5].symbolizers[0].color)
 
     def testStyleRules11(self):
+        """ Spaces in attribute selectors need to be acceptable
+        """
+        s = """
+            Layer[PERSONS < 2000000] { polygon-fill: #6CAE4C; }
+            Layer[PERSONS >= 2000000][PERSONS < 4000000] { polygon-fill: #3B7AB3; }
+            Layer[PERSONS > 4000000] { polygon-fill: #88000F; }
+        """
+    
+        declarations = stylesheet_declarations(s)
+        polygon_rules = get_polygon_rules(declarations)
+        
+        self.assertEqual("[PERSONS] < 2000000", polygon_rules[0].filter.text)
+        self.assertEqual(color(0x6c, 0xae, 0x4c), polygon_rules[0].symbolizers[0].color)
+        
+        self.assertEqual("[PERSONS] >= 2000000 and [PERSONS] < 4000000", polygon_rules[1].filter.text)
+        self.assertEqual(color(0x3b, 0x7a, 0xb3), polygon_rules[1].symbolizers[0].color)
+        
+        self.assertEqual("[PERSONS] > 4000000", polygon_rules[2].filter.text)
+        self.assertEqual(color(0x88, 0x00, 0x0f), polygon_rules[2].symbolizers[0].color)
+
+    def testStyleRules11b(self):
         s = """
             Layer
             {
