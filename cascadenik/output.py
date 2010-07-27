@@ -181,9 +181,9 @@ class LineSymbolizer:
 class TextSymbolizer:
     def __init__(self, name, face_name, size, color, wrap_width=None, \
         spacing=None, label_position_tolerance=None, max_char_angle_delta=None, \
-        halo_color=None, halo_radius=None, dx=None, dy=None, character_spacing=None, \
-        line_spacing=None, avoid_edges=None, min_distance=None, allow_overlap=None, \
-        placement=None):
+        halo_color=None, halo_radius=None, dx=None, dy=None, avoid_edges=None, \
+        min_distance=None, allow_overlap=None, placement=None, \
+        character_spacing=None, line_spacing=None):
 
         assert type(name) is str
         assert type(face_name) is str
@@ -248,7 +248,10 @@ class TextSymbolizer:
         return sym
 
 class ShieldSymbolizer:
-    def __init__(self, face_name=None, size=None, file=None, filetype=None, width=None, height=None, color=None, character_spacing=None, line_spacing=None, spacing=None, min_distance=None):
+    def __init__(self, face_name=None, size=None, file=None, filetype=None, \
+        width=None, height=None, color=None, min_distance=None, character_spacing=None, \
+        line_spacing=None, spacing=None):
+        
         assert face_name and size or file
         
         assert face_name is None or type(face_name) is str

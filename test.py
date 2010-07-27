@@ -1425,7 +1425,7 @@ class CompileXMLTests(unittest.TestCase):
                 </Layer>
             </Map>
         """
-        map = compile(s, self.tmpdir)
+        map = compile(s, dir=self.tmpdir)
         
         self.assertEqual(1, len(map.layers))
         self.assertEqual(3, len(map.layers[0].styles))
@@ -1482,7 +1482,7 @@ class CompileXMLTests(unittest.TestCase):
                 </Layer>
             </Map>
         """
-        map = compile(s, self.tmpdir)
+        map = compile(s, dir=self.tmpdir)
         
         import mapnik
         
