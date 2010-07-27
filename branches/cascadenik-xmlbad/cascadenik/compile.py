@@ -941,7 +941,7 @@ def get_polygon_pattern_rules(declarations, dir=None, move_local_files=False):
     
     return rules
 
-def get_line_pattern_rules(declarations, out=None):
+def get_line_pattern_rules(declarations, dir=None, move_local_files=False):
     """ Given a list of declarations, return a list of output.Rule objects.
         
         Optionally provide an output directory for local copies of image files.
@@ -958,7 +958,7 @@ def get_line_pattern_rules(declarations, out=None):
     
         line_pattern_file, line_pattern_type, line_pattern_width, line_pattern_height \
             = values.has_key('line-pattern-file') \
-            and postprocess_symbolizer_image_file(str(values['line-pattern-file'].value), out, 'line-pattern') \
+            and postprocess_symbolizer_image_file(str(values['line-pattern-file'].value), dir, 'line-pattern', move_local_files) \
             or (None, None, None, None)
         
         line_pattern_width = values.has_key('line-pattern-width') and values['line-pattern-width'].value or line_pattern_width
