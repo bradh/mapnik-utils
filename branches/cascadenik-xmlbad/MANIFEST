@@ -8,4 +8,5 @@ cascadenik-style.py
 setup.py
 cascadenik/__init__.py
 cascadenik/compile.py
+cascadenik/output.py
 cascadenik/style.py
