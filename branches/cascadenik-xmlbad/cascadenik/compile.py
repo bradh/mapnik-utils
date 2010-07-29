@@ -759,7 +759,7 @@ def get_text_rule_groups(declarations, **kwargs):
         # a place to put rules
         rules = []
         
-        for (filter, values) in filtered_property_declarations(declarations, property_names):
+        for (filter, values) in filtered_property_declarations(name_declarations, property_names):
             
             face_name = values.has_key('text-face-name') and values['text-face-name'].value
             size = values.has_key('text-size') and values['text-size'].value
@@ -914,7 +914,7 @@ def get_shield_rule_groups(declarations, **kwargs):
         # a place to put rules
         rules = []
         
-        for (filter, values) in filtered_property_declarations(declarations, property_names):
+        for (filter, values) in filtered_property_declarations(name_declarations, property_names):
         
             face_name = values.has_key('shield-face-name') and values['shield-face-name'].value
             size = values.has_key('shield-size') and values['shield-size'].value
