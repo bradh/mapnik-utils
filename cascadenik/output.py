@@ -174,6 +174,8 @@ class LineSymbolizer:
         stroke.opacity = self.opacity or stroke.opacity
         stroke.line_cap = self.cap or stroke.line_cap
         stroke.line_join = self.join or stroke.line_join
+        if self.dashes:
+            stroke.add_dash(*self.dashes.values)
         sym = mapnik.LineSymbolizer(stroke)
         
         return sym
@@ -235,25 +237,26 @@ class TextSymbolizer:
         sym.label_spacing = self.spacing or sym.label_spacing
         sym.label_position_tolerance = self.label_position_tolerance or sym.label_position_tolerance
         sym.max_char_angle_delta = self.max_char_angle_delta or sym.max_char_angle_delta
-        sym.halo_fill = self.halo_color or sym.halo_fill
+        sym.halo_fill = mapnik.Color(str(self.halo_color)) if self.halo_color else sym.halo_fill
         sym.halo_radius = self.halo_radius or sym.halo_radius
         sym.character_spacing = self.character_spacing or sym.character_spacing
         sym.line_spacing = self.line_spacing or sym.line_spacing
-        sym.avoid_edges = self.avoid_edges or sym.avoid_edges
+        sym.avoid_edges = self.avoid_edges.value if self.avoid_edges else sym.avoid_edges
         sym.minimum_distance = self.min_distance or sym.minimum_distance
-        sym.allow_overlap = self.allow_overlap or sym.allow_overlap
+        sym.allow_overlap = self.allow_overlap.value if self.allow_overlap else sym.allow_overlap
         
         sym.displacement(self.dx or 0, self.dy or 0)
         
         return sym
 
 class ShieldSymbolizer:
-    def __init__(self, face_name=None, size=None, file=None, filetype=None, \
+    def __init__(self, name, face_name=None, size=None, file=None, filetype=None, \
         width=None, height=None, color=None, min_distance=None, character_spacing=None, \
         line_spacing=None, spacing=None):
         
         assert face_name and size or file
         
+        assert type(name) is str
         assert face_name is None or type(face_name) is str
         assert size is None or type(size) is int
         assert width is None or type(width) is int
@@ -265,6 +268,7 @@ class ShieldSymbolizer:
         assert spacing is None or type(spacing) is int
         assert min_distance is None or type(min_distance) is int
 
+        self.name = name
         self.face_name = face_name
         self.size = size
         self.file = file
@@ -279,7 +283,7 @@ class ShieldSymbolizer:
         self.min_distance = min_distance
 
     def __repr__(self):
-        return 'Shield(%s, %s, %s)' % (self.face_name, self.size, self.file)
+        return 'Shield(%s, %s, %s, %s)' % (self.name, self.face_name, self.size, self.file)
 
 class PointSymbolizer:
     def __init__(self, file, filetype, width, height, allow_overlap=None):
