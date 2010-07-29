@@ -925,8 +925,14 @@ def get_shield_rule_groups(declarations, **kwargs):
             color = values.has_key('shield-fill') and values['shield-fill'].value or None
             min_distance = values.has_key('shield-min-distance') and values['shield-min-distance'].value or None
             
+            character_spacing = values.has_key('shield-character-spacing') and values['shield-character-spacing'].value or None
+            line_spacing = values.has_key('shield-line-spacing') and values['shield-line-spacing'].value or None
+            spacing = values.has_key('shield-spacing') and values['shield-spacing'].value or None
+            
             symbolizer = (face_name and size or file) \
-                and output.ShieldSymbolizer(face_name, size, file, filetype, width, height, color, min_distance)
+                and output.ShieldSymbolizer(text_name, face_name, size, file, filetype, 
+                                            width, height, color, min_distance,
+                                            character_spacing, line_spacing, spacing)
             
             if symbolizer:
                 rules.append(make_rule(filter, symbolizer))
