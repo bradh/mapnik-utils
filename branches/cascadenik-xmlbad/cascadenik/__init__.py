@@ -18,7 +18,7 @@ VERSION = '0.2.0'
 
 __all__ = ['compile','_compile','style','stylesheet_declarations']
 
-def load_map(map, input, dir=None, move_local_files=False):
+def load_map(map, input, target_dir=None, move_local_files=False):
     """
     """
-    compile(input, dir, move_local_files).to_mapnik(map)
+    compile(input, target_dir=target_dir, move_local_files=move_local_files).to_mapnik(map)
