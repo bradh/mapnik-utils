@@ -851,11 +851,6 @@ def postprocess_symbolizer_image_file(file_name, temp_name, **kwargs):
             is_local = True
             msg('found locally cached file: %s' %  dest_file)
 
-    # finally, early return if possible
-    if is_local and os.path.exists(dest_file) and mapnik_auto_image_support and supported_type:
-        symbolizer_el.set('file', dest_file)
-        return
-    
     # throw error if we need to detect image sizes and can't because pil is missing
     if not mapnik_auto_image_support and not HAS_PIL:
         raise SystemExit('PIL (Python Imaging Library) is required for handling image data unless you are using PNG inputs and running Mapnik >=0.7.0')
