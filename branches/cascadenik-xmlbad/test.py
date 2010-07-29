@@ -6,6 +6,7 @@ import shutil
 import unittest
 import tempfile
 import xml.etree.ElementTree
+import mapnik
 from cascadenik.style import ParseException, stylesheet_rulesets, rulesets_declarations, stylesheet_declarations
 from cascadenik.style import Selector, SelectorElement, SelectorAttributeTest
 from cascadenik.style import postprocess_property, postprocess_value, Property
@@ -1613,7 +1614,7 @@ class CompileXMLTests(unittest.TestCase):
         doc = xml.etree.ElementTree.parse(path)
         map_el = doc.getroot()
         
-        # print open(path, 'r').read()
+        #print open(path, 'r').read()
         os.unlink(path)
         
         self.assertEqual(3, len(map_el.findall('Style')))
@@ -1699,6 +1700,72 @@ class CompileXMLTests(unittest.TestCase):
                 self.assertEqual('200', style_el.find('Rule').find('MaxScaleDenominator').text)
                 self.assertEqual(1, len(style_el.find('Rule').findall('PolygonSymbolizer')))
                 self.assertEqual(1, len(style_el.find('Rule').findall('LineSymbolizer')))
+
+    def testCompile4(self):
+        s = """<?xml version="1.0"?>
+            <Map>
+                <Stylesheet>
+                    Map { 
+                        map-bgcolor: #fff; 
+                    }
+                    
+                    Layer {
+                        point-file: url('http://cascadenik-sampledata.s3.amazonaws.com/purple-point.png');
+                        point-allow-overlap: true;
+                    }
+                    
+                    Layer {
+                        line-color: #0f0;
+                        line-width: 3;
+                        line-dasharray: 8,100;
+                    }
+
+                    Layer { 
+                        polygon-pattern-file: url('http://cascadenik-sampledata.s3.amazonaws.com/purple-point.png'); 
+                    }
+                    Layer { 
+                        line-pattern-file: url('http://cascadenik-sampledata.s3.amazonaws.com/purple-point.png'); 
+                    }
+                    
+                    Layer name {
+                        text-face-name: "DejaVu Sans Book";
+                        text-size: 10;
+                        text-fill: #005;
+                        text-halo-radius: 1;
+                        text-halo-fill: #f00;
+                        text-placement: line;
+                        text-allow-overlap: true;
+                        text-avoid-edges: true;
+                    }
+                    
+                    Layer name2 {
+                        shield-face-name: 'Helvetica';
+                        shield-size: 12;
+                        
+                        shield-file: url('http://cascadenik-sampledata.s3.amazonaws.com/purple-point.png');
+                        shield-width: 16;
+                        shield-height: 16;
+                        
+                        shield-fill: #f00;
+                        shield-min-distance: 5;
+                        shield-spacing: 7;
+                        shield-line-spacing: 3;
+                        shield-character-spacing: 18;
+                    }
+                </Stylesheet>
+                <Layer>
+                    <Datasource>
+                        <Parameter name="plugin_name">example</Parameter>
+                    </Datasource>
+                </Layer>
+            </Map>
+        """
+        mmap = mapnik.Map(640, 480)
+        ms = compile(s, target_dir=self.tmpdir)
+        ms.to_mapnik(mmap)
+        mapnik.save_map(mmap, os.path.join(self.tmpdir, 'out.mml'))
+        print open(os.path.join(self.tmpdir, 'out.mml'), 'rb').read()
+        self.assert_(False)
         
 if __name__ == '__main__':
     unittest.main()
