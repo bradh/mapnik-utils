@@ -285,33 +285,61 @@ class ShieldSymbolizer:
     def __repr__(self):
         return 'Shield(%s, %s, %s, %s)' % (self.name, self.face_name, self.size, self.file)
 
-class PointSymbolizer:
-    def __init__(self, file, filetype, width, height, allow_overlap=None):
+    def to_mapnik(self):
+        sym = mapnik.ShieldSymbolizer(self.name, 
+                self.face_name, 
+                self.size, 
+                mapnik.Color(str(self.color)) if self.color else None, 
+                self.file, 
+                self.type, 
+                self.width, 
+                self.height)
+        
+        sym.character_spacing = self.character_spacing or sym.character_spacing
+        sym.line_spacing = self.line_spacing or sym.line_spacing
+        sym.spacing = self.spacing or sym.line_spacing
+        sym.min_distance = self.min_distance or sym.min_distance
+        
+        return sym
+
+class BasePointSymbolizer(object):
+    def __init__(self, file, filetype, width, height):
         assert type(file) is str
         assert type(filetype) is str
         assert type(width) is int
         assert type(height) is int
-        assert allow_overlap is None or allow_overlap.__class__ is style.boolean
 
         self.file = file
         self.type = filetype
         self.width = width
         self.height = height
+
+    def __repr__(self):
+        return '%s(%s)' % (self.__class__.__name__, self.file)
+
+    def to_mapnik(self):
+        sym_class = getattr(mapnik, self.__class__.__name__)
+        sym = sym_class(self.file, self.type, self.width, self.height)
+        return sym
+
+class PointSymbolizer(BasePointSymbolizer):
+    def __init__(self, file, filetype, width, height, allow_overlap=None):
+        super(PointSymbolizer, self).__init__(file, filetype, width, height)
+
+        assert allow_overlap is None or allow_overlap.__class__ is style.boolean
+
         self.allow_overlap = allow_overlap
 
-    def __repr__(self):
-        return 'Point(%s)' % self.file
+    def to_mapnik(self):
+        sym = super(PointSymbolizer, self).to_mapnik()
+        
+        sym.allow_overlap = self.allow_overlap.value if self.allow_overlap else sym.allow_overlap
+        
+        return sym
+        
 
-class PolygonPatternSymbolizer(PointSymbolizer):
-    def __init__(self, file, filetype, width, height):
-        PointSymbolizer.__init__(self, file, filetype, width, height)
-    
-    def __repr__(self):
-        return 'PolyPat(%s)' % self.file
+class PolygonPatternSymbolizer(BasePointSymbolizer):
+    pass
 
-class LinePatternSymbolizer(PointSymbolizer):
-    def __init__(self, file, filetype, width, height):
-        PointSymbolizer.__init__(self, file, filetype, width, height)
-    
-    def __repr__(self):
-        return 'LinePat(%s)' % self.file
+class LinePatternSymbolizer(BasePointSymbolizer):
+    pass
