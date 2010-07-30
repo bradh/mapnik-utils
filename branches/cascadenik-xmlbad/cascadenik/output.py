@@ -298,7 +298,7 @@ class ShieldSymbolizer:
         sym.character_spacing = self.character_spacing or sym.character_spacing
         sym.line_spacing = self.line_spacing or sym.line_spacing
         sym.spacing = self.spacing or sym.line_spacing
-        sym.min_distance = self.min_distance or sym.min_distance
+        sym.minimum_distance = self.min_distance or sym.minimum_distance
         
         return sym
 
