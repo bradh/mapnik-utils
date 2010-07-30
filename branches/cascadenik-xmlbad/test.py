@@ -1765,7 +1765,6 @@ class CompileXMLTests(unittest.TestCase):
         ms.to_mapnik(mmap)
         mapnik.save_map(mmap, os.path.join(self.tmpdir, 'out.mml'))
         print open(os.path.join(self.tmpdir, 'out.mml'), 'rb').read()
-        self.assert_(False)
         
 if __name__ == '__main__':
     unittest.main()
