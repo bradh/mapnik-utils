@@ -254,7 +254,7 @@ class ShieldSymbolizer:
         width=None, height=None, color=None, min_distance=None, character_spacing=None, \
         line_spacing=None, spacing=None):
         
-        assert face_name and size or file
+        assert (face_name and size) or file
         
         assert type(name) is str
         assert face_name is None or type(face_name) is str
