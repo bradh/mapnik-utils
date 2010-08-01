@@ -35,7 +35,7 @@
 {
     point-file: url('sjjb-mapicons/png/tourist_view_point.glow.8.png');
     text-fill: #734a08;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -120,7 +120,7 @@
 {
     point-file: url('sjjb-mapicons/png/tourist_castle.glow.8.png');
     text-fill: #734a08;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -229,7 +229,7 @@
 {
     point-file: url('sjjb-mapicons/png/amenity_toilets.glow.8.png');
     text-fill: #734a08;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -256,7 +256,7 @@
 {
     point-file: url('sjjb-mapicons/png/accommodation_shelter.glow.8.png');
     text-fill: #0092da;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -433,7 +433,7 @@
 {
     point-file: url('sjjb-mapicons/png/food_pub.glow.8.png');
     text-fill: #734a08;
-    text-dy: 9;
+    text-dy: 12;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -487,7 +487,7 @@
 {
     point-file: url('sjjb-mapicons/png/transport_parking.glow.8.png');
     text-fill: #0092da;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -514,7 +514,7 @@
 {
     point-file: url('sjjb-mapicons/png/transport_parking_car_paid.glow.8.png');
     text-fill: #0092da;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -541,7 +541,7 @@
 {
     point-file: url('sjjb-mapicons/png/place_of_worship.glow.8.png');
     text-fill: #0092da;
-    text-dy: 9;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -576,10 +576,9 @@
 
 .poi_natural.point[natural=cave_entrance][zoom>=13] name
 {
-    point-file: url('img/svg-twotone-png/tourist_cave.p.8.png');
-/*    point-file: url('sjjb-mapicons/png/poi_cave.glow.8.png');*/
+    point-file: url('sjjb-mapicons/png/poi_cave.glow.8.png');
     text-fill: #734a08;
-    text-dy: 10;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
     text-placement: point;
@@ -590,8 +589,7 @@
 
 .poi_natural.point[natural=cave_entrance][zoom>=15] name
 {
-    point-file: url('img/svg-twotone-png/tourist_cave.p.12.png');
-/*    point-file: url('sjjb-mapicons/png/poi_cave.glow.12.png');*/
+    point-file: url('sjjb-mapicons/png/poi_cave.glow.12.png');
     text-fill: #734a08;
     text-dy: 14;
     text-fontset-name: "book-fonts";
@@ -706,9 +704,9 @@
 /*.poi_historic.point[historic=ruins][ruins=bunker][zoom>=13] name,*/
 .poi.point[military=bunker][zoom>=13] name
 {
-    point-file: url('img/svg-twotone-png/military_bunker.p.14.png');
-/*    point-file: url('sjjb-mapicons/png/poi_military_bunker.glow.14.png');*/
-    text-fill: #734a08;
+    point-file: url('sjjb-mapicons/png/poi_military_bunker.glow.10.png');
+    /*text-fill: #734a08;*/ /* brown */
+    text-fill: #000;
     text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 8;
@@ -721,10 +719,10 @@
 /*.poi_historic.point[historic=ruins][ruins=bunker][zoom>=15] name,*/
 .poi.point[military=bunker][zoom>=15] name
 {
-    point-file: url('img/svg-twotone-png/military_bunker.p.16.png');
-/*    point-file: url('sjjb-mapicons/png/poi_military_bunker.glow.16.png');*/
-    text-fill: #734a08;
-    text-dy: 17;
+    point-file: url('sjjb-mapicons/png/poi_military_bunker.glow.12.png');
+    /*text-fill: #734a08;*/ /* brown */
+    text-fill: #000;
+    text-dy: 13;
     text-fontset-name: "book-fonts";
     text-size: 10;
     text-placement: point;
