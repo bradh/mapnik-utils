@@ -316,7 +316,7 @@ class ValueTests(unittest.TestCase):
 
     def testValue15(self):
         self.assertEqual(14, postprocess_value([('NUMBER', '14')], Property('shield-line-spacing')).value)
-
+    
 class CascadeTests(unittest.TestCase):
 
     def testCascade1(self):
@@ -539,6 +539,8 @@ class SelectorParseTests(unittest.TestCase):
         self.assertEqual("[foo] = '1.1'", test2str(filters[1].tests[0]))
 
     def testFilters10(self):
+        # Unicode is fine in filter values
+        # Not so much in properties
         s = u'''
         Layer[name="Grüner Strich"] { polygon-fill: #000; }
         '''
@@ -547,6 +549,27 @@ class SelectorParseTests(unittest.TestCase):
         filters = tests_filter_combinations(selectors_tests(selectors))
         
         self.assertEqual(u"[name] = 'Grüner Strich'", test2str(filters[1].tests[0]))
+        self.assert_(isinstance(filters[1].tests[0].value, unicode))
+        self.assert_(isinstance(filters[1].tests[0].property, str))
+        print repr(filters[1].tests[0].property)
+        print repr(filters[1].tests[0].value)
+
+    def testUnicode1(self):
+        # Unicode is bad in property values
+        s = u'''
+        Layer CODE {
+            text-face-name: "DejaVu Sans Book";
+            text-size: 12; 
+            text-fill: #005;
+            text-placement: line;
+        }
+        '''
+        declarations = stylesheet_declarations(s, is_gym=True)
+        text_rule_groups = get_text_rule_groups(declarations)
+        
+        self.assertEqual(str, type(text_rule_groups.keys()[0]))
+        self.assertEqual(str, type(text_rule_groups['CODE'][0].symbolizers[0].face_name))
+        self.assertEqual(str, type(text_rule_groups['CODE'][0].symbolizers[0].placement))
 
 class FilterCombinationTests(unittest.TestCase):
 
@@ -1765,6 +1788,26 @@ class CompileXMLTests(unittest.TestCase):
         ms.to_mapnik(mmap)
         mapnik.save_map(mmap, os.path.join(self.tmpdir, 'out.mml'))
         print open(os.path.join(self.tmpdir, 'out.mml'), 'rb').read()
+
+    def testCompile5(self):
+        s = u"""<?xml version="1.0" encoding="UTF-8" ?>
+            <Map>
+                <Stylesheet>
+                    Layer[name="Grüner Strich"] { polygon-fill: #000; }
+                </Stylesheet>
+                <Layer>
+                    <Datasource>
+                        <Parameter name="plugin_name">example</Parameter>
+                    </Datasource>
+                </Layer>
+            </Map>
+        """.encode('utf-8')
+        mmap = mapnik.Map(640, 480)
+        ms = compile(s, target_dir=self.tmpdir)
+        ms.to_mapnik(mmap)
+        mapnik.save_map(mmap, os.path.join(self.tmpdir, 'out.mml'))
+        print open(os.path.join(self.tmpdir, 'out.mml'), 'rb').read()
+        
         
 if __name__ == '__main__':
     unittest.main()

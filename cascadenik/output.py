@@ -125,8 +125,8 @@ class MaxScaleDenominator:
 
 class Filter:
     def __init__(self, text):
-        self.text = text
-
+        self.text = text.encode('utf8')
+    
     def __repr__(self):
         return str(self.text)
 
