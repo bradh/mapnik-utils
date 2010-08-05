@@ -288,7 +288,7 @@ class Declaration:
         self.sort_key = sort_key
 
     def __repr__(self):
-        return '%(selector)s { %(property)s: %(value)s }' % self.__dict__
+        return u'%(selector)s { %(property)s: %(value)s }' % self.__dict__
 
 class Selector:
     """ Represents a complete selector with elements and attribute checks.
@@ -425,7 +425,7 @@ class Selector:
         return True
 
     def __repr__(self):
-        return ' '.join(repr(a) for a in self.elements)
+        return u' '.join(repr(a) for a in self.elements)
 
 class SelectorElement:
     """ One element in selector, with names and tests.
@@ -442,7 +442,7 @@ class SelectorElement:
             self.tests = []
 
     def addName(self, name):
-        self.names.append(name)
+        self.names.append(str(name))
     
     def addTest(self, test):
         self.tests.append(test)
@@ -460,7 +460,7 @@ class SelectorElement:
         return len([n for n in self.names if n.startswith('.')])
     
     def __repr__(self):
-        return ''.join(self.names) + ''.join(repr(t) for t in self.tests)
+        return u''.join(self.names) + u''.join(repr(t) for t in self.tests)
 
 class SelectorAttributeTest:
     """ Attribute test for a Selector, i.e. the part that looks like "[foo=bar]"
@@ -468,11 +468,11 @@ class SelectorAttributeTest:
     def __init__(self, property, op, value):
         assert op in ('<', '<=', '=', '!=', '>=', '>')
         self.op = op
-        self.property = property
+        self.property = str(property)
         self.value = value
 
     def __repr__(self):
-        return '[%(property)s%(op)s%(value)s]' % self.__dict__
+        return u'[%(property)s%(op)s%(value)s]' % self.__dict__
 
     def __cmp__(self, other):
         """
@@ -696,7 +696,7 @@ class Value:
         return repr(self.value)
 
     def __str__(self):
-        return unicode(self.value)
+        return str(self.value)
 
 def stylesheet_declarations(string, base=None, is_gym=False):
     """
@@ -981,7 +981,7 @@ def postprocess_value(tokens, property, base=None, line=0, col=0):
         if tokens[0][0] != 'STRING':
             raise ParseException('String value only for property "%(property)s"' % locals(), line, col)
 
-        value = tokens[0][1][1:-1]
+        value = str(tokens[0][1][1:-1])
 
     elif properties[property.name] is color_transparent:
         if tokens[0][0] != 'HASH' and (tokens[0][0] != 'IDENT' or tokens[0][1] != 'transparent'):
@@ -1023,7 +1023,7 @@ def postprocess_value(tokens, property, base=None, line=0, col=0):
         if tokens[0][0] != 'URI':
             raise ParseException('URI value only for property "%(property)s"' % locals(), line, col)
 
-        raw = tokens[0][1]
+        raw = str(tokens[0][1])
 
         if raw.startswith('url("') and raw.endswith('")'):
             raw = raw[5:-2]
@@ -1049,7 +1049,7 @@ def postprocess_value(tokens, property, base=None, line=0, col=0):
         if tokens[0][1] not in properties[property.name]:
             raise ParseException('Unrecognized value for property "%(property)s"' % locals(), line, col)
 
-        value = tokens[0][1]
+        value = str(tokens[0][1])
             
     elif properties[property.name] is numbers:
         values = []
