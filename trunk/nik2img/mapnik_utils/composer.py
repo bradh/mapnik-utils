@@ -261,10 +261,10 @@ class ComposeDebug(Compose):
         #self.debug_msg('mime: %s' % self.mime)
 
     def build(self):
-        try:
-            builder = super(ComposeDebug,self).build()
-        except Exception, E:
-            self.output_error(E)        
+        #try:
+        builder = super(ComposeDebug,self).build()
+        #except Exception, E:
+        #    self.output_error(E)        
         self.last_step('Loading map took... ', builder.load_map_time)
         if self.verbose:
             self.debug_msg('SRS: %s' % self.map.srs)
@@ -289,7 +289,7 @@ class ComposeDebug(Compose):
                 self.debug_msg("Layers intersecting map: [%s]" % ', '.join([l.name for l in lyrs]))
             self.debug_msg("At current scale of '%s'..." % self.map.scale())
             for lyr in lyrs:
-                if not l.visible(self.map.scale()):
+                if not lyr.visible(self.map.scale_denominator()):
                     self.debug_msg("Layer '%s' is NOT visible" % lyr.name,warn=True)
                 else:
                     self.debug_msg("layer '%s' is visible" % lyr.name)
