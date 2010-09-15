@@ -252,6 +252,7 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
 	        (select way,
+                 (case when (tags->'intermittent' in ('no','false','0') or not tags ? 'intermittent') then 'no'::text else 'yes'::text end) as intermittent,
                  waterway, name 
                  from planet_line
                  where waterway in ('river', 'stream', 'canal', 'drain')
