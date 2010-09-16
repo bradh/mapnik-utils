@@ -53,6 +53,7 @@ class Compose(object):
         self.rendered = False
         self.verbose = False
         self.scale_factor = None
+        self.aspect_fix_mode = None
         
         self.start_time = 0
         self.load_map_time = 0
@@ -120,18 +121,22 @@ class Compose(object):
             if not selected:
                 self.output_error('Layer not found: available layers are: "%s"' % ',  '.join(disactivated))
                 
-        # handle shifts in pixel dimensions or bbox ratio
-        # need to make as an option
-        #try:
-        #    self.map.aspect_fix_mode = mapnik.aspect_fix_mode.ADJUST_CANVAS_HEIGHT
-        #except:
-        #    self.msg('aspect_fix_mode not available!')
+        # set up behavior for fixing relationship between map aspect and bbox aspect
+        if self.aspect_fix_mode:
+            if not hasattr(self.map, 'aspect_fix_mode'):
+                self.output_error('Your version of Mapnik does not support setting the aspect_fix_mode (only available in >= Mapnik 0.6.0')
+            try:
+                mode = getattr(mapnik.aspect_fix_mode,self.aspect_fix_mode.upper())
+            except AttributeError:
+                self.output_error('Error setting aspect_fix_mode, accepted values are: %s' % ', '.join(mapnik.aspect_fix_mode.names.keys()))
+            
+            self.map.aspect_fix_mode = mode
 
-        
         # zoom to max extent at beginning if we later need to 
         # zoom to a center point
         # or need to zoom to a zoom-level
         self.msg('Setting Map view...')
+        
         if self.center or not self.zoom is None:
             if self.max_extent:
                 self.msg('Zooming to max extent: %s' % self.max_extent) 

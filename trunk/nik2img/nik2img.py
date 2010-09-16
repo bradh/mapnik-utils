@@ -168,6 +168,11 @@ parser.add_option('--scale-factor', dest='scale_factor',
                   type='float',
                   help='Pass a scale factor to the Mapnik renderer (experimental)',
                   action='store')
+
+parser.add_option('--aspect-fix-mode', dest='aspect_fix_mode',
+                  type='string',
+                  help='Pass an aspect_fix_mode string (case-insensitive match of http://media.mapnik.org/api_docs/python/mapnik._mapnik.aspect_fix_mode-class.html)',
+                  action='store')
                       
 if __name__ == '__main__':
     (options, args) = parser.parse_args()
