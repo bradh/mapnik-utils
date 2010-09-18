@@ -51,10 +51,10 @@ class Mapnik:
 
             # bring 0.5.x series python bindings up to 0.6.x
             if not hasattr(Mapnik.__instance,'mapnik_version'):
-                import compatibility 
+                from mapnik_utils import compatibility 
 
             # extent mapnik objects 
-            import metaclass_injectors
+            from mapnik_utils import metaclass_injectors
 
             Mapnik.__version = version
 
