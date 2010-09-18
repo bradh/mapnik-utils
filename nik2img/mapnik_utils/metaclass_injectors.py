@@ -6,7 +6,7 @@ from mapnik_utils.version_adapter import Mapnik
 mapnik = Mapnik()
 
 # mapnik_utils
-from projection import EasyProjection
+from mapnik_utils.projection import EasyProjection
 
 if not hasattr(mapnik,'ProjTransform'):
     from compatibility import ProjTransform
@@ -80,13 +80,14 @@ class _Map(mapnik.Map,_injector):
         c = self.layers_bounds().center()
         self.set_center_and_zoom(c.x,c.y,level=level,geographic=self.proj_obj.geographic)
     
-    @property
     def max_resolution(self):
         #self.zoom_max()
-        return self.envelope().width()/self.width    
+        map_w,map_h = self.envelope().width(),self.envelope().height()
+        return max(map_w / self.width, map_h / self.height)
 
     def get_scales(self,number):
-        return [self.max_resolution / 2 ** i for i in range(int(number))]        
+        max_res = self.max_resolution()
+        return [max_res / 2 ** i for i in range(int(number))]        
 
     def get_scale_for_zoom_level(self,level):
         return self.get_scales(level+1)[level]
