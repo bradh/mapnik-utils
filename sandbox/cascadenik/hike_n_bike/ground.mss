@@ -27,21 +27,8 @@
     */
 }
 
-.water.edge[zoom>12]
-{
-    line-color: #a1cbea;
-    line-join: round;
-    line-cap: round;
-}
-.water.edge[zoom>14] { line-width: 6; }
-.water.edge[zoom<=14] { line-width: 4; }
-
-.water.area
-{
-    polygon-fill: #cae5fb;
-}
-
-.water.line name
+/* NOTE: rivers are handled with .river.label */
+.water.line[waterway!=river] name
 {
     text-fontset-name: "book-fonts";
     text-placement: line;
@@ -56,28 +43,42 @@
     line-join: round;
 }
 
-.water.line[zoom>=11][zoom<=12] { line-width: 2; text-size: 7; }
-.water.line[zoom>=11][zoom<=12][waterway=stream] { line-width: 1; text-size: 0; }
+.water.line[zoom>=11][zoom<=12][waterway=river] { line-width: 2; text-size: 7; }
+.water.line[zoom>=11][zoom<=12][waterway!=river] { line-width: 1; text-size: 0; }
 
-.water.line[zoom=13] { line-width: 3; text-size: 8; }
-.water.line[zoom=13][waterway=stream] { line-width: 1.5; text-size: 0; }
-.water.line[zoom=13][waterway=stream][intermittent=yes] { line-dasharray: 4,2; }
+.water.line[zoom=13][waterway=river] { line-width: 3; text-size: 8; }
+.water.line[zoom=13][waterway!=river] { line-width: 1.5; text-size: 0; }
+.water.line[zoom=13][waterway!=river][intermittent=yes] { line-dasharray: 4,2; }
 
-.water.line[zoom=14] { line-width: 5; text-size: 9; }
-.water.line[zoom=14][waterway=stream] { line-width: 2; text-size: 0; }
-.water.line[zoom=14][waterway=stream][intermittent=yes] { line-dasharray: 4,2; }
+.water.line[zoom=14][waterway=river] { line-width: 5; text-size: 9; }
+.water.line[zoom=14][waterway!=river] { line-width: 2; text-size: 0; }
+.water.line[zoom=14][waterway!=river][intermittent=yes] { line-dasharray: 4,2; }
 
-.water.line[zoom=15] { line-width: 6; text-size: 10; }
-.water.line[zoom=15][waterway=stream] { line-width: 2.5;  text-size: 8; }
-.water.line[zoom=15][waterway=stream][intermittent=yes] { line-dasharray: 6,3; }
+.water.line[zoom=15][waterway=river] { line-width: 6; text-size: 10; }
+.water.line[zoom=15][waterway!=river] { line-width: 2.5;  text-size: 8; }
+.water.line[zoom=15][waterway!=river][intermittent=yes] { line-dasharray: 6,3; }
 
-.water.line[zoom=16] { line-width: 7; text-size: 11; }
-.water.line[zoom=16][waterway=stream] { line-width: 3;  text-size: 8; }
-.water.line[zoom=16][waterway=stream][intermittent=yes] { line-dasharray: 6,3; }
+.water.line[zoom=16][waterway=river] { line-width: 7; text-size: 11; }
+.water.line[zoom=16][waterway!=river] { line-width: 3;  text-size: 8; }
+.water.line[zoom=16][waterway!=river][intermittent=yes] { line-dasharray: 6,3; }
 
-.water.line[zoom>=17] { line-width: 9; text-size: 12; }
-.water.line[zoom>=17][waterway=stream] { line-width: 5;  text-size: 9; }
-.water.line[zoom>=17][waterway=stream][intermittent=yes] { line-dasharray: 8,4; }
+.water.line[zoom>=17][waterway=river] { line-width: 9; text-size: 12; }
+.water.line[zoom>=17][waterway!=river] { line-width: 5;  text-size: 9; }
+.water.line[zoom>=17][waterway!=river][intermittent=yes] { line-dasharray: 8,4; }
+
+.water.edge[zoom>12]
+{
+    line-color: #a1cbea;
+    line-join: round;
+    line-cap: round;
+}
+.water.edge[zoom>14] { line-width: 6; }
+.water.edge[zoom<=14] { line-width: 4; }
+
+.water.area
+{
+    polygon-fill: #cae5fb;
+}
 
 .water.ferry[zoom>=11]
 {
@@ -630,18 +631,34 @@
     text-wrap-width: 100;
 }
 
+.river.label name
+{
+    text-fontset-name: "book-fonts";
+    text-placement: line;
+    text-fill: #7396bb;
+    text-halo-fill: #e7f6fd;
+    text-halo-radius: 1;
+    text-wrap-width: 100;
+}
+
 .water.label[zoom>=13][zoom<=15][size=large] name,
 .water.label[zoom>=15][zoom<=16][size=medium] name,
-.water.label[zoom=16][size=small] name
+.water.label[zoom=16][size=small] name,
+.river.label[zoom>=13][zoom<=14] name
 {
     text-size: 9;
     text-wrap-width: 50;
 }
 
 .water.label[zoom>=16][size=large] name,
-.water.label[zoom>=17] name
+.water.label[zoom>=17] name,
+.river.label[zoom>=15] name
 {
     text-size: 11;
+}
+.river.label[zoom>=16] name
+{
+    text-size: 12;
 }
 
 
