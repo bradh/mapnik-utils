@@ -27,8 +27,7 @@
     */
 }
 
-/* NOTE: rivers are handled with .river.label */
-.water.line[waterway!=river] name
+.water.line name
 {
     text-fontset-name: "book-fonts";
     text-placement: line;
