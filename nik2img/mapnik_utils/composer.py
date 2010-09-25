@@ -9,6 +9,7 @@ from timeit import time
 from pdb import set_trace
 
 # mapnik_utils
+from subprocess import Popen
 from mapnik_utils.renderer import Render
 from mapnik_utils.loader import Load
 from mapnik_utils.tools import call, color_text, color_print
@@ -226,13 +227,16 @@ class Compose(object):
             try:
                 cmd = 'xdg-open %s' % self.image
                 Popen(cmd.split(' '))
-            except:
+            except OSError:
                 try:
                     cmd = 'gthumb %s' % self.image
                     Popen(cmd.split(' '))
-                except:
-                    cmd = 'display %s' % self.image
-                    Popen(cmd.split(' '))
+                except OSError:
+                    try:
+                        cmd = 'display %s' % self.image
+                        Popen(cmd.split(' '))
+                    except OSError:
+                        pass
         elif platform.uname()[0] == 'Darwin':
             if app:
                 call('open %s -a %s' % (self.image, app))
