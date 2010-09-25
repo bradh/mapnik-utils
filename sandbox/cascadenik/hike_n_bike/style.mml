@@ -839,7 +839,16 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                (select way, "natural", name, ele, 
                   (case when tags->'importance' ~ e'^-?[[:digit:]]+(\.[[:digit:]]+)?$' then 
-                   cast (tags->'importance' as float) else 0 end)
+                   cast (tags->'importance' as float) else 
+                   (case when tags->'importance' in ('international') then  5.0
+                         when tags->'importance' in ('national')      then  3.0
+                         when tags->'importance' in ('regional')      then  1.0
+                         when tags->'importance' in ('urban')         then  0.0
+                         when tags->'importance' in ('suburban')      then -1.0
+                         when tags->'importance' in ('local')         then -2.0
+                         else                                               0.0 
+                         end)
+                   end)
                   as importance_real
                   from planet_point
                   where "natural" in ('peak') 
