@@ -1,10 +1,15 @@
 import style
 
 try:
-    import mapnik
+    import mapnik2 as mapnik
+    mapnik.Filter = mapnik.Expression
 except ImportError:
-    # *.to_mapnik() won't work, maybe that's okay?
-    pass
+    try:
+        import mapnik
+        mapnik.Expression = str
+    except ImportError:
+        # *.to_mapnik() won't work, maybe that's okay?
+        pass
 
 class Map:
     def __init__(self, srs=None, layers=None, bgcolor=None):
@@ -280,7 +285,7 @@ class TextSymbolizer:
         return 'Text(%s, %s)' % (self.face_name, self.size)
 
     def to_mapnik(self):
-        sym = mapnik.TextSymbolizer(self.name, self.face_name, self.size,
+        sym = mapnik.TextSymbolizer(mapnik.Expression(self.name), self.face_name, self.size,
                                     mapnik.Color(str(self.color)))
 
         sym.wrap_width = self.wrap_width or sym.wrap_width
@@ -337,7 +342,8 @@ class ShieldSymbolizer:
         return 'Shield(%s, %s, %s, %s)' % (self.name, self.face_name, self.size, self.file)
 
     def to_mapnik(self):
-        sym = mapnik.ShieldSymbolizer(self.name, 
+        sym = mapnik.ShieldSymbolizer(
+                mapnik.Expression(self.name), 
                 self.face_name, 
                 self.size, 
                 mapnik.Color(str(self.color)) if self.color else None, 

@@ -6,7 +6,12 @@ import shutil
 import unittest
 import tempfile
 import xml.etree.ElementTree
-import mapnik
+
+try:
+    import mapnik2 as mapnik
+except ImportError:
+    import mapnik
+
 from cascadenik.style import ParseException, stylesheet_rulesets, rulesets_declarations, stylesheet_declarations
 from cascadenik.style import Selector, SelectorElement, SelectorAttributeTest
 from cascadenik.style import postprocess_property, postprocess_value, Property
@@ -18,7 +23,7 @@ from cascadenik.compile import get_point_rules, get_polygon_pattern_rules, get_l
 from cascadenik.compile import test2str, compile
 from cascadenik.compile import auto_detect_mapnik_version
 import cascadenik.output as output
-
+    
 MAPNIK_AUTO_IMAGE_SUPPORT = False
 ver = auto_detect_mapnik_version()
 if ver:
@@ -1663,8 +1668,6 @@ class CompileXMLTests(unittest.TestCase):
         """
         map = compile(s, dir=self.tmpdir)
         
-        import mapnik
-        
         mmap = mapnik.Map(640, 480)
         map.to_mapnik(mmap)
         
@@ -1725,8 +1728,6 @@ class CompileXMLTests(unittest.TestCase):
                     ])
                 ])
             ])
-        
-        import mapnik
         
         mmap = mapnik.Map(640, 480)
         map.to_mapnik(mmap)
