@@ -150,6 +150,54 @@ class PolygonSymbolizer:
         
         return sym
 
+class RasterSymbolizer:
+    def __init__(self, mode=None, opacity=None, scaling=None):
+        assert opacity is None or type(opacity) in (int, float)
+        assert mode is None or type(mode) is str
+        assert scaling is None or type(scaling) is str
+
+        self.mode = mode
+        self.opacity = opacity or 1.0
+        self.scaling = scaling
+
+    def __repr__(self):
+        return 'Raster(%s, %s, %s)' % (self.mode, self.opacity, self.scaling)
+
+    def to_mapnik(self):
+        sym = mapnik.RasterSymbolizer()
+        sym.opacity = self.opacity
+        sym.mode = self.mode or sym.mode
+        sym.scaling = self.scaling or sym.scaling
+
+        return sym
+
+class MarkersSymbolizer:
+    def __init__(self, filename=None, allow_overlap=None, spacing=None, max_error=None, opacity=None, **kwargs):
+        assert filename is None or type(filename) is str
+        assert allow_overlap is None or allow_overlap.__class__ is style.boolean
+        assert spacing is None or type(spacing) in (int, float)
+        assert max_error is None or type(max_error) in (int, float)
+        assert opacity is None or type(opacity) in (int, float)
+
+        self.filename = filename
+        self.allow_overlap = allow_overlap
+        self.spacing = spacing or 100
+        self.max_error = max_error or 0.2
+        self.opacity = opacity or 1.0
+
+    def __repr__(self):
+        return 'Markers(%s, %s, %s)' % (self.filename, self.allow_overlap, self.spacing, self.max_error, self.opacity)
+
+    def to_mapnik(self):
+        sym = mapnik.MarkersSymbolizer()
+        sym.filename = self.filename or sym.filename
+        sym.allow_overlap = self.allow_overlap
+        sym.spacing = self.spacing
+        sym.max_error = self.max_error
+        sym.opacity = self.opacity
+
+        return sym
+
 class LineSymbolizer:
     def __init__(self, color, width, opacity=None, join=None, cap=None, dashes=None):
         assert color.__class__ is style.color

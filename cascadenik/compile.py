@@ -9,12 +9,8 @@ from operator import lt, le, eq, ge, gt
 import base64
 import os.path
 import zipfile
-<<<<<<< HEAD:cascadenik/compile.py
 import style, output
-=======
-import style
 import shutil
->>>>>>> 4df3fb4... add support for local, zipped shapefiles, improve debug output:serverside/cascadenik/cascadenik/compile.py
 
 HAS_PIL = False
 try:
@@ -652,8 +648,9 @@ def get_polygon_rules(declarations,**kwargs):
         and refer to it in Layer.
     """
     property_map = {'polygon-fill': 'fill', 'polygon-opacity': 'fill-opacity',
-                    'polygon-gamma': 'gamma'}
-    
+                    'polygon-gamma': 'gamma',
+                    'polygon-meta-output': 'meta-output', 'polygon-meta-writer': 'meta-writer'}
+
     property_names = property_map.keys()
     
     # a place to put rules
@@ -662,11 +659,81 @@ def get_polygon_rules(declarations,**kwargs):
     for (filter, values) in filtered_property_declarations(declarations, property_names):
         color = values.has_key('polygon-fill') and values['polygon-fill'].value
         opacity = values.has_key('polygon-opacity') and values['polygon-opacity'].value or None
-        symbolizer = color and output.PolygonSymbolizer(color, opacity)
+        gamma = values.has_key('polygon-gamma') and values['polygon-gamma'].value or None
+        symbolizer = color and output.PolygonSymbolizer(color, opacity, gamma)
         
         if symbolizer:
             rules.append(make_rule(filter, symbolizer))
     
+    return rules
+
+def get_raster_rules(declarations,**kwargs):
+    """ Given a Map element, a Layer element, and a list of declarations,
+        create a new Style element with a RasterSymbolizer, add it to Map
+        and refer to it in Layer.
+    """
+    property_map = {'raster-opacity': 'opacity',
+                    'raster-mode': 'mode',
+                    'raster-scaling': 'scaling'
+                    }
+
+    property_names = property_map.keys()
+
+    # a place to put rules
+    rules = []
+
+    for (filter, values) in filtered_property_declarations(declarations, property_names):
+        sym_params = {}
+        for prop,attr in property_map.items():
+            sym_params[attr] = values.has_key(prop) and values[prop].value or None
+        
+        symbolizer = output.RasterSymbolizer(**sym_params)
+
+        rules.append(make_rule(filter, symbolizer))
+
+    return rules
+
+def get_marker_rules(declarations,**kwargs):
+    """ Given a Map element, a Layer element, and a list of declarations,
+        create a new Style element with a MarkersSymbolizer, add it to Map
+        and refer to it in Layer.
+    """
+    # basically not supported before Mapnik2
+    if not kwargs.get('mapnik_version') >= 800:
+        return
+    
+    property_map = {'marker-line-color': 'stroke', 
+                    'marker-line-width': 'stroke-width',
+                    'marker-line-opacity': 'stroke-opacity',
+                    'marker-fill': 'fill', 
+                    'marker-fill-opacity': 'opacity',
+                    'marker-placement': 'placement',
+                    'marker-type':'marker_type',
+                    'marker-width':'width',
+                    'marker-height':'height',
+                    'marker-file':'file',
+                    'marker-allow-overlap':'allow_overlap',
+                    'marker-spacing':'spacing',
+                    'marker-max-error':'max_error',
+                    'marker-transform':'transform',
+                    #'marker-meta-output': 'meta-output', 
+                    #'marker-meta-writer': 'meta-writer'
+                    }
+    
+    property_names = property_map.keys()
+    
+    # a place to put rules
+    rules = []
+
+    for (filter, values) in filtered_property_declarations(declarations, property_names):
+        sym_params = {}
+        for prop,attr in property_map.items():
+            sym_params[attr] = values.has_key(prop) and values[prop].value or None
+        
+        symbolizer = output.MarkersSymbolizer(**sym_params)
+
+        rules.append(make_rule(filter, symbolizer))
+
     return rules
 
 def get_line_rules(declarations, **kwargs):
@@ -677,7 +744,9 @@ def get_line_rules(declarations, **kwargs):
     """
     property_map = {'line-color': 'stroke', 'line-width': 'stroke-width',
                     'line-opacity': 'stroke-opacity', 'line-join': 'stroke-linejoin',
-                    'line-cap': 'stroke-linecap', 'line-dasharray': 'stroke-dasharray'}
+                    'line-cap': 'stroke-linecap', 'line-dasharray': 'stroke-dasharray',
+                    'line-meta-output': 'meta-output', 'line-meta-writer': 'meta-writer'}
+
 
     property_names = property_map.keys()
     
@@ -739,7 +808,8 @@ def get_text_rule_groups(declarations, **kwargs):
                     'text-dx': 'dx', 'text-dy': 'dy', 'text-character-spacing': 'character_spacing',
                     'text-line-spacing': 'line_spacing',
                     'text-avoid-edges': 'avoid_edges', 'text-min-distance': 'min_distance',
-                    'text-allow-overlap': 'allow_overlap', 'text-placement': 'placement'}
+                    'text-allow-overlap': 'allow_overlap', 'text-placement': 'placement',
+                    'text-meta-output': 'meta-output', 'text-meta-writer': 'meta-writer'}
 
     property_names = property_map.keys()
     
@@ -889,7 +959,8 @@ def get_shield_rule_groups(declarations, **kwargs):
                     'shield-fill': 'fill', 'shield-character-spacing': 'character_spacing',
                     'shield-line-spacing': 'line_spacing',
                     'shield-spacing': 'spacing', 'shield-min-distance': 'min_distance',
-                    'shield-file': 'file', 'shield-width': 'width', 'shield-height': 'height' }
+                    'shield-file': 'file', 'shield-width': 'width', 'shield-height': 'height',
+                    'shield-meta-output': 'meta-output', 'shield-meta-writer': 'meta-writer'}
 
     property_names = property_map.keys()
     
@@ -955,7 +1026,8 @@ def get_point_rules(declarations, **kwargs):
     """
     property_map = {'point-file': 'file', 'point-width': 'width',
                     'point-height': 'height', 'point-type': 'type',
-                    'point-allow-overlap': 'allow_overlap'}
+                    'point-allow-overlap': 'allow_overlap',
+                    'point-meta-output': 'meta-output', 'point-meta-writer': 'meta-writer'}
     
     property_names = property_map.keys()
     
@@ -985,7 +1057,9 @@ def get_polygon_pattern_rules(declarations, **kwargs):
         Optionally provide an output directory for local copies of image files.
     """
     property_map = {'polygon-pattern-file': 'file', 'polygon-pattern-width': 'width',
-                    'polygon-pattern-height': 'height', 'polygon-pattern-type': 'type'}
+                    'polygon-pattern-height': 'height', 'polygon-pattern-type': 'type',
+                    'polygon-meta-output': 'meta-output', 'polygon-meta-writer': 'meta-writer'}
+
     
     property_names = property_map.keys()
     
@@ -1014,7 +1088,9 @@ def get_line_pattern_rules(declarations, **kwargs):
         Optionally provide an output directory for local copies of image files.
     """
     property_map = {'line-pattern-file': 'file', 'line-pattern-width': 'width',
-                    'line-pattern-height': 'height', 'line-pattern-type': 'type'}
+                    'line-pattern-height': 'height', 'line-pattern-type': 'type',
+                    'line-pattern-meta-output': 'meta-output', 'line-pattern-meta-writer': 'meta-writer'}
+
     
     property_names = property_map.keys()
     
@@ -1320,7 +1396,6 @@ def compile(src,**kwargs):
         if layer_el.get('status', None) in ('off', '0', 0):
             continue
         
-<<<<<<< HEAD:cascadenik/compile.py
         for parameter_el in layer_el.find('Datasource').findall('Parameter'):
             if parameter_el.get('name', None) == 'file':
                 # fetch a remote zipped shapefile or read a local one
@@ -1331,31 +1406,6 @@ def compile(src,**kwargs):
                 # http://trac.mapnik.org/ticket/173
                 if not kwargs.get('mapnik_version') >= 601:
                     parameter_el.text = parameter_el.text.replace('\r', ' ').replace('\n', ' ')
-=======
-        for parameter in ds_params:
-            # TODO - support other kinds of file-based datasources other than shapefiles
-            if ds_type == 'shape' and parameter.get('name', None) == 'file':
-                # fetch a remote, zipped shapefile or read a local one
-                if parameter.text:
-                    msg('Handling shapefile datasource...')
-                    parameter.text = localize_shapefile(src, parameter.text, **kwargs)
-                    # TODO - support datasource reprojection to make map srs
-                    # TODO - support automatically indexing shapefiles
-            elif ds_type == 'postgis' and parameter.get('name', None) == 'table':
-                # remove line breaks from possible SQL
-                # http://trac.mapnik.org/ticket/173
-                if not kwargs.get('mapnik_version',None) >= 601:
-                    parameter.text = parameter.text.replace('\r', ' ').replace('\n', ' ')
-            elif parameter.get('name', None) == 'file':
-                pass #msg('other file based datasource needing handling!')
-
-        if layer.get('status') == 'off':
-            # don't bother
-            continue
-    
-        # the default...
-        #layer.set('status', 'off')
->>>>>>> 4df3fb4... add support for local, zipped shapefiles, improve debug output:serverside/cascadenik/cascadenik/compile.py
 
         layer_declarations = get_applicable_declarations(layer_el, declarations)
         
@@ -1367,6 +1417,12 @@ def compile(src,**kwargs):
 
         styles.append(output.Style('polygon pattern style %d' % ids.next(),
                                    get_polygon_pattern_rules(layer_declarations, **kwargs)))
+
+        styles.append(output.Style('marker style %d' % ids.next(),
+                           get_marker_rules(layer_declarations,**kwargs)))
+
+        styles.append(output.Style('raster style %d' % ids.next(),
+                           get_raster_rules(layer_declarations,**kwargs)))
 
         styles.append(output.Style('line style %d' % ids.next(),
                                    get_line_rules(layer_declarations, **kwargs)))
