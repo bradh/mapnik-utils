@@ -191,7 +191,7 @@ class MarkersSymbolizer:
     def to_mapnik(self):
         sym = mapnik.MarkersSymbolizer()
         sym.filename = self.filename or sym.filename
-        sym.allow_overlap = self.allow_overlap
+        sym.allow_overlap = self.allow_overlap.value if self.allow_overlap else sym.allow_overlap
         sym.spacing = self.spacing
         sym.max_error = self.max_error
         sym.opacity = self.opacity
