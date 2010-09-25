@@ -1,14 +1,1 @@
-#labels Featured
-Cascadenik implements cascading stylesheets for Mapnik.
-
-It's an abstraction layer and preprocessor that converts special, CSS-like syntax into Mapnik-compatible style definitions. It's easier to write complex style rules using the alternative syntax, because it allows for separation of symbolizers and provides a mechanism for inheritance.
-
-Links:
-  * [http://mapnik-utils.googlecode.com/svn/trunk/serverside/cascadenik/doc/index.html Examples] demonstrating simple use.
-  * [http://code.google.com/p/mapnik-utils/wiki/CascadenikProperties Dictionary of properties and values].
-  * [http://mapnik-utils.googlecode.com/svn/trunk/serverside/cascadenik/ Source code].
-  * [http://code.google.com/p/mapnik-utils/source/checkout Download from subversion repository].
-  * Early development notes and examples:
-   * http://mike.teczno.com/notes/cascadenik.html
-   * http://teczno.com/cascadenik-openstreetmap/
-   * http://teczno.com/cascadenik-openstreetmap-II/
+Cascadenik now has a new [home at http://github.com/mapnik/Cascadenik/wiki/Cascadenik Github].
