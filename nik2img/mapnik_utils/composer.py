@@ -222,14 +222,18 @@ class Compose(object):
                 self.msg('Overriding default image viewer not supported on Win32')
             call('start %s' % self.image.replace('/','\\'))
         elif platform.uname()[0] == 'Linux':
-            if app:
-                call('%s %s' % (app, self.image))
             else:
-                resp = call('xdg-open %s' % self.image)
-                if not resp:
-                    resp = call('gthumb %s' % self.image)
-                    if not resp:
+                # make blind and dumb attempt to open images, but don't block while open
+                try:
+                    cmd = 'xdg-open %s' % self.image
+                    Popen(cmd.split(' '))
+                except:
+                    try:
+                        cmd = 'gthumb %s' % self.image
+                        Popen(cmd.split(' '))
+                    except:
                         call('display %s' % self.image)
+                        Popen(cmd.split(' '))
         elif platform.uname()[0] == 'Darwin':
             if app:
                 call('open %s -a %s' % (self.image, app))
