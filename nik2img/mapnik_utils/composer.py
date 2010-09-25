@@ -232,7 +232,7 @@ class Compose(object):
                         cmd = 'gthumb %s' % self.image
                         Popen(cmd.split(' '))
                     except:
-                        call('display %s' % self.image)
+                        cmd = 'display %s' % self.image
                         Popen(cmd.split(' '))
         elif platform.uname()[0] == 'Darwin':
             if app:
