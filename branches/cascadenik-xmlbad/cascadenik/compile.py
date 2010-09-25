@@ -813,7 +813,7 @@ def get_text_rule_groups(declarations, **kwargs):
     """
     property_map = {'text-face-name': 'face_name', 'text-size': 'size', 
                     'text-ratio': 'text_ratio', 'text-wrap-width': 'wrap_width', 'text-spacing': 'spacing',
-                    'text-label-position-tolerance': 'label_position_tolerance',
+                    'text-label-position-tolerance': 'label_position_tolerance','text-transform':'text_transform'
                     'text-max-char-angle-delta': 'max_char_angle_delta', 'text-fill': 'fill',
                     'text-halo-fill': 'halo_fill', 'text-halo-radius': 'halo_radius',
                     'text-dx': 'dx', 'text-dy': 'dy', 'text-character-spacing': 'character_spacing',
@@ -866,12 +866,14 @@ def get_text_rule_groups(declarations, **kwargs):
             min_distance = values.has_key('text-min-distance') and values['text-min-distance'].value or None
             allow_overlap = values.has_key('text-allow-overlap') and values['text-allow-overlap'].value or None
             placement = values.has_key('text-placement') and values['text-placement'].value or None
+            text_transform = values.has_key('text-transform') and values['text-transform'].value or None
             
             symbolizer = face_name and size and color \
                 and output.TextSymbolizer(text_name, face_name, size, color, \
                                           wrap_width, spacing, label_position_tolerance, \
                                           max_char_angle_delta, halo_color, halo_radius, dx, dy, \
-                                          avoid_edges, min_distance, allow_overlap, placement)
+                                          avoid_edges, min_distance, allow_overlap, placement, \
+                                          transform)
             
             if symbolizer:
                 rules.append(make_rule(filter, symbolizer))
