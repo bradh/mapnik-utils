@@ -1,1 +1,1 @@
-Cascadenik now has a new [home at http://github.com/mapnik/Cascadenik/wiki/Cascadenik Github].
+Cascadenik now has a new [http://github.com/mapnik/Cascadenik/wiki/Cascadenik home at Github].
