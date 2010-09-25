@@ -233,7 +233,7 @@ class TextSymbolizer:
         spacing=None, label_position_tolerance=None, max_char_angle_delta=None, \
         halo_color=None, halo_radius=None, dx=None, dy=None, avoid_edges=None, \
         min_distance=None, allow_overlap=None, placement=None, \
-        character_spacing=None, line_spacing=None):
+        character_spacing=None, line_spacing=None, text_transform=None):
 
         assert type(name) is str
         assert type(face_name) is str
@@ -253,6 +253,7 @@ class TextSymbolizer:
         assert min_distance is None or type(min_distance) is int
         assert allow_overlap is None or allow_overlap.__class__ is style.boolean
         assert placement is None or type(placement) is str
+        assert text_transform is None or type(text_transform) is str
 
         self.name = name
         self.face_name = face_name
@@ -273,6 +274,7 @@ class TextSymbolizer:
         self.min_distance = min_distance
         self.allow_overlap = allow_overlap
         self.placement = placement
+        self.text_transform = text_transform
 
     def __repr__(self):
         return 'Text(%s, %s)' % (self.face_name, self.size)
@@ -292,6 +294,7 @@ class TextSymbolizer:
         sym.avoid_edges = self.avoid_edges.value if self.avoid_edges else sym.avoid_edges
         sym.minimum_distance = self.min_distance or sym.minimum_distance
         sym.allow_overlap = self.allow_overlap.value if self.allow_overlap else sym.allow_overlap
+        sym.text_transform = self.text_transform if self.text_transform else sym.text_transform
         
         sym.displacement(self.dx or 0, self.dy or 0)
         
