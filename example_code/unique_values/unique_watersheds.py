@@ -25,21 +25,11 @@ def generate_unique_values(features):
         rgb = '%s%s,%s%s,%s%s' % (random_rgb(),'%',random_rgb(),'%',random_rgb(),'%')
         r.symbols.append(PolygonSymbolizer(Color('rgb(%s)' % rgb)))
         r.symbols.append(LineSymbolizer(Color('black'),.1))
-        # should eventually break this out so that the text is always on top
-        t = TextSymbolizer('ECOREGION', 'DejaVu Sans Bold', 10, Color('rgb(%s)' % rgb))
-        t.halo_fill = Color('white')
-        t.halo_radius = 1
-        r.symbols.append(t)
         s.rules.append(r)
   else:
       r=Rule()
       r.symbols.append(PolygonSymbolizer(Color('steelblue')))
       r.symbols.append(LineSymbolizer(Color('black'),.1))
-      # should eventually break this out so that the text is always on top
-      t = TextSymbolizer('ECOREGION', 'DejaVu Sans Bold', 10, Color('black'))
-      t.halo_fill = Color('white')
-      t.halo_radius = 1
-      r.symbols.append(t)
       s.rules.append(r)  
   return s
 
@@ -52,10 +42,21 @@ features = 37 # Mapnik will need to expose datasource properties to be able to r
 unique_style = generate_unique_values(features)
 
 m.append_style('Random RGB values',unique_style)
+
+# place in separate style, so that the text is always on top
+s,r = Style(),Rule()
+t = TextSymbolizer('ECOREGION', 'DejaVu Sans Bold', 10, Color('black'))
+t.halo_fill = Color('white')
+t.halo_radius = 1
+r.symbols.append(t)
+s.rules.append(r)  
+m.append_style('Labels',s)
+
 lyr = Layer('shape')
-lyr.datasource = Shapefile(file='../../sample_data/north_pacific_ecoregions')
+lyr.datasource = Shapefile(file='../../data/north_pacific_ecoregions')
 lyr.srs = north_pacific_albers
 lyr.styles.append('Random RGB values')
+lyr.styles.append('Labels')
 m.layers.append(lyr)
 m.zoom_to_box(lyr.envelope())
 
