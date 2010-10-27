@@ -105,7 +105,7 @@ class Compose(object):
     def build(self):
         self.msg('Loading mapfile...')
         
-        builder = Load(self.mapfile,variables={},from_string=self.from_string)
+        builder = Load(self.mapfile,variables={},from_string=self.from_string,verbose=self.verbose)
         if not self.from_string:
             self.msg('Loaded %s...' % self.mapfile)
         else:
@@ -223,20 +223,23 @@ class Compose(object):
                 self.msg('Overriding default image viewer not supported on Win32')
             call('start %s' % self.image.replace('/','\\'))
         elif platform.uname()[0] == 'Linux':
-            # make blind and dumb attempt to open images, but don't block while open
-            try:
-                cmd = 'xdg-open %s' % self.image
-                Popen(cmd.split(' '))
-            except OSError:
+            if app:
+                call('%s %s' % (app,self.image))
+            else:
+                # make blind and dumb attempt to open images, but don't block while open
                 try:
-                    cmd = 'gthumb %s' % self.image
+                    cmd = 'xdg-open %s' % self.image
                     Popen(cmd.split(' '))
                 except OSError:
                     try:
-                        cmd = 'display %s' % self.image
+                        cmd = 'gthumb %s' % self.image
                         Popen(cmd.split(' '))
                     except OSError:
-                        pass
+                        try:
+                            cmd = 'display %s' % self.image
+                            Popen(cmd.split(' '))
+                        except OSError:
+                            pass
         elif platform.uname()[0] == 'Darwin':
             if app:
                 call('open %s -a %s' % (self.image, app))
