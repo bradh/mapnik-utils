@@ -8,11 +8,15 @@ mapnik = Mapnik()
 
 
 class Load(object):
-    def __init__(self,mapfile,variables={},from_string=False):
+    def __init__(self,mapfile,variables={},output_dir=None,from_string=False,verbose=False):
         self.mapfile = mapfile
-        self.from_string = from_string
         self.variables = variables
-        
+        self.from_string = from_string
+        self.verbose = verbose
+        if output_dir:
+            self.output_dir = output_dir
+        else:
+            self.output_dir = os.path.dirname(self.mapfile)
         self.start_time = 0
         self.load_map_time = 0
         
@@ -66,13 +70,20 @@ class Load(object):
         else:
             return mapnik.load_map(m,self.mapfile)
 
-    def load_mml(self,m):    
-        from cascadenik import compile
-        compiled = '%s_compiled.xml' % os.path.splitext(self.mapfile)[0]
-        open(compiled, 'w').write(compile(self.mapfile))
-        mapnik.load_map(m, compiled)
-        #from cascadenik import load_map as load
-        #load(m,self.mapfile)
+    def load_mml(self,m):
+        import cascadenik
+        if hasattr(cascadenik,'VERSION'):
+            major = int(cascadenik.VERSION.split('.')[0])
+            if major == 1:
+                cascadenik.load_map(m,self.mapfile,self.output_dir,verbose=self.verbose)
+                #load_map(map, src_file, output_dir, cache_dir=None, datasources_cfg=None, verbose=False):
+            else:
+                raise NotImplementedError('This nik2img version does not yet support Cascadenik 2.x, please upgrade nik2img to the latest release')
+        else:
+            from cascadenik import compile
+            compiled = '%s_compiled.xml' % os.path.splitext(self.mapfile)[0]
+            open(compiled, 'w').write(compile(self.mapfile))
+            mapnik.load_map(m, compiled)
 
     def load_py(self,m,map_variable='m'):
         """
