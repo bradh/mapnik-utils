@@ -317,10 +317,10 @@ class ComposeDebug(Compose):
         if not self.map:
             self.debug_msg('Calling build from render...')
         self.debug_msg('Starting rendering...')            
-        try:
-            renderer = super(ComposeDebug,self).render()
-        except Exception, E:
-            self.output_error(E)
+        #try:
+        renderer = super(ComposeDebug,self).render()
+        #except Exception, E:
+        #    self.output_error(E)
         self.last_step('Rendering image took... ', renderer.render_time)
         self.debug_msg('Finished rendering map to... %s' % self.image)
         self.total_time()
