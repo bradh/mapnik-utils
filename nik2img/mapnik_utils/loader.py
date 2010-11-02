@@ -16,7 +16,10 @@ class Load(object):
         if output_dir:
             self.output_dir = output_dir
         else:
-            self.output_dir = os.path.dirname(self.mapfile)
+            if self.mapfile.startswith('http'):
+                self.output_dir = os.getcwd() #os.path.expanduser('~/.cascadenik')
+            else:
+                self.output_dir = os.path.dirname(self.mapfile)
         self.start_time = 0
         self.load_map_time = 0
         
@@ -34,7 +37,7 @@ class Load(object):
         self.load_map_time = timeit.time.time() - self.start_time
         
     def validate(self):
-        if not os.path.exists(self.mapfile):
+        if not os.path.exists(self.mapfile) and not self.mapfile.startswith('http'):
             raise AttributeError('Map "%s" not found!' % os.path.abspath(self.mapfile))
         if not self.file_type in self.mapfile_types:
             raise AttributeError('Invalid mapfile type: only these extension allowed: %s' % ', '.join(self.mapfile_types.keys()))
