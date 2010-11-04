@@ -210,7 +210,10 @@ class _Coord(mapnik.Coord,_injector):
         trans = mapnik.ProjTransform(from_prj,to_prj)
         return trans.forward(self)
 
-class _Envelope(mapnik.Envelope,_injector):
+if not hasattr(mapnik,'Box2d'):
+    mapnik.Box2d = mapnik.Envelope
+
+class _Box2d(mapnik.Box2d,_injector):
     def transform(self,from_prj,to_prj):
         trans = mapnik.ProjTransform(from_prj,to_prj)
         return trans.forward(self)
