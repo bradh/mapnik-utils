@@ -76,12 +76,16 @@ class Load(object):
     def load_mml(self,m):
         import cascadenik
         if hasattr(cascadenik,'VERSION'):
-            #major = int(cascadenik.VERSION.split('.')[0])
-            #if major == 1:
-            cascadenik.load_map(m,self.mapfile,self.output_dir,verbose=self.verbose)
-            #load_map(map, src_file, output_dir, cache_dir=None, datasources_cfg=None, verbose=False):
-            #else:
-            #    raise NotImplementedError('This nik2img version does not yet support Cascadenik 2.x, please upgrade nik2img to the latest release')
+            major = int(cascadenik.VERSION.split('.')[0])
+            if major < 1:
+                from cascadenik import compile
+                compiled = '%s_compiled.xml' % os.path.splitext(self.mapfile)[0]
+                open(compiled, 'w').write(compile(self.mapfile))
+                mapnik.load_map(m, compiled)
+            elif major == 1:
+                cascadenik.load_map(m,self.mapfile,self.output_dir,verbose=self.verbose)
+            elif major > 2:
+                raise NotImplementedError('This nik2img version does not yet support Cascadenik 2.x, please upgrade nik2img to the latest release')
         else:
             from cascadenik import compile
             compiled = '%s_compiled.xml' % os.path.splitext(self.mapfile)[0]
