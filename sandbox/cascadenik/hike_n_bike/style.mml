@@ -236,7 +236,7 @@ zoom level  - scale denominator
                  landuse, "natural", waterway
                  from planet_polygon
                  where landuse in ('reservoir', 'water', 'basin')
-                    or "natural" in ('lake', 'water', 'land')
+                    or "natural" in ('lake', 'water')
                     or waterway in ('canal', 'riverbank', 'river')
                 ) as foo]]></Parameter>
         </Datasource>
@@ -254,7 +254,7 @@ zoom level  - scale denominator
                  landuse, "natural", waterway
                  from planet_polygon
                  where landuse in ('reservoir', 'water', 'basin')
-                    or "natural" in ('lake', 'water', 'land')
+                    or "natural" in ('lake', 'water')
                     or waterway in ('canal', 'riverbank', 'river')
                 ) as foo]]></Parameter>
         </Datasource>
@@ -272,6 +272,38 @@ zoom level  - scale denominator
                  route 
                  from planet_line
                  where route in ('ferry')
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+    <Layer class="island edge" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 "natural"
+                 from planet_polygon
+                 where "natural" in ('land')
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+    <Layer class="island area" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 "natural"
+                 from planet_polygon
+                 where "natural" in ('land')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -842,10 +874,10 @@ zoom level  - scale denominator
                    cast (tags->'importance' as float) else 
                    (case when tags->'importance' in ('international') then  5.0
                          when tags->'importance' in ('national')      then  3.0
-                         when tags->'importance' in ('regional')      then  1.0
-                         when tags->'importance' in ('urban')         then  0.0
-                         when tags->'importance' in ('suburban')      then -1.0
-                         when tags->'importance' in ('local')         then -2.0
+                         when tags->'importance' in ('regional')      then  0.0
+                         when tags->'importance' in ('urban')         then -1.0
+                         when tags->'importance' in ('suburban')      then -2.0
+                         when tags->'importance' in ('local')         then -3.0
                          else                                               0.0 
                          end)
                    end)
@@ -1237,7 +1269,7 @@ zoom level  - scale denominator
                        regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
                  from planet_polygon
                  where landuse in ('reservoir', 'water', 'basin')
-                 or "natural" in ('lake', 'water', 'land')
+                 or "natural" in ('lake', 'water')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
