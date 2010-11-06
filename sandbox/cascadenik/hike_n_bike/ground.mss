@@ -29,7 +29,7 @@
 
 .water.line name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-placement: line;
 /*     text-size: 9; */
     text-fill: #7396bb;
@@ -77,6 +77,19 @@
 .water.area
 {
     polygon-fill: #cae5fb;
+}
+
+.island.edge[zoom>12]
+{
+    line-color: #a1cbea;
+    line-join: round;
+    line-cap: round;
+}
+.island.edge[zoom>14] { line-width: 6; }
+.island.edge[zoom<=14] { line-width: 4; }
+.island.area
+{
+    polygon-fill: #eeeeee;
 }
 
 .water.ferry[zoom>=11]
@@ -377,7 +390,7 @@
     line-color: #659a4e;
     line-join: round;
     line-width: 1;
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-size: 9;
     text-fill: #659a4e;
     text-halo-radius: 1;
@@ -415,7 +428,7 @@
 }
 .boundary.national_park[zoom>=8][zoom<=9] name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-size: 8;
     text-dy: -8;
     text-fill: #9c9;
@@ -425,7 +438,7 @@
 }
 .boundary.national_park[zoom>=10][zoom<=11] name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-size: 11;
     text-fill: #9c9;
     text-halo-radius: 1;
@@ -437,7 +450,7 @@
 .parklike.label name,
 .citylike.label[amenity!=parking] name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -449,7 +462,7 @@
 .parklike.label[zoom=16][size=small] name,
 .citylike.label[zoom=16][size=small][amenity!=parking] name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -461,7 +474,7 @@
 .parklike.label[zoom>=17] name,
 .citylike.label[zoom>=17][amenity!=parking] name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -473,7 +486,7 @@
 
 .building.label name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -482,7 +495,7 @@
 .building.label[zoom>=15][zoom<=16][size=medium] name,
 .building.label[zoom=16][size=small] name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -497,7 +510,7 @@
     point-file: url('sjjb-mapicons/png/tourist_museum.glow.16.png');
     text-dy: 18;
     text-fill: #734a08;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -511,7 +524,7 @@
     point-file: url('sjjb-mapicons/png/tourist_museum.glow.14.png');
     text-dy: 16;
     text-fill: #734a08;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -613,7 +626,7 @@
 .building.label[zoom>=16][size=large] name,
 .building.label[zoom>=17] name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-halo-radius: 1;
@@ -623,7 +636,7 @@
 
 .water.label name
 {
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-fill: #7396bb;
     text-halo-fill: #e7f6fd;
     text-halo-radius: 1;
@@ -632,7 +645,7 @@
 
 .river.label name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-placement: line;
     text-fill: #7396bb;
     text-halo-fill: #e7f6fd;
@@ -663,7 +676,7 @@
 
 .ferry.label[zoom>=13] name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 9;
     text-placement: line;
     text-dy: 5;
