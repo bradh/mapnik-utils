@@ -219,7 +219,7 @@ zoom level  - scale denominator
                  (case when (tags->'intermittent' in ('no','false','0') or not tags ? 'intermittent') then 'no'::text else 'yes'::text end) as intermittent,
                  waterway, name 
                  from planet_line
-                 where waterway in ('river', 'stream', 'canal', 'drain')
+                 where waterway in ('river', 'stream', 'canal', 'drain', 'ditch')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
