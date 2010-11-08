@@ -215,7 +215,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  (case when (tags->'intermittent' in ('no','false','0') or not tags ? 'intermittent') then 'no'::text else 'yes'::text end) as intermittent,
                  waterway, name 
                  from planet_line
@@ -318,10 +318,28 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 highway, tunnel, bridge, oneway,
-                 tags->'lanes' as lanes
+                 tunnel, bridge, oneway,
+                 tags->'lanes' as lanes,
+                 (case 
+                       when highway='construction' and tags @> 'construction=>pedestrian'        then 'pedestrian'::text
+                       when highway='construction' and tags @> 'construction=>living_street'     then 'living_street'::text
+                       when highway='construction' and tags @> 'construction=>residential'       then 'residential'::text
+                       when highway='construction' and tags @> 'construction=>unclassified'      then 'unclassified'::text
+                       when highway='construction' and tags @> 'construction=>service'           then 'service'::text
+                       when highway='construction' and tags @> 'construction=>minor'             then 'minor'::text
+                       when highway='construction' and tags @> 'construction=>road'              then 'road'::text
+                       when highway='construction' and tags @> 'construction=>tertiary'          then 'tertiary'::text
+                       when highway='construction' and tags @> 'construction=>secondary'         then 'secondary'::text
+                       when highway='construction' and tags @> 'construction=>secondary_link'    then 'secondary_link'::text
+                       when highway='construction' and tags @> 'construction=>primary'           then 'primary'::text
+                       when highway='construction' and tags @> 'construction=>primary_link'      then 'primary_link'::text
+                       when highway='construction' and tags @> 'construction=>trunk'             then 'trunk'::text
+                       when highway='construction' and tags @> 'construction=>trunk_link'        then 'trunk_link'::text
+                       when highway='construction' and tags @> 'construction=>motorway'          then 'motorway'::text
+                       when highway='construction' and tags @> 'construction=>motorway_link'     then 'motorway_link '::text
+                       else highway end) as highway
                  from planet_polygon
-                 where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link')
+                 where highway in ('pedestrian', 'living_street', 'residential', 'unclassified', 'service', 'minor', 'road', 'tertiary', 'secondary', 'secondary_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'motorway', 'motorway_link', 'construction')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -339,6 +357,7 @@ zoom level  - scale denominator
                 (select way,
                  highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
+                 tags->'construction' as construction,
                  (case when highway in ('motorway', 'motorway_link') then 0
                        when highway in ('trunk', 'trunk_link', 'primary', 'primary_link') then 1
                        when highway in ('secondary', 'secondary_link') then 2
@@ -362,15 +381,23 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, highway, 
+                (select way,
                  tags->'bicycle' as bicycle, 
                  tags->'horse' as horse, 
                  tags->'foot' as foot, 
                  tags->'tracktype' as tracktype, 
                  tags->'path' as path,
-                 name, ref
+                 name, ref,
+                 (case 
+                       when highway='construction' and tags @> 'construction=>track'             then 'track'::text
+                       when highway='construction' and tags @> 'construction=>footway'           then 'footway '::text
+                       when highway='construction' and tags @> 'construction=>steps'             then 'steps'::text
+                       when highway='construction' and tags @> 'construction=>bridleway'         then 'bridleway'::text
+                       when highway='construction' and tags @> 'construction=>path'              then 'path'::text
+                       when highway='construction' and tags @> 'construction=>cycleway'          then 'cycleway'::text
+                       else highway end) as highway
                  from planet_line
-                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway', 'construction') 
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -386,6 +413,7 @@ zoom level  - scale denominator
                 (select way,
                  highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
+                 tags->'construction' as construction,
                     (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                           WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                           WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -409,15 +437,23 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, highway, 
+                (select way,
                  tags->'bicycle' as bicycle, 
                  tags->'horse' as horse, 
                  tags->'foot' as foot, 
                  tags->'tracktype' as tracktype, 
                  tags->'path' as path,
-                 name, ref
+                 name, ref,
+                 (case 
+                       when highway='construction' and tags @> 'construction=>track'             then 'track'::text
+                       when highway='construction' and tags @> 'construction=>footway'           then 'footway '::text
+                       when highway='construction' and tags @> 'construction=>steps'             then 'steps'::text
+                       when highway='construction' and tags @> 'construction=>bridleway'         then 'bridleway'::text
+                       when highway='construction' and tags @> 'construction=>path'              then 'path'::text
+                       when highway='construction' and tags @> 'construction=>cycleway'          then 'cycleway'::text
+                       else highway end) as highway
                  from planet_line
-                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway', 'construction') 
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -433,6 +469,7 @@ zoom level  - scale denominator
                 (select way,
                  highway, tunnel, bridge, oneway,
                  tags->'lanes' as lanes,
+                 tags->'construction' as construction,
                         (CASE WHEN highway IN ('motorway', 'motorway_link') THEN 0
                               WHEN highway IN ('trunk', 'trunk_link', 'primary', 'primary_link') THEN 1
                               WHEN highway IN ('secondary', 'secondary_link') THEN 2
@@ -457,9 +494,10 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  highway,
-                 tags->'lanes' as lanes
+                 tags->'lanes' as lanes,
+                 tags->'construction' as construction
                  from planet_line
-	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary')
+                 where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary')
                  )
                  as foo]]></Parameter>
         </Datasource>
@@ -478,7 +516,7 @@ zoom level  - scale denominator
                 (select way,
                  highway 
                  from planet_line
-	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
+                 where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -494,8 +532,8 @@ zoom level  - scale denominator
                 (select way,
                  highway 
                  from planet_line
-	         where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
-	        ) as foo]]></Parameter>
+                 where highway in ('motorway', 'motorway_link', 'trunk', 'trunk_link')
+                ) as foo]]></Parameter>
         </Datasource>
     </Layer>
 
@@ -511,7 +549,7 @@ zoom level  - scale denominator
                 (select way,
                  railway, tunnel, bridge, disused, tags->'abandoned' as abandoned 
                  from planet_line
-	         where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
+                 where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -528,7 +566,7 @@ zoom level  - scale denominator
                 (select way,
                  railway, tunnel, bridge, disused, tags->'abandoned' as abandoned 
                  from planet_line
-	         where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
+                 where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -545,7 +583,7 @@ zoom level  - scale denominator
                 (select way,
                  railway, tunnel, bridge, disused, tags->'abandoned' as abandoned 
                  from planet_line
-	         where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
+                 where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -562,7 +600,7 @@ zoom level  - scale denominator
                 (select way,
                  railway, tunnel, bridge, disused, tags->'abandoned' as abandoned 
                  from planet_line
-	         where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
+                 where railway in ('rail', 'spur', 'subway', 'light_rail', 'tram', 'abandoned', 'disused', 'monorail', 'narrow_gauge')
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -577,10 +615,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way, 
+                (select way, 
                  power
                  from planet_line
-	         where power in ('line')
+                 where power in ('line')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -594,10 +632,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way, 
+                (select way, 
                  barrier
                  from planet_line
-	         where barrier is not null
+                 where barrier is not null
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -621,6 +659,25 @@ zoom level  - scale denominator
         </Datasource>
     </Layer>
 
+    <Layer class="path construction" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way, highway,
+                 tags->'path' as path,
+                 tags->'construction' as construction,
+                 name, ref
+                 from planet_line
+                 where construction is not null
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+
     <Layer class="boundary line" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -630,10 +687,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  boundary, admin_level 
                  from planet_line
-	         where boundary='administrative'
+                 where boundary='administrative'
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -646,10 +703,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  boundary, admin_level 
                  from planet_polygon
-	         where boundary='administrative'
+                 where boundary='administrative'
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -662,10 +719,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  boundary, ref 
                  from planet_line
-	         where boundary='forest'
+                 where boundary='forest'
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -678,10 +735,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  boundary, name
                  from planet_polygon
-	         where boundary='national_park'
+                 where boundary='national_park'
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -695,7 +752,7 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  building
                  from planet_polygon
                  where building is not null
@@ -714,10 +771,10 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-	        (select way,
+                (select way,
                  place, name,
-	         coalesce(z_order, 0) as correct_z_order,
-	         (case when place = 'city' then 0
+                 coalesce(z_order, 0) as correct_z_order,
+                 (case when place = 'city' then 0
                        when place = 'town' then 1
                        when place = 'village' then 2
                        else 3 end) as priority from planet_point
@@ -1124,6 +1181,7 @@ zoom level  - scale denominator
                 (select way,
                  highway, name, ref, oneway,
                  tags->'lanes' as lanes,
+                 tags->'construction' as construction,
                  length(way) as length, char_length(ref) as ref_length,
                  (case when char_length(ref) between 2 and 9 then ref
                        else null end) as ref_content,
@@ -1193,6 +1251,7 @@ zoom level  - scale denominator
                 (select way,
                  highway, name, ref, oneway,
                  tags->'lanes' as lanes,
+                 tags->'construction' as construction,
                  length(way) as length, 
                  (case when highway in ('motorway', 'motorway_link') then 0 
                        when highway in ('trunk', 'trunk_link', 'primary', 'primary_link') then 1 
@@ -1214,15 +1273,23 @@ zoom level  - scale denominator
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
-                (select way, highway, 
+                (select way,
                  tags->'bicycle' as bicycle, 
                  tags->'horse' as horse, 
                  tags->'foot' as foot, 
                  tags->'tracktype' as tracktype, 
                  tags->'path' as path,
-                 name, ref
+                 name, ref,
+                 (case 
+                       when highway='construction' and tags @> 'construction=>track'             then 'track'::text
+                       when highway='construction' and tags @> 'construction=>footway'           then 'footway '::text
+                       when highway='construction' and tags @> 'construction=>steps'             then 'steps'::text
+                       when highway='construction' and tags @> 'construction=>bridleway'         then 'bridleway'::text
+                       when highway='construction' and tags @> 'construction=>path'              then 'path'::text
+                       when highway='construction' and tags @> 'construction=>cycleway'          then 'cycleway'::text
+                       else highway end) as highway
                  from planet_line
-                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway') 
+                 where highway in ('track', 'footway', 'steps', 'bridleway', 'path', 'cycleway', 'construction') 
                  order by z_order asc
                 ) as foo]]></Parameter>
         </Datasource>
@@ -1286,7 +1353,7 @@ zoom level  - scale denominator
                 (select way,
                  name 
                  from planet_line 
-	         where waterway in ('river') 
+                 where waterway in ('river') 
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -1302,7 +1369,7 @@ zoom level  - scale denominator
                 (select way,
                  route, name, ref 
                  from planet_line 
-	         where route in ('ferry') 
+                 where route in ('ferry') 
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -1333,11 +1400,11 @@ zoom level  - scale denominator
 <!--
     <Style name="raster">
       <Rule>
-	<RasterSymbolizer>
+        <RasterSymbolizer>
           <CssParameter name="opacity">1.0</CssParameter>
           <CssParameter name="scaling">bilinear</CssParameter>
           <CssParameter name="mode">grain_merge</CssParameter>
-	</RasterSymbolizer>
+        </RasterSymbolizer>
       </Rule>
     </Style>
 -->

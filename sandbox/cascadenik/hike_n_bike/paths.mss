@@ -29,8 +29,38 @@
     line-dasharray: 1, 2, 1, 24;
 }
 
+/* somewhat aligned with .path.closed (thicker/wider at high zooms, but same "runlength") */
+.path.construction[zoom>=13]
+{
+    line-color: #ffffff;
+    line-opacity: 0.9;
+    line-cap: butt;
+    line-join: miter;
+}
+.path.construction[zoom=13]
+{
+    line-width: 3;
+    line-dasharray: 1, 1, 1, 8;
+}
+.path.construction[zoom=14]
+{
+    line-width: 5;
+    line-dasharray: 1, 1, 1, 10;
+}
+.path.construction[zoom=15],
+.path.construction[zoom=16]
+{
+    line-width: 9;
+    line-dasharray: 2, 1, 2, 13;
+}
+.path.construction[zoom>=17]
+{
+    line-width: 11;
+    line-dasharray: 2, 1, 2, 23;
+}
+
 /*
-unterschiedliche Strichsorten:  
+[Arnd] unterschiedliche Strichsorten:  
 fettere Striche: Autos nicht; Fahrrad nicht: ein fetter und ein duenner 
 (impliziert auto nicht? ;-); Fussgaenger: zwei duenne?
 */
@@ -323,7 +353,7 @@ fettere Striche: Autos nicht; Fahrrad nicht: ein fetter und ein duenner
 
 .path.label[zoom>=12] name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-fill: #000;
     text-placement: line;
@@ -337,7 +367,7 @@ fettere Striche: Autos nicht; Fahrrad nicht: ein fetter und ein duenner
 
 .path.label[zoom>=15] name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-fill: #000;
     text-placement: line;
