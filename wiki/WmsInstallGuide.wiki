@@ -12,7 +12,6 @@ All files can be found in http://mapnik-utils.googlecode.com/svn/example_code/wm
  * Decide whether to run as wsgi,mod_python,cgi,fastcgi (the server has wrappers for each)
  * If you want to run in fastcgi mode then install mod_fastcgi or mod_fcgi within apache
   * These hints might help:
-   * http://blog.brandonking.net//2008/01/django-app-modfcgid-apache-2-setup-on.html/
    * http://blog.cleverelephant.ca/2008/05/fastcgi-on-osx-leopard.html
  
 === Step 2 ===
