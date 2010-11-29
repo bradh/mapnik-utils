@@ -1,11 +1,27 @@
-=================
 nik2img changelog
 =================
 
-Version 0.6.1,  2010:
-------------------------------
 
- * Added support for passing scale-factor to Mapnik, to be able to scale up or down fonts, line widths, etc
+Version 0.7.0,  Nov 29th, 2010:
+-------------------------------
+ 
+ * Packged from r1090
+ 
+ * Added support for rendering remote Cascadenik MML files, eg:
+    
+    $ nik2img.py https://github.com/mapnik/Cascadenik/raw/master/doc/example1.mml t.png --mapnik-version 1
+
+ * Added support for Cascadenik 1.x
+
+ * Exposed the ability to set the mapnik.Map aspect_fix_mode which controls bbox/dimension resizing
+ 
+ * Recusively register fonts when passed the --fonts argument
+ 
+ * Fixed double opening of image in default graphical viewer on linux
+ 
+ * Fixed bug in verbose output when reporting visible layers
+ 
+ * Added support for passing scale-factor to Mapnik2, to be able to scale up or down fonts, line widths, etc
 
 
 Version 0.6.0, May 25th, 2010:

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-__version__ = '0.6.1'
-__author__ = 'Dane Springmeyer (dbsgeo [ -a- ] gmail.com)'
-__copyright__ = 'Copyright 2009, Dane Springmeyer'
+__version__ = '0.7.0'
+__author__ = 'Dane Springmeyer (dane [ -a- ] dbsgeo.com)'
+__copyright__ = 'Copyright 2010, Dane Springmeyer'
 __license__ = 'BSD'
 
 import os
