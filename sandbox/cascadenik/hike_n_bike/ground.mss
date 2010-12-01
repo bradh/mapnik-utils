@@ -106,36 +106,36 @@
     line-dasharray: 5, 5;
 }
 
-.citylike.area
+.citylike.area[zoom>=8]
 {
     polygon-fill: #dddddd;
     polygon-opacity: 0.93;
 }
 
-.citylike.area[landuse=residential]
+.citylike.area[zoom>=8][landuse=residential]
 {
 /*     polygon-fill: #eeeeee; */
      polygon-fill: #e0d7bd;
     polygon-opacity: 0.99;
 }
 
-.citylike.area[landuse=industrial]
+.citylike.area[zoom>=8][landuse=industrial]
 {
      polygon-fill: #e1d8be;
     polygon-opacity: 0.99;
 }
 
 /*
-.citylike.area[amenity=school],
-.citylike.area[amenity=college],
-.citylike.area[amenity=university]
+.citylike.area[zoom>=8][amenity=school],
+.citylike.area[zoom>=8][amenity=college],
+.citylike.area[zoom>=8][amenity=university]
 {
     polygon-fill: #d2caba;
     polygon-opacity: 0.93;
 }
 */
 
-.parklike.area
+.parklike.area[zoom>=8]
 {
     polygon-fill: #b4c29a;
     polygon-opacity: 0.99;
@@ -153,69 +153,69 @@
 /*     line-color: #6dbe3c; */
 /* } */
 
-.parklike.area[landuse=cemetery]
+.parklike.area[zoom>=8][landuse=cemetery]
 {
     line-color: #799a67;
     polygon-fill: #b5c39b;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[natural=wood],
-.parklike.area[landuse=forest]
+.parklike.area[zoom>=8][natural=wood],
+.parklike.area[zoom>=8][landuse=forest]
 {
 /*     line-color: #799a67; */
     polygon-fill: #d9e0c9;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[landuse=allotments]
+.parklike.area[zoom>=8][landuse=allotments]
 {
     polygon-fill: #cdc2af;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[landuse=farm],
-.parklike.area[landuse=farmland]
+.parklike.area[zoom>=8][landuse=farm],
+.parklike.area[zoom>=8][landuse=farmland]
 {
     polygon-fill: #ead8bd;
     polygon-opacity: 0.93;
 }
 
-.parklike.area[landuse=vineyard]
+.parklike.area[zoom>=8][landuse=vineyard]
 {
     polygon-fill: #d0d7bf;
     polygon-opacity: 0.93;
 }
 
-.parklike.area[landuse=recreation_ground],
-.parklike.area[landuse=greenfield],
-.parklike.area[landuse=meadow],
-.parklike.area[landuse=grass],
-.parklike.area[landuse=village_green]
+.parklike.area[zoom>=8][landuse=recreation_ground],
+.parklike.area[zoom>=8][landuse=greenfield],
+.parklike.area[zoom>=8][landuse=meadow],
+.parklike.area[zoom>=8][landuse=grass],
+.parklike.area[zoom>=8][landuse=village_green]
 {
     polygon-fill: #bfd8b1;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[natural=scrub]
+.parklike.area[zoom>=8][natural=scrub]
 {
     polygon-fill: #afc7a2;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[natural=wetland]
+.parklike.area[zoom>=8][natural=wetland]
 {
     polygon-fill: #b9d1c8;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[natural=beach]
+.parklike.area[zoom>=8][natural=beach]
 {
     polygon-fill: #dfd076;
     polygon-opacity: 0.99;
 }
 
-.parklike.area[landuse=quarry]
+.parklike.area[zoom>=8][landuse=quarry]
 {
     polygon-fill: #bbb;
     polygon-opacity: 0.99;
