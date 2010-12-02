@@ -537,6 +537,23 @@ zoom level  - scale denominator
         </Datasource>
     </Layer>
 
+    <Layer class="motorway lowzoom" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 highway 
+                 from planet_roads
+                 where highway in ('motorway', 'trunk')
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+
     <Layer class="rail bridge" srs="&osm_srs;">
         <Datasource>
             <Parameter name="type">postgis</Parameter>
@@ -773,7 +790,9 @@ zoom level  - scale denominator
             <Parameter name="table"><![CDATA[
                 (select way,
                  place, name,
+                 tags->'capital' as capital,
                  coalesce(z_order, 0) as correct_z_order,
+                 case when capital in ('yes', 'true', '1') then 'yes'::text else 'no'::text end as is_capital,
                  (case when place = 'city' then 0
                        when place = 'town' then 1
                        when place = 'village' then 2
