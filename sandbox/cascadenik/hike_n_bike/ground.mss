@@ -401,22 +401,22 @@
 .boundary.national_park[zoom>=7][zoom<=9] name
 {
     polygon-fill: #00ff00;
-    polygon-opacity: 0.05;
+    polygon-opacity: 0.07;
     line-color: #00ff00;
     line-join: round;
     line-width: 1.5;
     line-dasharray: 4, 2;
-    line-opacity: 0.15;
+    line-opacity: 0.2;
 }
 .boundary.national_park[zoom>=10][zoom<=12] name
 {
     polygon-fill: #00ff00;
-    polygon-opacity: 0.05;
+    polygon-opacity: 0.07;
     line-color: #00ff00;
     line-join: round;
     line-width: 3.0;
     line-dasharray: 6, 2;
-    line-opacity: 0.15;
+    line-opacity: 0.2;
 }
 .boundary.national_park[zoom>=13][zoom<=18] name
 {
@@ -424,7 +424,7 @@
     line-join: round;
     line-width: 3.0;
     line-dasharray: 6, 2;
-    line-opacity: 0.15;
+    line-opacity: 0.25;
 }
 .boundary.national_park[zoom>=8][zoom<=9] name
 {
