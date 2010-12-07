@@ -753,9 +753,10 @@ zoom level  - scale denominator
             <Parameter name="extent">&extent;</Parameter>
             <Parameter name="table"><![CDATA[
                 (select way,
-                 boundary, name
+                 boundary, leisure, name
                  from planet_polygon
-                 where boundary='national_park'
+                 where boundary in ('national_park', 'protected_area')
+                    or leisure='nature_reserve'
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
