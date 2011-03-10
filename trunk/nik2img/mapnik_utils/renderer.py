@@ -98,12 +98,18 @@ class Render(object):
         Routine to render the an image to a string
         """
         self.timer()
-        im = mapnik.Image(self.m.width,self.m.height)
-        if self.scale_factor:
-            mapnik.render(self.m,im,self.scale_factor)
+        if self.format in self.CAIRO_FILE_FORMATS:
+            (handle, cairo_tmp) = tempfile.mkstemp('.%s' % self.format, 'nik2img-cairo_tmp-tmp')
+            os.close(handle)
+            self.local_render_wrapper(self.m, cairo_tmp, self.format)
+            return open(cairo_tmp,'rb').read()
         else:
-            mapnik.render(self.m,im)
-        return im.tostring(self.format)
+            im = mapnik.Image(self.m.width,self.m.height)
+            if self.scale_factor:
+                mapnik.render(self.m,im,self.scale_factor)
+            else:
+                mapnik.render(self.m,im)
+            return im.tostring(self.format)
         self.stop()
 
     def print_stream(self):
