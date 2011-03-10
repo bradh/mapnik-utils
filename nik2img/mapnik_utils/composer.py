@@ -204,10 +204,10 @@ class Compose(object):
             self.output_error("Dry run completed successfully...")
 
         renderer = Render(self.map,self.image,self.format,self.world_file,self.zip_compress,self.scale_factor)
-        if not self.image == '-':
-            renderer.render_file()
-        else:
+        if self.image == '-':
             renderer.print_stream()
+        else:
+            renderer.render_file()
         self.rendered = True
         return renderer
     
