@@ -146,7 +146,7 @@ class _Map(mapnik.Map,_injector):
         for layer in self.layers:
             layer_box = layer.envelope().transform(layer.proj_obj,self.proj_obj)
             if layer_box.intersects(self.envelope()):
-                layer.active_rules = layer.active_rules(self)
+                #layer.active_rules = layer.active_rules(self)
                 lyrs.append(layer)
         return lyrs
 
@@ -197,14 +197,10 @@ class _Layer(mapnik.Layer,_injector):
     def active_rules(self,map):
         rules = []
         for style in self.styles:
-            try:
-                sty_obj = map.find_style(style)
-                for rule in sty_obj.rules:
-                    if rule.active(map.scale()):
-                        rule.parent = style 
-                        rules.append(rule)
-            except Exception, e:
-                sys.stderr.write('Warning: style name reference "%s" found in layer "%s" but Style not found in Map\n' % (style,self.name)) 
+            sty_obj = map.find_style(style)
+            for rule in sty_obj.rules:
+                if rule.active(map.scale_denominator()):
+                    rules.append({'parent':style,'filter':str(rule.filter)})
         return rules
 
 

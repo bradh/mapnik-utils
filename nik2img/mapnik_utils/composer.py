@@ -304,14 +304,15 @@ class ComposeDebug(Compose):
                 self.debug_msg("Layers intersecting map: [%s]" % ', '.join([l.name for l in lyrs]))
             self.debug_msg("At current scale of '%s'..." % self.map.scale())
             for lyr in lyrs:
-                if not lyr.visible(self.map.scale_denominator()):
-                    self.debug_msg("Layer '%s' is NOT visible" % lyr.name,warn=True)
+                active_rules = lyr.active_rules(self.map)
+                if len(active_rules):
+                    active_styles = ', '.join(["'%s'" % s['parent'] for s in active_rules]) 
+                    self.debug_msg("Layer '%s' has %s active rule(s) in styles: %s" % (lyr.name,len(active_rules),active_styles))
+                    active_filter_strings = ', '.join(["'%s'" % s['filter'] for s in active_rules]) 
+                    if 'true' not in active_filter_strings:
+                        print 'Active rule filters: %s' % (active_filter_strings)
                 else:
-                    self.debug_msg("layer '%s' is visible" % lyr.name)
-                # crashing in filter on os x...
-                #    rules = ', '.join(['%s:%s (%s -> %s)' % (r.parent,str(r.filter)[:10],r.min_scale,r.max_scale) for r in lyr.active_rules])
-                #    self.debug_msg('active rules for %s: %s' % (l.name,rules))
-                
+                    self.debug_msg("Layer '%s' is NOT visible" % lyr.name,warn=True)
         
     def render(self):
         if not self.map:
