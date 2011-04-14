@@ -141,7 +141,7 @@ class Compose(object):
         if self.center or not self.zoom is None:
             if self.max_extent:
                 self.msg('Zooming to max extent: %s' % self.max_extent) 
-                self.map.zoom_to_box(mapnik.Envelope(*self.max_extent))
+                self.map.zoom_to_box(mapnik.Box2d(*self.max_extent))
             else:
                 self.map.zoom_max()
                 self.msg('Zoomed to *estimated* max extent: %s' % self.map.envelope()) 
@@ -164,19 +164,19 @@ class Compose(object):
                 self.map.zoom_to_layer(self.zoom_to_layers[0])
         else:
             if self.extent:
-                env = mapnik.Envelope(*self.extent)
+                env = mapnik.Box2d(*self.extent)
                 self.msg('Zooming to custom projected extent: "%s"' % env)
                 self.map.zoom_to_box(env)
                 from_prj = mapnik.Projection(self.map.srs)
                 to_prj = mapnik.Projection('+proj=latlong +datum=WGS84')
-                bbox = env.transform(from_prj,to_prj)
+                bbox = env.forward(from_prj,to_prj)
                 self.msg('Custom extent in geographic coordinates: "%s"' % bbox)
             elif self.bbox:
-                env = mapnik.Envelope(*self.bbox)
+                env = mapnik.Box2d(*self.bbox)
                 self.msg('Zooming to custom geographic extent: "%s"' % env)
                 from_prj = mapnik.Projection('+proj=latlong +datum=WGS84')
                 to_prj = mapnik.Projection(self.map.srs)
-                self.map.zoom_to_box(env.transform(from_prj,to_prj))
+                self.map.zoom_to_box(env.forward(from_prj,to_prj))
             else:
                 self.map.zoom_all()
                 self.msg('Zoom to extent of all layers: "%s"' % self.map.envelope())
