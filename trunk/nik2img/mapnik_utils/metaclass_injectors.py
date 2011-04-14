@@ -35,7 +35,7 @@ class _Map(mapnik.Map,_injector):
         return EasyProjection(self.srs)
 
     def lon_lat_bbox(self):
-        return self.envelope().transform(self.proj_obj,EasyProjection(4326))
+        return self.envelope().forward(self.proj_obj,EasyProjection(4326))
 
     def find_layer(self,name):
         lyr = [l for l in self.layers if l.name.lower() == name.lower()]
@@ -52,30 +52,42 @@ class _Map(mapnik.Map,_injector):
     def zoom_to_layer(self,layer):
         layer = self.find_layer(layer)
         layer_box = layer.envelope()
-        box = layer_box.transform(layer.proj_obj,self.proj_obj)
+        box = layer_box.forward(layer.proj_obj,self.proj_obj)
         self.zoom_to_box(box)
 
     def lon_lat_layers_bounds(self):
-        return self.layers_bounds().transform(self.proj_obj,EasyProjection(4326))
+        return self.layers_bounds().forward(self.proj_obj,EasyProjection(4326))
 
     def layers_bounds(self):
         new_box = None
         if len(self.layers):
             first = self.layers[0]
-            new_box = first.envelope().transform(first.proj_obj,self.proj_obj)
+            new_box = None
+            try:
+                new_box = first.envelope().forward(first.proj_obj,self.proj_obj)
+            except RuntimeError:
+                # try clipping layer extent to map
+                new_box = self.envelope().forward(self.proj_obj,first.proj_obj)
+                new_box.clip(first.envelope())
             for layer in self.layers:
                 layer_box = layer.envelope()
-                box = layer_box.transform(layer.proj_obj,self.proj_obj)
+                box = None
+                try:
+                    box = layer_box.forward(layer.proj_obj,self.proj_obj)
+                except RuntimeError:
+                    # try clipping layer extent to map
+                    box = self.envelope().forward(self.proj_obj,first.proj_obj)
+                    box.clip(layer_box)
                 new_box.expand_to_include(box)
         return new_box
     
     def zoom_to_layers(self,layers):
         first = self.find_layer(layers[0])
-        new_box = first.envelope().transform(first.proj_obj,self.proj_obj)
+        new_box = first.envelope().forward(first.proj_obj,self.proj_obj)
         for lyr in layers:
             layer = self.find_layer(lyr)
             layer_box = layer.envelope()
-            box = layer_box.transform(layer.proj_obj,self.proj_obj)
+            box = layer_box.forward(layer.proj_obj,self.proj_obj)
             new_box.expand_to_include(box)
         self.zoom_to_box(new_box)
 
@@ -121,7 +133,8 @@ class _Map(mapnik.Map,_injector):
     def zoom_max(self):
         max_extent = mapnik.Box2d(-179.99999694572804,-85.0511285163245,179.99999694572804,85.0511287798066)
         if not self.proj_obj.geographic:
-            max_extent = max_extent.forward(self.proj_obj)
+            wgs_84 = mapnik.Projection('+init=epsg:4326')
+            max_extent = max_extent.forward(wgs_84,self.proj_obj)
         self.zoom_to_box(max_extent)
 
     def activate_layers(self,names):
@@ -144,7 +157,13 @@ class _Map(mapnik.Map,_injector):
     def intersecting_layers(self):
         lyrs = []
         for layer in self.layers:
-            layer_box = layer.envelope().transform(layer.proj_obj,self.proj_obj)
+            layer_box = None
+            try:
+                layer_box = layer.envelope().forward(layer.proj_obj,self.proj_obj)
+            except RuntimeError:
+                # try clipping layer extent to map
+                layer_box = self.envelope().forward(self.proj_obj,layer.proj_obj)
+                layer_box.clip(layer.envelope())
             if layer_box.intersects(self.envelope()):
                 #layer.active_rules = layer.active_rules(self)
                 lyrs.append(layer)
@@ -205,12 +224,12 @@ class _Layer(mapnik.Layer,_injector):
 
 
 class _Coord(mapnik.Coord,_injector):
-    def transform(self,from_prj,to_prj):
+    def forward(self,from_prj,to_prj):
         trans = mapnik.ProjTransform(from_prj,to_prj)
         return trans.forward(self)
 
 class _Box2d(mapnik.Box2d,_injector):
-    def transform(self,from_prj,to_prj):
+    def forward(self,from_prj,to_prj):
         trans = mapnik.ProjTransform(from_prj,to_prj)
         return trans.forward(self)
 
