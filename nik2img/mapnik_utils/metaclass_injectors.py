@@ -111,7 +111,8 @@ class _Map(mapnik.Map,_injector):
     def set_center_and_zoom(self,lon,lat,level=0,geographic=True):
         coords = mapnik.Coord(lon,lat)
         if geographic and not self.proj_obj.geographic:
-            coords = coords.forward(self.proj_obj)
+            wgs_84 = mapnik.Projection('+init=epsg:4326')
+            coords = coords.forward(wgs_84,self.proj_obj)
         w,h = self.width, self.height
         res = self.get_scale_for_zoom_level(level) 
         box = mapnik.Box2d(coords.x - 0.5 * w * res,
@@ -127,7 +128,8 @@ class _Map(mapnik.Map,_injector):
                       coords.x + radius,
                       coords.y + radius)
         if geographic and not self.proj_obj.geographic:
-            box = box.forward(self.proj_obj)
+            wgs_84 = mapnik.Projection('+init=epsg:4326')
+            box = box.forward(wgs_84,self.proj_obj)
         self.zoom_to_box(box)
 
     def zoom_max(self):
