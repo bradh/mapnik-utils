@@ -208,10 +208,10 @@ if __name__ == '__main__':
 
     if len(args) > 1:
         options.image = args[1]
-        if options.image == '-':
-            options.pipe = True
-        else:
-            options.pipe = False
+        #if options.image == '-':
+        #    options.pipe_output = True
+        #else:
+        #    options.pipe_output = False
            
     options.width, options.height = options.dimensions
     if not options.format and hasattr(options,'image'):
