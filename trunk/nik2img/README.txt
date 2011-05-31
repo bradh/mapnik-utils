@@ -3,10 +3,19 @@ nik2img
 
 Generate Mapnik graphics from the command line
 
+
 Description
 ===========
 
 Use nik2img to interact with the Mapnik C++/Python mapping toolkit from the command line.
+
+
+Requirements
+============
+
+Mapnik >=0.6.0
+
+Tests only work with >= Mapnik 0.7.2
 
 
 Installing nik2img
