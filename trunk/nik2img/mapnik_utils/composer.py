@@ -306,7 +306,12 @@ class ComposeDebug(Compose):
             for lyr in lyrs:
                 active_rules = lyr.active_rules(self.map)
                 if len(active_rules):
-                    active_styles = ', '.join(["'%s'" % s['parent'] for s in active_rules]) 
+                    active_styles = []
+                    for ar in active_rules:
+                        rsty = ar['parent']
+                        if rsty not in active_styles:
+                            active_styles.append(rsty)
+                    active_styles_string = ', '.join(active_styles) 
                     self.debug_msg("Layer '%s' has %s active rule(s) in styles: %s" % (lyr.name,len(active_rules),active_styles))
                     active_filter_strings = ', '.join(["'%s'" % s['filter'] for s in active_rules]) 
                     if 'true' not in active_filter_strings:
