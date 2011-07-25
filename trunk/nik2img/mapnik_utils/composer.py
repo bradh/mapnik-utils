@@ -313,9 +313,9 @@ class ComposeDebug(Compose):
                             active_styles.append(rsty)
                     active_styles_string = ', '.join(active_styles) 
                     self.debug_msg("Layer '%s' has %s active rule(s) in styles: %s" % (lyr.name,len(active_rules),active_styles))
-                    active_filter_strings = ', '.join(["'%s'" % s['filter'] for s in active_rules]) 
+                    active_filter_strings = ', '.join(["'%s'" % s['name'] or s['filter'] for s in active_rules]) 
                     if 'true' not in active_filter_strings:
-                        print 'Active rule filters: %s' % (active_filter_strings)
+                        print 'Active rules: %s' % (active_filter_strings)
                 else:
                     self.debug_msg("Layer '%s' is NOT visible" % lyr.name,warn=True)
         
