@@ -221,7 +221,7 @@ class _Layer(mapnik.Layer,_injector):
             sty_obj = map.find_style(style)
             for rule in sty_obj.rules:
                 if rule.active(map.scale_denominator()):
-                    rules.append({'parent':style,'filter':str(rule.filter)})
+                    rules.append({'name':rule.name,'parent':style,'filter':str(rule.filter)})
         return rules
 
 
