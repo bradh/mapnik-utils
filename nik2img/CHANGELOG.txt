@@ -4,6 +4,8 @@ nik2img changelog
 Version 0.8.0,  Oct 26th, 2011:
 -------------------------------
 
+ * Packaged from r1111
+
  * Better support for Mapnik2
  
  * More robust handling of projection transformations
