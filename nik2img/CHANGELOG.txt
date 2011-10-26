@@ -1,6 +1,18 @@
 nik2img changelog
 =================
 
+Version 0.8.0,  Oct 26th, 2011:
+-------------------------------
+
+ * Better support for Mapnik2
+ 
+ * More robust handling of projection transformations
+ 
+ * Ability to stream cairo formats to stdout
+ 
+ * Fixes for --verbose output correctness 
+ 
+ 
 
 Version 0.7.0,  Nov 29th, 2010:
 -------------------------------
