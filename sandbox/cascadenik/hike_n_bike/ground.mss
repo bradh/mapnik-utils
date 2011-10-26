@@ -1,23 +1,23 @@
 @charset "UTF-8"; /* -*- mode: css -*- */
 
-.coast.edge.outer
+.coast.edge.outer[zoom>=9]
 {
     line-width: 13;
     line-color: #a1cbea;/* !!! */
     line-join: round;
 }
 
-.coast.edge.inner
+.coast.edge.inner[zoom>=9]
 {
     line-width: 5;
     line-color: #7eaac1;/* !!! */
     line-join: round;
 }
 
-.coast.edge.outer[zoom<=12] { line-width: 9; }
-.coast.edge.inner[zoom<=12] { line-width: 3; }
+.coast.edge.outer[zoom>=9][zoom<=12] { line-width: 9; }
+.coast.edge.inner[zoom>=9][zoom<=12] { line-width: 3; }
 
-.coast.fill
+.coast.fill[zoom>=9]
 {
     polygon-fill: #eeeeee;
     /* polygon-fill: #dceee9; */
@@ -27,7 +27,34 @@
     */
 }
 
-.water.line name
+.shore.edge.outer[zoom<9]
+{
+    line-width: 13;
+    line-color: #a1cbea;/* !!! */
+    line-join: round;
+}
+
+.shore.edge.inner[zoom<9]
+{
+    line-width: 5;
+    line-color: #7eaac1;/* !!! */
+    line-join: round;
+}
+
+.shore.edge.outer[zoom<9] { line-width: 9; }
+.shore.edge.inner[zoom<9] { line-width: 3; }
+
+.shore.fill[zoom<9]
+{
+    polygon-fill: #eeeeee;
+    /* polygon-fill: #dceee9; */
+    /*
+    line-width: 1;
+    line-color: #dceee9;
+    */
+}
+
+.water.line[zoom>=7] name
 {
     text-fontset: "book-fonts";
     text-placement: line;
@@ -74,10 +101,13 @@
 .water.edge[zoom>14] { line-width: 6; }
 .water.edge[zoom<=14] { line-width: 4; }
 
-.water.area
-{
-    polygon-fill: #cae5fb;
-}
+/* for very low zooms, lakes etc. need a minimum area to look good when rendered */
+/* use the darker outline color */
+.water.area.lowzoom[zoom>=3][zoom<5][size=huge]  { polygon-fill: #a1cbea; }
+.water.area.lowzoom[zoom>=5][zoom<8][size=huge],
+.water.area.lowzoom[zoom>=5][zoom<8][size=large] { polygon-fill: #a1cbea; }
+ /* use the normal fill color: */
+.water.area[zoom>=8] { polygon-fill: #cae5fb; }
 
 .island.edge[zoom>12]
 {
@@ -398,7 +428,7 @@
     text-placement: line;
 }
 
-.boundary.national_park[zoom>=7][zoom<=9] name
+.boundary.national_park[zoom>=7][zoom<=9]
 {
     polygon-fill: #00ff00;
     polygon-opacity: 0.07;
@@ -408,7 +438,7 @@
     line-dasharray: 4, 2;
     line-opacity: 0.2;
 }
-.boundary.national_park[zoom>=10][zoom<=12] name
+.boundary.national_park[zoom>=10][zoom<=12]
 {
     polygon-fill: #00ff00;
     polygon-opacity: 0.07;
@@ -418,7 +448,7 @@
     line-dasharray: 6, 2;
     line-opacity: 0.2;
 }
-.boundary.national_park[zoom>=13][zoom<=18] name
+.boundary.national_park[zoom>=13][zoom<=18]
 {
     line-color: #00ff00;
     line-join: round;
@@ -426,7 +456,7 @@
     line-dasharray: 6, 2;
     line-opacity: 0.25;
 }
-.boundary.national_park[zoom>=8][zoom<=9] name
+.boundary.national_park[zoom>=8][zoom<=9][size=huge] name
 {
     text-fontset: "oblique-fonts";
     text-size: 8;
@@ -436,7 +466,8 @@
     text-placement: point;
     text-wrap-width: 14;
 }
-.boundary.national_park[zoom>=10][zoom<=11] name
+.boundary.national_park[zoom>=10][zoom<=11][size=huge] name,
+.boundary.national_park[zoom>=10][zoom<=11][size=large] name
 {
     text-fontset: "oblique-fonts";
     text-size: 11;

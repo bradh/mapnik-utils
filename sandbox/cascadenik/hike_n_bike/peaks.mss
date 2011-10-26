@@ -7,7 +7,7 @@
 {
     point-file: url('img/svg-twotone-png/poi_peak.p.16.png');
     text-dy: 32;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 32;
     text-placement: point;
     text-wrap-width: 500;
@@ -20,7 +20,7 @@
 /* define the text style */
 .peak.point
 {
-    text-fontset-name: "bold-fonts";
+    text-fontset: "bold-fonts";
     text-fill: #333333;
     text-placement: point;
     text-wrap-width: 500; /* basically never */

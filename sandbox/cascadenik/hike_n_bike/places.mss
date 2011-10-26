@@ -2,7 +2,7 @@
 
 .place name
 {
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-fill: #000;
     text-placement: point;
     text-wrap-width: 65;
@@ -11,7 +11,7 @@
 .place[place=town][zoom>=9] name,
 .place[place=city] name
 {
-    text-fontset-name: "bold-fonts";
+    text-fontset: "bold-fonts";
     text-halo-radius: 2 !important;
     text-fill: #222;
 }
@@ -41,6 +41,8 @@
 .place[place=town][zoom>=9][zoom<=12] name { text-size: 10; }
 .place[place=town][zoom>=13][zoom<=14] name { text-size: 12; }
 
+.place[place=city][capital=yes][zoom>=3][zoom<=4] name { text-size:  9; }
+.place[place=city][capital=yes][zoom>=5][zoom<=6] name { text-size: 10; }
 .place[place=city][zoom>=7][zoom<=8] name { text-size: 10; }
 .place[place=city][zoom>=9][zoom<=13] name { text-size: 12; }
 .place[place=city][zoom=14] name { text-size: 14; }

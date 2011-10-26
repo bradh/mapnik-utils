@@ -7,7 +7,7 @@
 {
     point-file: url('sjjb-mapicons/png/poi_point_of_interest.glow.12.png');
     text-dy: 14;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 500;
@@ -23,7 +23,7 @@
     point-file: url('img/mapnik-symbols/tree.png');
     text-fill: #239c45;
     text-dy: 9;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -36,7 +36,7 @@
     point-file: url('sjjb-mapicons/png/tourist_view_point.glow.8.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -49,7 +49,7 @@
     point-file: url('sjjb-mapicons/png/tourist_view_point.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -64,7 +64,7 @@
 /*    point-file: url('sjjb-mapicons/png/tourist_tower.glow.10.png'); */
     text-fill: #734a08;
     text-dy: 9;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -79,7 +79,7 @@
 /*    point-file: url('sjjb-mapicons/png/tourist_tower.glow.14.png');*/
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -93,7 +93,7 @@
     point-file: url('sjjb-mapicons/png/tourist_ruin.glow.10.png');
     text-fill: #734a08;
     text-dy: 9;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -107,7 +107,7 @@
     point-file: url('sjjb-mapicons/png/tourist_ruin.glow.14.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -121,7 +121,7 @@
     point-file: url('sjjb-mapicons/png/tourist_castle.glow.8.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -134,7 +134,7 @@
     point-file: url('sjjb-mapicons/png/tourist_castle.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -148,7 +148,7 @@
     point-file: url('img/svg-twotone-png/tourist_guidepost.p.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -162,7 +162,7 @@
     point-file: url('sjjb-mapicons/png/amenity_information.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -175,7 +175,7 @@
     point-file: url('sjjb-mapicons/png/amenity_information.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -189,7 +189,7 @@
     point-file: url('sjjb-mapicons/png/poi_point_of_interest.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -202,7 +202,7 @@
     point-file: url('sjjb-mapicons/png/poi_point_of_interest.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -216,7 +216,7 @@
     point-file: url('sjjb-mapicons/png/amenity_bench.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -230,7 +230,7 @@
     point-file: url('sjjb-mapicons/png/amenity_toilets.glow.8.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -243,7 +243,7 @@
     point-file: url('sjjb-mapicons/png/amenity_toilets.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -257,7 +257,7 @@
     point-file: url('sjjb-mapicons/png/accommodation_shelter.glow.8.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -270,7 +270,7 @@
     point-file: url('sjjb-mapicons/png/accommodation_shelter.glow.12.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -284,7 +284,7 @@
     point-file: url('sjjb-mapicons/png/accommodation_shelter.glow.16.png');
     text-fill: #0092da;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -298,7 +298,7 @@
     point-file: url('sjjb-mapicons/png/tourist_picnic.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -311,7 +311,7 @@
     point-file: url('sjjb-mapicons/png/tourist_picnic.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -325,7 +325,7 @@
     point-file: url('sjjb-mapicons/png/amenity_telephone.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -338,7 +338,7 @@
     point-file: url('sjjb-mapicons/png/amenity_telephone.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -353,7 +353,7 @@
     point-file: url('sjjb-mapicons/png/health_hospital_emergency.glow.10.png');
     text-fill: #da0092;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 500;
@@ -366,7 +366,7 @@
     point-file: url('sjjb-mapicons/png/health_hospital_emergency.glow.12.png');
     text-fill: #da0092;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -380,7 +380,7 @@
     point-file: url('sjjb-mapicons/png/food_restaurant.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -393,7 +393,7 @@
     point-file: url('sjjb-mapicons/png/food_restaurant.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -407,7 +407,7 @@
     point-file: url('sjjb-mapicons/png/food_fastfood.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -420,7 +420,7 @@
     point-file: url('sjjb-mapicons/png/food_fastfood.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -434,7 +434,7 @@
     point-file: url('sjjb-mapicons/png/food_pub.glow.8.png');
     text-fill: #734a08;
     text-dy: 12;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -447,7 +447,7 @@
     point-file: url('sjjb-mapicons/png/food_pub.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -461,7 +461,7 @@
     point-file: url('sjjb-mapicons/png/food_drinkingtap.glow.12.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -474,7 +474,7 @@
     point-file: url('sjjb-mapicons/png/food_drinkingtap.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -488,7 +488,7 @@
     point-file: url('sjjb-mapicons/png/transport_parking.glow.8.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 50;
@@ -501,7 +501,7 @@
     point-file: url('sjjb-mapicons/png/transport_parking.glow.12.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 50;
@@ -515,7 +515,7 @@
     point-file: url('sjjb-mapicons/png/transport_parking_car_paid.glow.8.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 50;
@@ -528,7 +528,7 @@
     point-file: url('sjjb-mapicons/png/transport_parking_car_paid.glow.12.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 50;
@@ -542,7 +542,7 @@
     point-file: url('sjjb-mapicons/png/place_of_worship.glow.8.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 50;
@@ -555,7 +555,7 @@
     point-file: url('sjjb-mapicons/png/place_of_worship.glow.12.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 50;
@@ -579,7 +579,7 @@
     point-file: url('sjjb-mapicons/png/poi_cave.glow.8.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -592,7 +592,7 @@
     point-file: url('sjjb-mapicons/png/poi_cave.glow.12.png');
     text-fill: #734a08;
     text-dy: 14;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -611,7 +611,7 @@
 /*    point-file: url('sjjb-mapicons/png/tourist_cross.glow.12.png'); */
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -625,7 +625,7 @@
 /*    point-file: url('sjjb-mapicons/png/tourist_cross.glow.16.png'); */
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -639,7 +639,7 @@
     point-file: url('sjjb-mapicons/png/accommodation_camping.glow.14.png');
     text-fill: #0092da;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -652,7 +652,7 @@
     point-file: url('sjjb-mapicons/png/accommodation_camping.glow.16.png');
     text-fill: #0092da;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -664,7 +664,7 @@
 .poi_boundary.point[boundary=marker][zoom>=16] ref
 {
     text-fill: #cf9700;
-    text-fontset-name: "oblique-fonts";
+    text-fontset: "oblique-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -679,7 +679,7 @@
     point-file: url('sjjb-mapicons/png/shopping_bicycle.glow.14.png');
     text-fill: #ac39ac;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -691,7 +691,7 @@
     point-file: url('sjjb-mapicons/png/shopping_bicycle.glow.16.png');
     text-fill: #ac39ac;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -708,7 +708,7 @@
     /*text-fill: #734a08;*/ /* brown */
     text-fill: #000;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -723,7 +723,7 @@
     /*text-fill: #734a08;*/ /* brown */
     text-fill: #000;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -745,7 +745,7 @@
     point-file: url('sjjb-mapicons/png/poi_tower_communications.glow.14.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -757,7 +757,7 @@
     point-file: url('sjjb-mapicons/png/poi_tower_communications.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;
@@ -771,7 +771,7 @@
     point-file: url('sjjb-mapicons/png/poi_mine.glow.14.png');
     text-fill: #734a08;
     text-dy: 13;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 8;
     text-placement: point;
     text-wrap-width: 77;
@@ -783,7 +783,7 @@
     point-file: url('sjjb-mapicons/png/poi_mine.glow.16.png');
     text-fill: #734a08;
     text-dy: 17;
-    text-fontset-name: "book-fonts";
+    text-fontset: "book-fonts";
     text-size: 10;
     text-placement: point;
     text-wrap-width: 77;

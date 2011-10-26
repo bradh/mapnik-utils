@@ -27,6 +27,8 @@ zoom level  - scale denominator
     <!ENTITY map_srs "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
     <!ENTITY coastlines "/home/project/o/s/m/osm/data/world_boundaries/processed_p">
     <!ENTITY coastlines_srs "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
+    <!ENTITY shorelines "/home/project/o/s/m/osm/data/world_boundaries/shoreline_300">
+    <!ENTITY shorelines_srs "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
     <!ENTITY osm_srs "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
     <!ENTITY contours_srs "+proj=latlong +datum=WGS84">    
     <!ENTITY host "sql-mapnik">
@@ -85,7 +87,6 @@ zoom level  - scale denominator
     </FontSet>
 
 
-    <!-- coastline shapefiles can be found at http://hypercube.telascience.org/~kleptog/ -->
     <Layer class="coast edge outer" srs="&coastlines_srs;">
         <Datasource>
             <Parameter name="type">shape</Parameter>
@@ -102,6 +103,25 @@ zoom level  - scale denominator
         <Datasource>
             <Parameter name="type">shape</Parameter>
             <Parameter name="file">&coastlines;</Parameter>
+        </Datasource>
+    </Layer>
+
+    <Layer class="shore edge outer" srs="&shorelines_srs;">
+        <Datasource>
+            <Parameter name="type">shape</Parameter>
+            <Parameter name="file">&shorelines;</Parameter>
+        </Datasource>
+    </Layer>
+    <Layer class="shore edge inner" srs="&shorelines_srs;">
+        <Datasource>
+            <Parameter name="type">shape</Parameter>
+            <Parameter name="file">&shorelines;</Parameter>
+        </Datasource>
+    </Layer>
+    <Layer class="shore fill" srs="&shorelines_srs;">
+        <Datasource>
+            <Parameter name="type">shape</Parameter>
+            <Parameter name="file">&shorelines;</Parameter>
         </Datasource>
     </Layer>
 
@@ -188,12 +208,15 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, landuse, "natural", leisure,
                  (case
-                         when round(way_area * 1000000) >= 20 then 'large'
-                         when round(way_area * 1000000) >= 1 then 'medium'
+                         when round(way_area) >= 20e6 then 'large'
+                         when round(way_area) >=  1e6 then 'medium'
                          else 'small' end) as size
                  from planet_polygon
                  where building is null
@@ -256,6 +279,30 @@ zoom level  - scale denominator
                  where landuse in ('reservoir', 'water', 'basin')
                     or "natural" in ('lake', 'water')
                     or waterway in ('canal', 'riverbank', 'river')
+                ) as foo]]></Parameter>
+        </Datasource>
+    </Layer>
+    <Layer class="water area lowzoom" srs="&osm_srs;">
+        <Datasource>
+            <Parameter name="type">postgis</Parameter>
+            <Parameter name="host">&host;</Parameter>
+            <Parameter name="dbname">&dbname;</Parameter>
+            <Parameter name="user">&user;</Parameter>
+            <Parameter name="estimate_extent">&estimate_extent;</Parameter>
+            <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
+            <Parameter name="table"><![CDATA[
+                (select way,
+                 "natural",
+                 (case
+                         when round(way_area) >= 50e6 then 'huge'
+                         when round(way_area) >= 20e6 then 'large'
+                         when round(way_area) >=  1e6 then 'medium'
+                         else 'small' end) as size
+                 from planet_polygon
+                 where "natural" in ('lake', 'water')
                 ) as foo]]></Parameter>
         </Datasource>
     </Layer>
@@ -751,9 +798,22 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
+	    <!--
+            psql -h sql-mapnik osm_mapnik
+            SELECT osm_id, name, way_area FROM planet_polygon WHERE (leisure='nature_reserve') AND (name LIKE 'Murm%') limit 25; 
+            SELECT osm_id, name, way_area FROM planet_polygon WHERE (boundary='national_park') AND (name LIKE 'A%') limit 25;
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
-                 boundary, leisure, name
+                 boundary, leisure, name,
+                 (case
+                         when round(way_area) >= 50e6 then 'huge'
+                         when round(way_area) >= 20e6 then 'large'
+                         when round(way_area) >= 10e6 then 'medium'
+                         else 'small' end) as size
                  from planet_polygon
                  where boundary in ('national_park', 'protected_area')
                     or leisure='nature_reserve'
@@ -811,6 +871,18 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+	    <!-- 
+
+SELECT osm_id, regexp_replace(tags->'osmc:symbol', '^([^:]+:[^:]+:[^:]+)(.*)$', e'\\1    (\\2)') as osmc_symbol FROM planet_line WHERE (route in ('hiking', 'foot'))  AND (tags->'osmc:symbol' LIKE '%:%:%') limit 25;
+
+SELECT osm_id, substring(tags->'osmc:symbol' from '^[^:]+:[^:]+:[^:]+') as osmc_symbol FROM planet_line WHERE (route in ('hiking', 'foot')) AND ((tags->'osmc:symbol' ~ '^red:white:[^:]*') OR (tags->'osmc:symbol' ~ '^yellow:white:[^:]*') OR (tags->'osmc:symbol' ~ '^green:white:[^:]*') OR (tags->'osmc:symbol' ~ '^blue:white:[^:]*') OR (tags->'osmc:symbol' ~ '^black:white:[^:]*')) limit 25;
+
+EXPLAIN ANALYZE
+SELECT osm_id, substring(tags->'osmc:symbol' from '^[^:]+:[^:]+:[^:]+') as osmc_symbol FROM planet_line WHERE (route in ('hiking', 'foot')) AND ((tags->'osmc:symbol' ~ '^red:white:[^:]*') OR (tags->'osmc:symbol' ~ '^yellow:white:[^:]*') OR (tags->'osmc:symbol' ~ '^green:white:[^:]*') OR (tags->'osmc:symbol' ~ '^blue:white:[^:]*') OR (tags->'osmc:symbol' ~ '^black:white:[^:]*'))
+ AND way &&
+ST_Transform(ST_SetSRID(ST_MakeBox2D(ST_Point(13.5333,50.95),ST_Point(13.9333,51.15)),4326),900913) limit 25;
+
+	    -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  route, name,
@@ -1224,12 +1296,15 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, landuse, aeroway, name, ref,
                  (case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
-                 (case when round(way_area * 1000000) >= 20 then 'large'
-                       when round(way_area * 1000000) >= 1 then 'medium'
+                 (case when round(way_area) >= 20e6 then 'large'
+                       when round(way_area) >=  1e6 then 'medium'
                        else 'small' end) as size,
                        regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
                  from planet_polygon
@@ -1322,11 +1397,14 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, landuse, "natural", leisure, name, ref,
-                 (case when round(way_area * 1000000) >= 20 then 'large'
-                       when round(way_area * 1000000) >= 1 then 'medium'
+                 (case when round(way_area) >= 20e6 then 'large'
+                       when round(way_area) >=  1e6 then 'medium'
                        else 'small' end) as size,
                        regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
                   from planet_polygon
@@ -1347,13 +1425,17 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  landuse, "natural", name,
-                 (case when way_area >= 200000 then 'large'
-                       when way_area >=  50000 then 'medium'
-                       else 'small' end) as size,
-                       regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
+                 (case when round(way_area) >= 20e6 then 'large'
+                       when round(way_area) >=  1e6 then 'medium'
+                       else 'small' end
+                 ) as size,
+                 regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched
                  from planet_polygon
                  where landuse in ('reservoir', 'water', 'basin')
                  or "natural" in ('lake', 'water')
@@ -1401,12 +1483,15 @@ zoom level  - scale denominator
             <Parameter name="user">&user;</Parameter>
             <Parameter name="estimate_extent">&estimate_extent;</Parameter>
             <Parameter name="extent">&extent;</Parameter>
+            <!--
+	    Note: check what number range way_area is in to decide if it is square degrees (osm2pgsql -l (latlon)) or square meters!
+            -->
             <Parameter name="table"><![CDATA[
                 (select way,
                  building, amenity, tourism, name, ref,
                  (case when (tags->'fee' in ('no','false','0') or not tags ? 'fee') then 'no'::text else 'yes'::text end) as fee,
-                 (case when round(way_area * 1000000) >= 20 then 'large'
-                       when round(way_area * 1000000) >= 1 then 'medium'
+                 (case when round(way_area) >= 20e6 then 'large'
+                       when round(way_area) >=  1e6 then 'medium'
                        else 'small' end
                  ) as size,
                  regexp_replace(upper(name), '(.)', e'\\1\xc2\xa0\xc2\xa0', 'g') as name_stretched

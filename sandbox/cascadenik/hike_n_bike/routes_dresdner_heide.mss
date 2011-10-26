@@ -10,7 +10,7 @@ http://commons.wikimedia.org/wiki/Category:Footpath_signs_in_Dresdner_Heide
 
 .route.hiking_heide empty
 {
-    shield-fontset-name: "book-fonts";
+    shield-fontset: "book-fonts";
     shield-size: 0;
     shield-fill: #777;
 }
