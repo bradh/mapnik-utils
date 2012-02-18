@@ -122,32 +122,42 @@
 
 /* -------------------------------------------------- */
 /* trams */
-.rail.centerline[zoom=15][railway=tram]
+.rail.centerline[zoom=15][railway=tram],
+.rail.centerline[zoom=15][railway=narrow_gauge],
+.rail.centerline[zoom=15][railway=monorail]
 {
     line-color: #808080;
     line-width: 1;
 }
 
-.rail.line[zoom=15][railway=tram]
+.rail.line[zoom=15][railway=tram],
+.rail.line[zoom=15][railway=narrow_gauge],
+.rail.line[zoom=15][railway=monorail]
 {
     line-color: #808080;
     line-width: 3;
     line-dasharray: 1, 4;
 }
 
-.rail.outline[zoom=16][railway=tram]
+.rail.outline[zoom=16][railway=tram],
+.rail.outline[zoom=16][railway=narrow_gauge],
+.rail.outline[zoom=16][railway=monorail]
 {
 /* the two tracks */
     line-color: #808080;
     line-width: 4;
 }
-.rail.centerline[zoom=16][railway=tram]
+.rail.centerline[zoom=16][railway=tram],
+.rail.centerline[zoom=16][railway=narrow_gauge],
+.rail.centerline[zoom=16][railway=monorail]
 {
 /* the white centerline dividing the tracks */
     line-color: #ddd;
     line-width: 2;
 }
-.rail.line[zoom=16][railway=tram]
+.rail.line[zoom=16][railway=tram],
+.rail.line[zoom=16][railway=narrow_gauge],
+.rail.line[zoom=16][railway=monorail]
 {
 /* the wooden... things */
     line-color: #808080;
@@ -155,19 +165,25 @@
     line-dasharray: 1, 5;
 }
 
-.rail.outline[zoom>16][railway=tram]
+.rail.outline[zoom>16][railway=tram],
+.rail.outline[zoom>16][railway=narrow_gauge],
+.rail.outline[zoom>16][railway=monorail]
 {
 /* the two tracks */
     line-color: #808080;
     line-width: 4;
 }
-.rail.centerline[zoom>16][railway=tram]
+.rail.centerline[zoom>16][railway=tram],
+.rail.centerline[zoom>16][railway=narrow_gauge],
+.rail.centerline[zoom>16][railway=monorail]
 {
 /* the white centerline dividing the tracks */
     line-color: #ddd;
     line-width: 2;
 }
-.rail.line[zoom>16][railway=tram]
+.rail.line[zoom>16][railway=tram],
+.rail.line[zoom>16][railway=narrow_gauge],
+.rail.line[zoom>16][railway=monorail]
 {
 /* the wooden... things */
     line-color: #808080;
