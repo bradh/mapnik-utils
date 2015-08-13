@@ -1,0 +1,65 @@
+## Nik2img.py ##
+
+A command line utility to take a cascadenik mml or mapnik xml file as input and output an image.
+
+### Installation ###
+
+To run this program:
+  * Make sure you have Mapnik installed
+  * Then install manually or using easy\_install
+
+To Install manually:
+  * Download the [latest tagged release](http://mapnik-utils.googlecode.com/svn/tags/nik2img/) or [from SVN trunk](http://mapnik-utils.googlecode.com/svn/trunk/nik2img/)
+  * Then do:
+```
+$ tar xvf nik2img-*.tar.gz # * denotes the release number
+$ cd nik2img-*
+$ sudo python setup.py install
+```
+  * This will place nik2img.py in `/usr/local/bin` and as a python module in `site-packages`
+
+To Install the latest release with [easy\_install](http://peak.telecommunity.com/DevCenter/EasyInstall) do:
+```
+$ sudo easy_install -U nik2img
+```
+
+Test Installation of command-line script:
+```
+$ nik2img.py # should be able to tab complete...
+$ which nik2img.py # should show install location
+$ nik2img.py -h # should display usage
+```
+
+To run the full test suite for nik2img:
+  * This will test the generation and automatic opening (except on linux) of a variety of map graphics
+
+```
+$ svn co http://mapnik-utils.googlecode.com/svn/trunk/nik2img/ nik2img-svn
+$ cd nik2img-svn
+$ python tests/run_tests.py
+```
+
+
+### Usage Examples ###
+
+  * For more examples see: http://trac.mapnik.org/wiki/Nik2Img
+
+Output an 8-bit png image:
+```
+$ nik2img.py mapfile.xml map.png -f png256
+```
+
+Loop through verbosely outputting all possible image formats and a custom tile size:
+```
+$ nik2img.py mapfile.xml maps/ -f all -d 256 256  -v
+```
+
+Generate a map in spherical mercator projection by supplying Long/Lat bounding box (of the United States):
+```
+$ nik2img.py mapfile.xml mercator.png --srs 900913 --bbox -124.73 24.95 -66.96 49.37 -v
+```
+
+Generate that same map in spherical mercator projection but by supplying the projected coordinates (in mercator):
+```
+$ nik2img.py mapfile.xml mercator.png --srs 900913 --projected-extent -13885038.383 2870337 -7455049 6338174 -v
+```

@@ -1,0 +1,1 @@
+Cascadenik has moved to github - check out the new [properties dictionary](http://github.com/mapnik/Cascadenik/wiki/Dictionary)
